@@ -1,0 +1,14 @@
+<html>
+<head>
+    <title>@yield('title')</title>
+</head>
+<body>
+@yield('header')
+@yield('programServices')
+@yield('aboutUs')
+@yield('testimonials')
+@yield('gallery')
+@yield('contactUs')
+@yield('footer')
+</body>
+</html>
