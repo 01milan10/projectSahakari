@@ -14,7 +14,7 @@
           <img src="{{asset('dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block has-treeview">Alexander Pierce</a>
+          <a href="#" class="d-block has-treeview">{{Auth:: user()->name}}</a>
         </div>
       </div>
         <form action="#" method="get" class="sidebar-form">
