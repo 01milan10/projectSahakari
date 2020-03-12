@@ -10,8 +10,8 @@ $factory->define(Balance::class, function (Faker $faker) {
     return [
         'client_name'=>$faker->name,
         'client_email'=>$faker->email,
-        'deposited_amount'=>$faker->randomDigitNotNull*100,
+        'deposited_amount'=>$faker->numberBetween(5,9)*1000,
         'collected_by'=>$faker->name,
-        'collected_date'=>$faker->unique()->dateTimeThisMonth(),
+        'collected_date'=>$faker->unique()->dateTimeThisYear(),
     ];
 });

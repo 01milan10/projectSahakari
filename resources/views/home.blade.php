@@ -77,7 +77,6 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <!-- Line chart -->
                         <div class="card card-primary card-outline">
                             <div class="card-header">
                                 <h3 class="card-title">
@@ -184,7 +183,10 @@
                 let totalMoney;
                 data.reduce((accumulator,currentValue)=>{
                     let month = currentValue.collected_date.split('-')[1];
-                    something.push({month:parseInt(month),money:parseInt(currentValue.deposited_amount)});
+                    let year = currentValue.collected_date.split('-')[0];
+                    if(new Date().getFullYear()==year){
+                        something.push({month:parseInt(month),money:parseInt(currentValue.deposited_amount)});
+                    }
                 },{});
                 value = _.groupBy(something,'month');
                 // console.log(_.groupBy(something,'month')[2]);
@@ -196,7 +198,7 @@
                     catch (e)
                     {
                         // console.log(e)
-                        monthlyTotal.push([i,0])
+                        // monthlyTotal.push([i,0])
                     }
                 }
                 // console.log(monthlyTotal);
@@ -212,14 +214,14 @@
                         tickColor  : '#f3f3f3'
                     },
                     series: {
-                        shadowSize: 0,
+                        shadowSize: 5,
                         lines     : {
                             show: true
                         },
                         points    : {
                             show: true
                         },
-                        label:'Total deposit per day ',
+                        label:'Total deposit per day in last 6 months',
                     },
                     lines : {
                         fill : false,
@@ -227,13 +229,14 @@
                     },
                     yaxis : {
                         show: true,
-                        label:"Deposited Amount in NPR",
                     },
                     xaxis : {
                         show: true,
                         mode:'time',
                         timeformat: "%b %d<br>%Y",
-                        tickSize:[1,"day"]
+                        tickSize:[1,"month"],
+                        max: (new Date().getTime()),
+                        min:((new Date().getTime()-365*12*60*60*1000))
                     }
                 })
             }
@@ -241,6 +244,7 @@
             function plot_bar(bar){
                 $.plot('#bar-chart', [bar], {
                     grid  : {
+                        hoverable: true,
                         borderWidth: 1,
                         borderColor: '#f3f3f3',
                         tickColor  : '#f3f3f3'
@@ -249,12 +253,12 @@
                         bars: {
                             show: true, barWidth: 0.5, align: 'center',
                         },
-                        label:"Total deposits per month."
+                        label:"Total deposits per month in "+new Date().getFullYear()+'.',
                     },
                     colors: ['#3c8dbc'],
                     xaxis : {
                         ticks: [[1,'January'], [2,'February'], [3,'March'], [4,'April'], [5,'May'], [6,'June'],[7,'July'],[8,'August'],[9,'September'],[10,'October'],[11,'November'],[12,'December']]
-                    }
+                    },
                 });
 
             }
@@ -286,7 +290,7 @@
                 position: 'absolute',
                 display : 'none',
                 opacity : 0.8
-            }).appendTo('body')
+            }).appendTo('body');
             $('#line-chart').bind('plothover', function (event, pos, item) {
 
                 let x, y,a;
@@ -294,20 +298,41 @@
                     x = parseInt(item.datapoint[0]),
                         y = parseInt(item.datapoint[1]),
                         a = new Date(x);
-                    $('#line-chart-tooltip').html("Deposit on " +(a.toLocaleDateString('default',{month: 'long'}))+' '+a.getDate() + ' is ' + y)
+                    $('#line-chart-tooltip').html("Deposit on " +(a.toLocaleDateString())+ ' is Rs. ' + y)
                         .css({
-                            top : item.pageY + 5,
-                            left: item.pageX + 5,
+                            top : item.pageY+5,
+                            left: item.pageX+5,
                         })
-                        .fadeIn(200)
+                        .fadeIn(100)
                 } else {
                     $('#line-chart-tooltip').hide()
                 }
 
-            })
+            });
+            //tooltip for bar chart
+            $('<div class="tooltip-inner" id="bar-chart-tooltip"></div>').css({
+                position: 'absolute',
+                display : 'none',
+                opacity : 0.8
+            }).appendTo('body');
+            $('#bar-chart').bind('plothover',function (event,pos,item) {
+                let y;
+                if(item){
+                    y = parseInt(item.datapoint[1]);
+                    $('#bar-chart-tooltip').html("Total Deposit is Rs: "+y)
+                        .css({
+                            top : item.pageY,
+                            left: item.pageX,
+                        })
+                        .fadeIn(100)
+                } else {
+                    $('#bar-chart-tooltip').hide()
+                }
+            });
+
         });
         function labelFormatter(label, series) {
-            return '<div style="font-size:13px; text-align:center; padding:2px; color: #fff; font-weight: 600;">'
+            return '<div style="font-size:13px; text-align:center; padding:2px; color: #fff ; font-weight: 600;">'
                 + label
                 + '<br>'
                 + Math.round(series.percent) + '%</div>'
