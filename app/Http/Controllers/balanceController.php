@@ -15,8 +15,20 @@ class balanceController extends Controller
 
     public function addReport(Request $request){
         $this->validate($request,[
-
+            'name'=>'required',
+            'email'=>'required',
+            'deposit'=>'required',
+            'cName'=>'required',
+            'collected_date'=>'required',
         ]);
+        Balance::create([
+            'client_name'=>$request['name'],
+            'client_email'=>$request['email'],
+            'deposited_amount'=>$request['deposit'],
+            'collected_by'=>$request['cName'],
+            'collected_date'=>$request['collected_date'],
+        ]);
+        Alert::success("Success","Report Added Successfully");
         return back();
     }
     public function retrieveBalance(Request $request){

@@ -12,6 +12,6 @@ $factory->define(Balance::class, function (Faker $faker) {
         'client_email'=>$faker->email,
         'deposited_amount'=>$faker->numberBetween(7,9)*1000,
         'collected_by'=>$faker->name,
-        'collected_date'=>$faker->unique()->dateTimeBetween('2015/01/01','2020/12/30'),
+        'collected_date'=>$faker->unique()->dateTimeBetween('2015/01/01',now()),
     ];
 });

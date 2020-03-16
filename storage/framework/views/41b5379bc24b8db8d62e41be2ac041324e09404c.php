@@ -1,14 +1,12 @@
-@extends('layouts.backend.app')
+<?php $__env->startSection('header'); ?>
+    <?php echo $__env->make('layouts.backend.header', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php $__env->stopSection(); ?>
 
-@section('header')
-    @include('layouts.backend.header')
-@endsection
+<?php $__env->startSection('sidebar'); ?>
+    <?php echo $__env->make('layouts.backend.sidebar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php $__env->stopSection(); ?>
 
-@section('sidebar')
-    @include('layouts.backend.sidebar')
-@endsection
-
-@section('content')
+<?php $__env->startSection('content'); ?>
     <div class="content-wrapper">
         <section class="content-header">
             <div class="container-fluid">
@@ -18,7 +16,7 @@
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
+                            <li class="breadcrumb-item"><a href="<?php echo e(route('home')); ?>">Home</a></li>
                             <li class="breadcrumb-item active">Report Entry</li>
                         </ol>
                     </div>
@@ -35,8 +33,9 @@
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
-                            <form class="form-horizontal" method="POST" action="{{ route('add.report') }}">
-                                {{csrf_field()}}
+                            <form class="form-horizontal" method="POST" action="<?php echo e(route('add.report')); ?>">
+                                <?php echo e(csrf_field()); ?>
+
                                 <div class="card-body">
                                     <div class="form-group row">
                                         <label for="client_name" class="col-sm-2 col-form-label">Client Name</label>
@@ -87,11 +86,13 @@
         </section>
     </div>
 
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('footer')
-    @include('layouts.backend.footer')
-@endsection
+<?php $__env->startSection('footer'); ?>
+    <?php echo $__env->make('layouts.backend.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php $__env->stopSection(); ?>
 
-@section('script')
-@endsection
+<?php $__env->startSection('script'); ?>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.backend.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH F:\DataworkshopNepal\projectSahakari\resources\views/report/addDataReport.blade.php ENDPATH**/ ?>

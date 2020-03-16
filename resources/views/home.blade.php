@@ -209,7 +209,7 @@
                                 color: '#00c0ef'
                             }
                         ]
-                        plot_line(line,0.25);
+                        plot_line(line,0.033);
                         plot_bar(bar,new Date().getFullYear());
                         plot_donut(donutData);
                     },
@@ -234,7 +234,7 @@
                         points    : {
                             show: true
                         },
-                        label:'Total deposit per day',
+                        label:'Total deposit in NPR',
                     },
                     lines : {
                         fill : false,
@@ -246,10 +246,11 @@
                     xaxis : {
                         show: true,
                         mode:'time',
-                        timeformat: ((a<=1)?"%b<br>%Y":"%Y"),
+                        timeformat: ((a<=1)?"%b<br>%y":"%Y"),
                         tickSize:[(a<1)?1:a,"month"],
+                        minTickSize:[28,'days'],
                         max: (new Date().getTime()),
-                        min:((a<=1)?(new Date().getTime()-365*15*60*60*1000):new Date().getTime()-365*24*60*60*1000*6),
+                        min:((a<=1)?(new Date().getTime()-365*12*60*60*1000):new Date().getTime()-365*24*60*60*1000*6),
                     }
                 })
             }
@@ -335,15 +336,31 @@
                 let sum;
                 let groupByYear;
                 let groupByMonth;
+                let groupByWeek;
                 let currentDate;
                 data.reduce((a,c)=>{
+                    let day = getWeek(new Date(c.collected_date).getDate());
                     let month = c.collected_date.split('-')[1];
                     let year = c.collected_date.split('-')[0];
                     if(totalYear.indexOf(year)===-1){
                         totalYear.push(year);
                     }
-                    groupedData.push({year:parseInt(year),month:parseInt(month),money:parseInt(c.deposited_amount)})
+                    groupedData.push({year:parseInt(year),month:parseInt(month),week:day,money:parseInt(c.deposited_amount)})
                 },{});
+                function getWeek(a) {
+                    if(a>=1 &&a<7){
+                        return 1;
+                    }
+                    else if(a>7&&a<14){
+                        return 2;
+                    }
+                    else if(a>14&&a<21){
+                        return 3;
+                    }
+                    else{
+                        return 4;
+                    }
+                }
                 if(timeFrame == 0.033){
                     for(i in data){
                         currentDate = new Date(data[i].collected_date);
@@ -353,16 +370,37 @@
                     return dailyTotal;
                 }
                 else if(timeFrame == 0.25){
-
+                    for(let a in totalYear){
+                        groupByMonth = _.groupBy(_.groupBy(groupedData,'year')[totalYear[a]],'month');
+                        currentYear = totalYear[a];
+                        for(i=1;i<=12;i++){
+                            groupByWeek = _.groupBy(groupByMonth[i],'week');
+                            for(j=1;j<=4;j++){
+                                try {
+                                    sum = groupByWeek[j].reduce((a,b)=>(a+b.money),0);
+                                    if(j<4){
+                                        weeklyTotal.push([new Date(currentYear+'-'+i+'-'+j*7),sum])
+                                    }
+                                    else{
+                                        weeklyTotal.push([new Date(currentYear+'-'+i+'-30'),sum])
+                                    }
+                                }
+                                catch (e){
+                                    //
+                                }
+                            }
+                        }
+                    }
+                    return weeklyTotal;
                 }
                 else if(timeFrame == 1){
                     for(let a in totalYear){
                         groupByMonth = _.groupBy(_.groupBy(groupedData,'year')[totalYear[a]],'month');
                         currentYear = totalYear[a];
-                        for(i=1;i<12;i++){
+                        for(i=1;i<=12;i++){
                             try {
                                 sum = groupByMonth[i].reduce((a,b)=>(a+b.money),0);
-                                monthlyTotal.push([new Date(currentYear+'-'+i).getTime(),sum]);
+                                monthlyTotal.push([new Date(currentYear+'-'+i),sum]);
                             }
                             catch (e){
                                 //
@@ -407,7 +445,7 @@
                     x = parseInt(item.datapoint[0]),
                         y = parseInt(item.datapoint[1]),
                         a = new Date(x);
-                    $('#line-chart-tooltip').html("Deposit on " +(a.toLocaleDateString())+ ' is Rs. ' + y)
+                    $('#line-chart-tooltip').html("Deposit on " +a.toLocaleDateString()+ ' is Rs. ' + y)
                         .css({
                             top : item.pageY+5,
                             left: item.pageX+5,
