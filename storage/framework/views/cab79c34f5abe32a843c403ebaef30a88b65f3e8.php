@@ -123,6 +123,14 @@
               <p>Downloads</p>
             </a>
           </li>
+            <li class="nav-item">
+                <a href="<?php echo e(route('show.contactForm')); ?>" class="nav-link">
+                    <i class="nav-icon fas fa-id-badge"></i>
+                    <p>
+                        Manage Contacts
+                    </p>
+                </a>
+            </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

@@ -54,6 +54,11 @@
                                         <div class="col-sm-10">
                                             <input type="number" class="form-control" id="deposit" placeholder="Deposited Amount" name="deposit">
                                         </div>
+                                    </div><div class="form-group row">
+                                        <label for="deposit" class="col-sm-2 col-form-label">Withdraw Amount</label>
+                                        <div class="col-sm-10">
+                                            <input type="number" class="form-control" id="deposit" placeholder="Withdrawn Amount" name="withdraw">
+                                        </div>
                                     </div>
                                     <div class="form-group row">
                                         <label for="collector" class="col-sm-2 col-form-label">Collected By</label>
@@ -62,7 +67,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="date" class="col-sm-2 col-form-label">Collected Date</label>
+                                        <label for="date" class="col-sm-2 col-form-label">Submission Date</label>
                                         <div class="col-sm-10">
                                             <input type="date" class="form-control" id="date" name="collected_date">
                                         </div>

@@ -69,9 +69,16 @@ Route::get('/list_oppurtunities','backendController@listOppurtunities')->name('l
 
 Route::get('/delete_oppurtunities/{id}','backendController@deleteOppurtunity')->name('delete.oppurtunity');
 
-//BalanceController
+//Balance Controller
 Route::get('/report','balanceController@showReportForm')->name('show.reportForm');
 
 Route::post('/report','balanceController@addReport')->name('add.report');
 
 Route::get('/retrieveBalance','balanceController@retrieveBalance')->name('retrieve.balance');
+
+//Contacts Controller
+Route::get('/addContacts','backendController@showContactForm')->name('show.contactForm');
+
+Route::post('/addContacts','backendController@addContact')->name('add.contacts');
+
+Route::get('/deleteContacts','backendController@deleteContact')->name('delete.contacts');

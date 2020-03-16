@@ -18,6 +18,7 @@ class balanceController extends Controller
             'name'=>'required',
             'email'=>'required',
             'deposit'=>'required',
+            'withdraw'=>'required',
             'cName'=>'required',
             'collected_date'=>'required',
         ]);
@@ -25,6 +26,7 @@ class balanceController extends Controller
             'client_name'=>$request['name'],
             'client_email'=>$request['email'],
             'deposited_amount'=>$request['deposit'],
+            'withdrawn_amount'=>$request['withdraw'],
             'collected_by'=>$request['cName'],
             'collected_date'=>$request['collected_date'],
         ]);

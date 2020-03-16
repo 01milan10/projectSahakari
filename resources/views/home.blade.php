@@ -52,7 +52,6 @@
                             <div class="card-footer">
                                 <label>Show Graph By:
                                     <select id="selectMenuLine">
-                                        <option value="0.033">--select--</option>
                                         <option value="0.033">day</option>
                                         <option value="0.25">week</option>
                                         <option value="1">month</option>
@@ -83,7 +82,6 @@
                             <div class="card-footer">
                                 <label>Show Graph By Year:
                                     <select id="selectMenuBar">
-                                        <option value="2020">--select--</option>
                                         <option value="2020">2020</option>
                                         <option value="2019">2019</option>
                                         <option value="2018">2018</option>
@@ -142,6 +140,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.time.js"></script>
 
     <script src="{{asset("js/underscore.js")}}"></script>
+    <script src="{{asset("js/flot.orderbar.js")}}"></script>
+    <script src="{{asset("js/flot.axisLabels.js")}}"></script>
 
 
     <script>
@@ -150,9 +150,10 @@
             let line;
             let i;
             let date;
-            let amount;
-            let plot_data = [];
-            let readyData=[];
+            let deposited_amount;
+            let withdrawn_amount;
+            let plot_data1 = [];
+            let plot_data2 = [];
             let frame;
             let barFrame;
             $(document).ready(function () {
@@ -163,34 +164,69 @@
                     success: function (response) {
                         for (i = 0;i<Object.keys(response).length;i++){
                             date = new Date(response[i].collected_date);
-                            amount = response[i].deposited_amount;
-                            plot_data.push([date,amount]);
+                            deposited_amount = response[i].deposited_amount;
+                            withdrawn_amount = response[i].withdrawn_amount;
+                            plot_data1.push([date,deposited_amount]);
+                            plot_data2.push([date,withdrawn_amount]);
                         }
 
                         $("#selectMenuLine").change(function () {
                             frame = $("#selectMenuLine option:selected").val();
-                            line = {
-                                data : groupData(response,frame),
-                                color: '#3c8dbc'
+                            line1 = {
+                                data : groupDeposit(response,frame),
+                                color: '#3c8dbc',
+                                label:'Total deposit in NPR',
                             }
-                            plot_line(line,frame);
+                            line2 = {
+                                data : groupWithdraw(response,frame),
+                                color: '#f56954',
+                                label:'Total withdraw in NPR',
+                            }
+                            plot_line(line1,line2,frame);
                         });
                         $("#selectMenuBar").change(function () {
                             barFrame = $("#selectMenuBar option:selected").val();
-                            bar = {
+                            bar1 = {
                                 data : groupDataForBarChart(response,barFrame),
-                                bars: { show: true }
+                                color: '#3c8dbc',
+                                bars: { show: true,order:1 },
+                                label:"Total deposits per month in "+barFrame+'.',
+
                             }
-                            plot_bar(bar,barFrame)
+                            bar2= {
+                                data : groupDataForBarChartWithdraw(response,barFrame),
+                                color: '#f56954',
+                                bars: { show: true,order:2 },
+                                label:"Total withdraw per month in "+barFrame+'.',
+
+                            }
+                            plot_bar(bar1,bar2,barFrame)
                         });
 
-                        line = {
-                            data : plot_data,
-                            color: '#3c8dbc'
+                        line1 = {
+                            data : plot_data1,plot_data2,
+                            color: '#3c8dbc',
+                            label:'Total deposit in NPR',
                         }
-                        bar = {
+                        line2 = {
+                            data : plot_data2,
+                            color: '#f56954',
+                            label:'Total withdraw in NPR',
+
+                        }
+                        bar1 = {
                             data : groupDataForBarChart(response,new Date().getFullYear()),
-                            bars: { show: true }
+                            color: '#3c8dbc',
+                            bars: { show: true,order:1 },
+                            label:"Total deposits per month in "+new Date().getFullYear()+'.',
+                        }
+                        bar2 = {
+                            data : groupDataForBarChart(response,new Date().getFullYear()),
+                            color: '#f56954',
+                            bars: { show: true,order:2 },
+                            label:"Total withdraw per month in "+new Date().getFullYear()+'.',
+
+
                         }
                         donutData = [
                             {
@@ -209,8 +245,8 @@
                                 color: '#00c0ef'
                             }
                         ]
-                        plot_line(line,0.033);
-                        plot_bar(bar,new Date().getFullYear());
+                        plot_line(line1,line2,0.033);
+                        plot_bar(bar1,bar2,new Date().getFullYear());
                         plot_donut(donutData);
                     },
                     fail:function () {
@@ -218,8 +254,8 @@
                     }
                 });
             });
-            function plot_line(line,a){
-                $.plot('#line-chart', [line], {
+            function plot_line(lineA,lineB,a){
+                $.plot('#line-chart', [lineA,lineB], {
                     grid  : {
                         hoverable  : true,
                         borderColor: '#f3f3f3',
@@ -232,18 +268,19 @@
                             show: true
                         },
                         points    : {
-                            show: true
+                            show: false
                         },
-                        label:'Total deposit in NPR',
                     },
                     lines : {
-                        fill : false,
-                        color: ['#3c8dbc']
+                        fill : true,
+
                     },
                     yaxis : {
                         show: true,
+                        axisLabel: "Amount in NPR",
                     },
                     xaxis : {
+                        axisLabel: "Date",
                         show: true,
                         mode:'time',
                         timeformat: ((a<=1)?"%b<br>%y":"%Y"),
@@ -255,8 +292,8 @@
                 })
             }
 
-            function plot_bar(bar,a){
-                $.plot('#bar-chart', [bar], {
+            function plot_bar(bar1,bar2,a){
+                $.plot('#bar-chart', [bar1,bar2], {
                     grid  : {
                         hoverable: true,
                         borderWidth: 1,
@@ -265,14 +302,16 @@
                     },
                     series: {
                         bars: {
-                            show: true, barWidth: 0.5, align: 'center',
+                            show: true, barWidth: 0.25, align: 'center',
                         },
-                        label:"Total deposits per month in "+a+'.',
                     },
-                    colors: ['#3c8dbc'],
                     xaxis : {
+                        axisLabel: "Deposited month",
                         ticks: [[1,'January'], [2,'February'], [3,'March'], [4,'April'], [5,'May'], [6,'June'],[7,'July'],[8,'August'],[9,'September'],[10,'October'],[11,'November'],[12,'December']]
                     },
+                    yaxis: {
+                        axisLabel: "Amount in NPR",
+                    }
                 });
 
             }
@@ -325,7 +364,33 @@
 
             }
 
-            function groupData(data,timeFrame){
+            function groupDataForBarChartWithdraw(data,frame) {
+                let groupByMonth;
+                let groupedData=[];
+                let monthlyTotal =[];
+                let sum =0;
+                data.reduce((a, c)=>{
+                    let month = c.collected_date.split('-')[1];
+                    let year = c.collected_date.split('-')[0];
+                    groupedData.push({year:parseInt(year),month:parseInt(month),money:parseInt(c.withdrawn_amount)})
+                },{});
+
+                groupByMonth = _.groupBy(_.groupBy(groupedData,'year')[frame],'month');
+
+                for(i=1;i<12;i++){
+                    try {
+                        sum = groupByMonth[i].reduce((a,b)=>(a+b.money),0);
+                        monthlyTotal.push([i,sum]);
+                    }
+                    catch (e){
+                        //
+                    }
+                }
+                return monthlyTotal;
+
+            }
+
+            function groupDeposit(data,timeFrame){
                 let currentYear;
                 let totalYear=[];
                 let groupedData= [];
@@ -345,16 +410,16 @@
                     if(totalYear.indexOf(year)===-1){
                         totalYear.push(year);
                     }
-                    groupedData.push({year:parseInt(year),month:parseInt(month),week:day,money:parseInt(c.deposited_amount)})
+                    groupedData.push({year:parseInt(year),month:parseInt(month),week:day,deposit:parseInt(c.deposited_amount),withdraw:parseInt(c.withdrawn_amount)})
                 },{});
                 function getWeek(a) {
-                    if(a>=1 &&a<7){
+                    if(a>=1 &&a<=7){
                         return 1;
                     }
-                    else if(a>7&&a<14){
+                    else if(a>7&&a<=14){
                         return 2;
                     }
-                    else if(a>14&&a<21){
+                    else if(a>14&&a<=21){
                         return 3;
                     }
                     else{
@@ -377,7 +442,7 @@
                             groupByWeek = _.groupBy(groupByMonth[i],'week');
                             for(j=1;j<=4;j++){
                                 try {
-                                    sum = groupByWeek[j].reduce((a,b)=>(a+b.money),0);
+                                    sum = groupByWeek[j].reduce((a,b)=>(a+b.deposit),0);
                                     if(j<4){
                                         weeklyTotal.push([new Date(currentYear+'-'+i+'-'+j*7),sum])
                                     }
@@ -391,6 +456,7 @@
                             }
                         }
                     }
+                    console.log(weeklyTotal);
                     return weeklyTotal;
                 }
                 else if(timeFrame == 1){
@@ -399,7 +465,7 @@
                         currentYear = totalYear[a];
                         for(i=1;i<=12;i++){
                             try {
-                                sum = groupByMonth[i].reduce((a,b)=>(a+b.money),0);
+                                sum = groupByMonth[i].reduce((a,b)=>(a+b.deposit),0);
                                 monthlyTotal.push([new Date(currentYear+'-'+i),sum]);
                             }
                             catch (e){
@@ -415,7 +481,111 @@
                         groupByYear = _.groupBy(groupedData,'year')[totalYear[a]];
                         currentYear = totalYear[a];
                         try {
-                            sum = groupByYear.reduce((a,b)=>(a+b.money),0);
+                            sum = groupByYear.reduce((a,b)=>(a+b.deposit),0);
+                            yearlyTotal.push([new Date(currentYear).getTime(),sum]);
+
+                        }
+                        catch (e) {
+                            //
+                        }
+                    }
+                    return yearlyTotal;
+                }
+
+            }
+
+            function groupWithdraw(data,timeFrame){
+                let currentYear;
+                let totalYear=[];
+                let groupedData= [];
+                let dailyTotal = [];
+                let weeklyTotal = [];
+                let monthlyTotal = [];
+                let yearlyTotal = [];
+                let sum;
+                let groupByYear;
+                let groupByMonth;
+                let groupByWeek;
+                let currentDate;
+                data.reduce((a,c)=>{
+                    let day = getWeek(new Date(c.collected_date).getDate());
+                    let month = c.collected_date.split('-')[1];
+                    let year = c.collected_date.split('-')[0];
+                    if(totalYear.indexOf(year)===-1){
+                        totalYear.push(year);
+                    }
+                    groupedData.push({year:parseInt(year),month:parseInt(month),week:day,withdraw:parseInt(c.withdrawn_amount)})
+                },{});
+                function getWeek(a) {
+                    if(a>=1 &&a<=7){
+                        return 1;
+                    }
+                    else if(a>7&&a<=14){
+                        return 2;
+                    }
+                    else if(a>14&&a<=21){
+                        return 3;
+                    }
+                    else{
+                        return 4;
+                    }
+                }
+                if(timeFrame == 0.033){
+                    for(i in data){
+                        currentDate = new Date(data[i].collected_date);
+                        sum = data[i].withdrawn_amount;
+                        dailyTotal.push([currentDate,sum]);
+                    }
+                    return dailyTotal;
+                }
+                else if(timeFrame == 0.25){
+                    for(let a in totalYear){
+                        groupByMonth = _.groupBy(_.groupBy(groupedData,'year')[totalYear[a]],'month');
+                        currentYear = totalYear[a];
+                        for(i=1;i<=12;i++){
+                            groupByWeek = _.groupBy(groupByMonth[i],'week');
+                            for(j=1;j<=4;j++){
+                                try {
+                                    sum = groupByWeek[j].reduce((a,b)=>(a+b.withdraw),0);
+                                    if(j<4){
+                                        weeklyTotal.push([new Date(currentYear+'-'+i+'-'+j*7),sum])
+                                    }
+                                    else{
+                                        weeklyTotal.push([new Date(currentYear+'-'+i+'-30'),sum])
+                                    }
+                                }
+                                catch (e){
+                                    //
+                                }
+                            }
+                        }
+                    }
+                    console.log(weeklyTotal);
+                    return weeklyTotal;
+                }
+                else if(timeFrame == 1){
+                    for(let a in totalYear){
+                        groupByMonth = _.groupBy(_.groupBy(groupedData,'year')[totalYear[a]],'month');
+                        currentYear = totalYear[a];
+                        for(i=1;i<=12;i++){
+                            try {
+                                sum = groupByMonth[i].reduce((a,b)=>(a+b.withdraw),0);
+                                monthlyTotal.push([new Date(currentYear+'-'+i),sum]);
+                            }
+                            catch (e){
+                                //
+                            }
+                        }
+                    }
+                    return monthlyTotal;
+
+                }
+                else{
+                    for(let a in totalYear){
+                        groupByYear = _.groupBy(groupedData,'year')[totalYear[a]];
+                        currentYear = totalYear[a];
+                        try {
+                            sum = groupByYear.reduce((a,b)=>(a+b.withdraw),0);
                             yearlyTotal.push([new Date(currentYear).getTime(),sum]);
 
                         }
@@ -445,7 +615,7 @@
                     x = parseInt(item.datapoint[0]),
                         y = parseInt(item.datapoint[1]),
                         a = new Date(x);
-                    $('#line-chart-tooltip').html("Deposit on " +a.toLocaleDateString()+ ' is Rs. ' + y)
+                    $('#line-chart-tooltip').html("Rs. "+ y +' on ' +a.toLocaleDateString())
                         .css({
                             top : item.pageY+5,
                             left: item.pageX+5,
@@ -466,7 +636,7 @@
                 let y;
                 if(item){
                     y = parseInt(item.datapoint[1]);
-                    $('#bar-chart-tooltip').html("Total Deposit is Rs: "+y)
+                    $('#bar-chart-tooltip').html("The amount is Rs: "+y)
                         .css({
                             top : item.pageY,
                             left: item.pageX,
