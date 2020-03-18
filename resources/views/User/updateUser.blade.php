@@ -41,7 +41,7 @@
                     <div class="form-group row">
                         <label for="inputText3" class="col-sm-2 col-form-label">Name</label>
                         <div class="col-sm-10">
-                        <input type="text" class="form-control" id="inputName3" value="{{$user['name']}}" name="name">
+                        <input type="text" class="form-control" id="inputName3" value="{{$user->name}}" name="name">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -57,14 +57,15 @@
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer">
-                    <button type="submit" class="btn btn-info">
-                    <i class="fas fa-user-edit mr-2"></i>
-                    Update</button>
-                      <form action="{{route('home')}}">
-                        <button class="btn btn-danger float-right">
-                      <i class="fas fa-times mr-2"></i>
-                      Cancel</button>
-                      </form>
+                        <button type="submit" class="btn btn-info">
+                            <i class="fas fa-user-edit mr-2"></i>
+                        Update</button>
+                        <button type="reset" class="btn btn-danger float-right">
+                            <a href="{{route("list.user")}}"class="btn-danger">
+                                <i class="fas fa-times mr-2"></i>
+                                Cancel
+                            </a>
+                        </button>
                     </div>
                     <!-- /.card-footer -->
                 </form>

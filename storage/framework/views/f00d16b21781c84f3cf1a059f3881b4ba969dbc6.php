@@ -45,7 +45,7 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" placeholder="Location" name="location" required autocomplete="location" autofocus>
+unset($__errorArgs, $__bag); ?>" placeholder="District" name="location" required autocomplete="location" autofocus>
                                     </div>
                                     <div>
                                         <label for="address"></label><input type="text" id="address" class="form-control mb-4 <?php $__errorArgs = ['title'];
@@ -106,7 +106,7 @@ unset($__errorArgs, $__bag); ?>" placeholder="Email" name="email" required autoc
                             <table id="contactsTable" class="table table-bordered table-striped">
                                 <thead>
                                 <tr>
-                                    <th>Location</th>
+                                    <th>District</th>
                                     <th>Address</th>
                                     <th>Telephone</th>
                                     <th>Alternate Line</th>
@@ -126,12 +126,12 @@ unset($__errorArgs, $__bag); ?>" placeholder="Email" name="email" required autoc
                                         <td><?php echo e($contact->email); ?></td>
                                         <td style="text-align:center">
                                             <div>
-                                                <a href="">
-                                                    <i class="fas fa-contact mr-3" data-toggle="tooltip" data-placement="top" title="contact">
+                                                <a href="<?php echo e(route('update.contacts',$contact->id)); ?>">
+                                                    <i class="fas fa-pen-alt mr-3" data-toggle="tooltip" data-placement="top" title="update">
                                                     </i>
                                                 </a>
-                                                <a href="">
-                                                    <i class="fas fa-trash ml-3" data-toggle="tooltip" data-placement="top" title="Delete" style="color:#dc3545">
+                                                <a href="<?php echo e(route('delete.contacts',$contact->id)); ?>">
+                                                    <i class="fas fa-trash ml-3" data-toggle="tooltip" data-placement="top" title="delete" style="color:#dc3545">
                                                     </i>
                                                 </a>
                                             </div>
@@ -141,7 +141,7 @@ unset($__errorArgs, $__bag); ?>" placeholder="Email" name="email" required autoc
                                 </tbody>
                                 <tfoot>
                                 <tr>
-                                    <th>Location</th>
+                                    <th>District</th>
                                     <th>Address</th>
                                     <th>Telephone</th>
                                     <th>Alternate Line</th>

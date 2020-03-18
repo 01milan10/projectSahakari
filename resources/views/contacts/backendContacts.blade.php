@@ -39,7 +39,7 @@
                                 {{csrf_field()}}
                                 <div class="card-body">
                                     <div>
-                                        <label for="location"></label><input type="text" id="location" class="form-control mb-4 @error('title') is-invalid @enderror" placeholder="Location" name="location" required autocomplete="location" autofocus>
+                                        <label for="location"></label><input type="text" id="location" class="form-control mb-4 @error('title') is-invalid @enderror" placeholder="District" name="location" required autocomplete="location" autofocus>
                                     </div>
                                     <div>
                                         <label for="address"></label><input type="text" id="address" class="form-control mb-4 @error('title') is-invalid @enderror" placeholder="Address" name="address" required autocomplete="address" autofocus>
@@ -79,7 +79,7 @@
                             <table id="contactsTable" class="table table-bordered table-striped">
                                 <thead>
                                 <tr>
-                                    <th>Location</th>
+                                    <th>District</th>
                                     <th>Address</th>
                                     <th>Telephone</th>
                                     <th>Alternate Line</th>
@@ -99,12 +99,12 @@
                                         <td>{{$contact->email}}</td>
                                         <td style="text-align:center">
                                             <div>
-                                                <a href="">
-                                                    <i class="fas fa-contact mr-3" data-toggle="tooltip" data-placement="top" title="contact">
+                                                <a href="{{route('update.contacts',$contact->id)}}">
+                                                    <i class="fas fa-pen-alt mr-3" data-toggle="tooltip" data-placement="top" title="update">
                                                     </i>
                                                 </a>
-                                                <a href="">
-                                                    <i class="fas fa-trash ml-3" data-toggle="tooltip" data-placement="top" title="Delete" style="color:#dc3545">
+                                                <a href="{{route('delete.contacts',$contact->id)}}">
+                                                    <i class="fas fa-trash ml-3" data-toggle="tooltip" data-placement="top" title="delete" style="color:#dc3545">
                                                     </i>
                                                 </a>
                                             </div>
@@ -114,7 +114,7 @@
                                 </tbody>
                                 <tfoot>
                                 <tr>
-                                    <th>Location</th>
+                                    <th>District</th>
                                     <th>Address</th>
                                     <th>Telephone</th>
                                     <th>Alternate Line</th>

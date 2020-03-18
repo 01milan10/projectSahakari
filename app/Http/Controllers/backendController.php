@@ -81,7 +81,43 @@ class backendController extends Controller
         return back();
     }
     public function deleteContact($id){
-
+        Contact::find($id)->delete();
+        Alert::Success("Success","Contact deleted successfully");
+        return back();
+    }
+    public function showUpdateContactForm($id){
+        $contact=Contact::find($id);
+//        dd($contact);
+        return view('contacts.updateContacts',['contact'=>$contact]);
+    }
+    public function updateContact(Request $request,$id){
+        if ($request['alt_phone']==''){
+            $alt_phone = "Not Available";
+        }
+        else{
+            $alt_phone = $request['alt_phone'];
+        }
+        if ($request['fax']==''){
+            $fax = "Not Available";
+        }
+        else{
+            $fax = $request['fax'];
+        }
+        $update = [
+            'location'=>$request['location'],
+            'address'=>$request['address'],
+            'phone'=>$request['phone'],
+            'alt_phone'=>$alt_phone,
+            'fax'=>$fax,
+            'email'=>$request['email'],
+        ];
+        if(Contact::find($id)->update($update)){
+            Alert::success("Success","Contacts information changed");
+        }
+        else{
+            Alert::error('Failed','Updating contact information failed');
+        }
+        return redirect('/addContacts');
     }
 
 

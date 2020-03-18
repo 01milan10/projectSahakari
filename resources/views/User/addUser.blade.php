@@ -79,8 +79,11 @@
                         <i class="fas fa-plus mr-2"></i>
                         Add</button>
                         <button type="reset" class="btn btn-danger float-right">
-                    <i class="fas fa-times mr-2"></i>
-                    Cancel</button>
+                            <a href="{{route("list.user")}}"class="btn-danger">
+                                <i class="fas fa-times mr-2"></i>
+                                Cancel
+                            </a>
+                        </button>
                     </div>
                     <!-- /.card-footer -->
                 </form>

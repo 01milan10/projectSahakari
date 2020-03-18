@@ -51,7 +51,7 @@
                       <?php echo e($user->password); ?>
 
                       <a class="float-right" href="<?php echo e(route('show.resetForm',['id'=>$user->id])); ?>">
-                          <i class="fas fa-redo mr-4" data-toggle="tooltip" data-placement="top" title="Change Password">
+                          <i class="fas fa-pen-alt mr-4" data-toggle="tooltip" data-placement="top" title="Change Password">
                           </i>
                       </a>
                   </td>

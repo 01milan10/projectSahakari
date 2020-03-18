@@ -81,4 +81,8 @@ Route::get('/addContacts','backendController@showContactForm')->name('show.conta
 
 Route::post('/addContacts','backendController@addContact')->name('add.contacts');
 
-Route::get('/deleteContacts','backendController@deleteContact')->name('delete.contacts');
+Route::get('/deleteContacts/{id}','backendController@deleteContact')->name('delete.contacts');
+
+Route::get('/updateContacts/{id}','backendController@showUpdateContactForm')->name('show.updateContactsForm');
+
+Route::post('/updateContacts/{id}','backendController@updateContact')->name('update.contacts');

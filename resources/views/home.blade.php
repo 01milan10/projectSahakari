@@ -32,22 +32,21 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-                        <div class="card card-primary card-outline">
+                        <div class="card card-primary card-outline" id="line_chart_card">
                             <div class="card-header">
                                 <h3 class="card-title">
                                     <i class="far fa-chart-bar"></i>
                                     Line Chart
                                 </h3>
 
-                                <div class="card-tools">
-                                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i>
-                                    </button>
-                                </div>
+{{--                                <div class="card-tools">--}}
+{{--                                    <button type="button" class="btn btn-tool" data-card-widget="maximize">--}}
+{{--                                        <i class="fas fa-expand"></i>--}}
+{{--                                    </button>--}}
+{{--                                </div>--}}
                             </div>
                             <div class="card-body">
-                                <div id="line-chart" style="height: 400px;"></div>
+                                <div id="line-chart"></div>
                             </div>
                             <div class="card-footer">
                                 <label>Show Graph By:
@@ -58,6 +57,12 @@
                                         <option value="12">year</option>
                                     </select>
                                 </label>
+                                <button type="reset" class="btn btn-primary float-right">
+                                    <a href=""class="btn-primary">
+                                        <i class="fas fa-file-download mr-2"></i>
+                                        Download
+                                    </a>
+                                </button>
                             </div>
                         </div>
                         <div class="card card-primary card-outline">
@@ -67,14 +72,11 @@
                                     Bar Chart
                                 </h3>
 
-                                <div class="card-tools">
-                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                        <i class="fas fa-minus"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-tool" data-card-widget="remove">
-                                        <i class="fas fa-times"></i>
-                                    </button>
-                                </div>
+{{--                                <div class="card-tools">--}}
+{{--                                    <button type="button" class="btn btn-tool" data-card-widget="maximize">--}}
+{{--                                        <i class="fas fa-expand"></i>--}}
+{{--                                    </button>--}}
+{{--                                </div>--}}
                             </div>
                             <div class="card-body">
                                 <div id="bar-chart" style="height: 400px;"></div>
@@ -90,35 +92,16 @@
                                         <option value="2015">2015</option>
                                     </select>
                                 </label>
+                                <button type="reset" class="btn btn-primary float-right">
+                                    <a href=""class="btn-primary">
+                                        <i class="fas fa-file-download mr-2"></i>
+                                        Download
+                                    </a>
+                                </button>
                             </div>
                             <!-- /.card-body-->
                         </div>
                     </div>
-                    <!-- /.col -->
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="card card-primary card-outline">
-                            <div class="card-header">
-                                <h3 class="card-title">
-                                    <i class="far fa-chart-bar"></i>
-                                    Donut Chart
-                                </h3>
-
-                                <div class="card-tools">
-                                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <div id="donut-chart" style="height: 300px;"></div>
-                            </div>
-                            <!-- /.card-body-->
-                        </div>
-                    </div>
-                    <!-- /.col -->
                     <!-- /.col -->
                 </div>
             </div>
@@ -133,11 +116,13 @@
 @section('script')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.min.js"></script>
     <!-- FLOT RESIZE PLUGIN - allows the chart to redraw when the window is resized -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.resize.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.resize.min.js"></script>
     <!-- FLOT PIE PLUGIN - also used to draw donut charts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.pie.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.time.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.canvas.min.js"></script>
 
     <script src="{{asset("js/underscore.js")}}"></script>
     <script src="{{asset("js/flot.orderbar.js")}}"></script>
@@ -146,8 +131,7 @@
 
     <script>
         $(function () {
-            let bar,donutData;
-            let line;
+            let donutData;
             let i;
             let date;
             let deposited_amount;
@@ -200,7 +184,7 @@
                                 label:"Total withdraw per month in "+barFrame+'.',
 
                             }
-                            plot_bar(bar1,bar2,barFrame)
+                            plot_bar(bar1,bar2)
                         });
 
                         line1 = {
@@ -255,12 +239,15 @@
                 });
             });
             function plot_line(lineA,lineB,a){
+                $("#line-chart").attr({
+                    "style":"height:400px; width:100%",
+                })
                 $.plot('#line-chart', [lineA,lineB], {
                     grid  : {
                         hoverable  : true,
                         borderColor: '#f3f3f3',
                         borderWidth: 5,
-                        tickColor  : '#f3f3f3'
+                        tickColor  : '#f3f3f3',
                     },
                     series: {
                         shadowSize: 5,
@@ -268,11 +255,13 @@
                             show: true
                         },
                         points    : {
-                            show: false
+                            show: true,
+                            radius:0.7,
                         },
                     },
                     lines : {
                         fill : true,
+                        steps:false,
 
                     },
                     yaxis : {
@@ -289,10 +278,10 @@
                         max: (new Date().getTime()),
                         min:((a<=1)?(new Date().getTime()-365*12*60*60*1000):new Date().getTime()-365*24*60*60*1000*6),
                     }
-                })
+                });
             }
 
-            function plot_bar(bar1,bar2,a){
+            function plot_bar(bar1,bar2){
                 $.plot('#bar-chart', [bar1,bar2], {
                     grid  : {
                         hoverable: true,
@@ -314,28 +303,6 @@
                     }
                 });
 
-            }
-
-            function plot_donut(donutData){
-                $.plot('#donut-chart', donutData, {
-                    series: {
-                        pie: {
-                            show       : true,
-                            radius     : 1,
-                            innerRadius: 0.5,
-                            label      : {
-                                show     : true,
-                                radius   : 2 / 3,
-                                formatter: labelFormatter,
-                                threshold: 0.1
-                            }
-
-                        }
-                    },
-                    legend: {
-                        show: false
-                    }
-                })
             }
 
             function groupDataForBarChart(data,frame) {
