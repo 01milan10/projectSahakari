@@ -26,16 +26,16 @@
         <section class="content">
             <div class="container col-lg-12">
                 <div class="row justify-content-center">
-                    <div class="card card-info">
+                    <div class="card card-primary card-outline">
                         <div class="card-header">
                             <h3 class="card-title">Add report to database.</h3>
                         </div>
-                        <div class="card-footer">
+                        <div class="card-body">
                             <form class="form-horizontal" method="POST" action="<?php echo e(route('add.report')); ?>">
                                 <?php echo e(csrf_field()); ?>
 
                                 <div class="card-body">
-                                    <table id="reportTable" class="table talign-center">
+                                    <table id="reportTable" class="table table-borderless">
                                         <thead>
                                         <th>Client Name</th>
                                         <th>Client Email</th>
@@ -44,12 +44,12 @@
                                         <th>Collected By</th>
                                         <th>Collection Date</th>
                                         </thead>
-                                        <tbody>
+                                        <tbody id="reportTabBody">
                                         <tr id="row">
                                             <td>
                                                 <div class="form-group row">
                                                     <div class="col-sm-12">
-                                                        <input type="text" class="form-control" id="client_name" placeholder="Client Name" name="name">
+                                                        <input type="text" class="form-control" id="client_name" required placeholder="Client Name" name="name[]">
                                                     </div>
                                                 </div>
 
@@ -57,7 +57,7 @@
                                             <td>
                                                 <div class="form-group row">
                                                     <div class="col-sm-12">
-                                                        <input type="email" class="form-control" id="client_email" placeholder="Client Email" name="email">
+                                                        <input type="email" class="form-control" id="client_email" required placeholder="Client Email" name="email[]">
                                                     </div>
                                                 </div>
 
@@ -65,7 +65,7 @@
                                             <td>
                                                 <div class="form-group row">
                                                     <div class="col-sm-12">
-                                                        <input type="number" class="form-control" id="deposit" placeholder="Deposited Amount" name="deposit">
+                                                        <input type="number" class="form-control" id="deposit" required placeholder="Deposited Amount" name="deposit[]">
                                                     </div>
                                                 </div>
 
@@ -73,7 +73,7 @@
                                             <td>
                                                 <div class="form-group row">
                                                     <div class="col-sm-12">
-                                                        <input type="number" class="form-control" id="deposit" placeholder="Withdrawn Amount" name="withdraw">
+                                                        <input type="number" class="form-control" id="withdraw" required placeholder="Withdrawn Amount" name="withdraw[]">
                                                     </div>
                                                 </div>
 
@@ -81,19 +81,24 @@
                                             <td>
                                                 <div class="form-group row">
                                                     <div class="col-sm-12">
-                                                        <input type="text" class="form-control" id="collector" placeholder="Collector's Name" name="cName">
+                                                        <input type="text" class="form-control" id="collector" required placeholder="Collector's Name" name="cName[]">
                                                     </div>
                                                 </div>
 
                                             </td>
                                             <td>
-                                                <div class="form-group row">
-                                                    <div class="col-sm-10">
-                                                        <input type="date" class="form-control" id="date" name="collected_date">
+                                                <div class="form-group row" id="last_child">
+                                                    <div class="col-sm-8">
+                                                        <input type="date" class="form-control" id="date" required name="collected_date[]">
                                                     </div>
-                                                    <div class="col-sm-2" data-toggle="tooltip" data-placement="top" title="Add new row">
+                                                    <div class="col-sm-2">
                                                         <div id="add-new-row" class="btn btn-outline-primary">
                                                             <i class="fa fa-plus"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <div id="remove-new-row" class="btn btn-outline-danger">
+                                                            <i class="fa fa-trash"></i>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -111,8 +116,40 @@
                                     Cancel
                                 </button>
                             </form>
+
                         </div>
                     </div>
+                    <div class="card card-primary card-outline">
+                        <div class="card-header">
+                            <h3 class="card-title">Today's Collection</h3>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-striped" id="collectorTable">
+                                <thead>
+                                <th>Collector Name</th>
+                                <th>Collected</th>
+                                <th>Client Name</th>
+                                <th>Collected Date</th>
+                                </thead>
+                                <tbody>
+                                <?php $__currentLoopData = $balances; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $balance): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <tr>
+                                        <td><?php echo e($balance["collected_by"]); ?></td>
+                                        <td><?php echo e($balance["deposited_amount"]); ?></td>
+                                        <td><?php echo e($balance["client_name"]); ?></td>
+                                        <td><?php echo e($balance["collected_date"]); ?></td>
+                                    </tr>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="card-footer">
+                            <div class="btn btn-outline-primary" id="download">
+                                <i class="fa fa-file-download"></i>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </section>
@@ -126,11 +163,32 @@
 
 <?php $__env->startSection('script'); ?>
     <script>
+        $('#collectorTable').DataTable();
         $('[data-toggle="tooltip"]').tooltip();
+        $("#download").click(function () {
+            let query = {
+                'data':$('.dataTables_filter input').val()
+            };
+            let url = "<?php echo e(URL::to('/download')); ?>?" + $.param(query)
+            window.location = url;
+        });
 
-        $("#add-new-row").click(function () {
-            $("#row").clone().val("").prependTo($("#reportTable"));
+        $(function () {
+            let counter=1;
+            $("#add-new-row").click(function () {
+                if(counter<12) {
+                    $("#row").first().clone(true).appendTo($("#reportTable"));
+                    counter++;
+                }
+            });
+            $("#remove-new-row").click(function () {
+                if(counter!=1){
+                    $(this).closest("#row").remove();
+                    counter--
+                }
+            });
         })
+
     </script>
 <?php $__env->stopSection(); ?>
 

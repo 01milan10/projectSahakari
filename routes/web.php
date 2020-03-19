@@ -76,6 +76,8 @@ Route::post('/report','balanceController@addReport')->name('add.report');
 
 Route::get('/retrieveBalance','balanceController@retrieveBalance')->name('retrieve.balance');
 
+Route::get('/download','balanceController@downloadCollectorReport')->name('download.collector.report');
+
 //Contacts Controller
 Route::get('/addContacts','backendController@showContactForm')->name('show.contactForm');
 

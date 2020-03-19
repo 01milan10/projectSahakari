@@ -13,6 +13,6 @@ $factory->define(Balance::class, function (Faker $faker) {
         'deposited_amount'=>$faker->numberBetween(6,9)*1000,
         'withdrawn_amount'=>$faker->numberBetween(5,9)*1000,
         'collected_by'=>$faker->name,
-        'collected_date'=>$faker->unique()->dateTimeBetween('2015/01/01',now()),
+        'collected_date'=>$faker->unique()->dateTimeBetween('2015/01/01','2020/12/30'),
     ];
 });
