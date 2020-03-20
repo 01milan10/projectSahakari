@@ -28,10 +28,10 @@ class BalanceExport implements FromCollection,WithHeadings
     public function headings(): array
     {
         return [
-          '-----Collector-----',
-          '-----Amount------',
-          '-------Collected Date----',
-          '------Client------',
+          'Collector',
+          'Amount',
+          'Collected Date',
+          'Client',
         ];
     }
 }

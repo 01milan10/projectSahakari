@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Committee;
 use App\Contact;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -10,115 +11,71 @@ use App\Oppurtunity;
 class backendController extends Controller
 {
 
-    //Opportunities controller
-    public function showOppurtunitiesForm(){
-        return view('oppurtunities.backendOppurtunities');
+    public function showTeamForm(){
+        $data=Committee::all();
+        return view('team.backendTeam',['data'=>$data]);
     }
-
-    public function addOppurtunities(Request $request){
+    public function addTeam(Request $request){
         $this->validate($request,[
-           'opening'=>'required',
-           'position'=>'required',
-           'seat'=>'required',
-           'requirement'=>'required',
-        ]);
-        $input=[
-          'opening'=>$request['opening'],
-          'position'=>$request['position'],
-          'seat'=>$request['seat'],
-          'requirement'=>$request['requirement'],
-        ];
-        Oppurtunity::create($input);
-        Alert::success("Success",'Job Posted Successfully.');
-        return back();
-    }
-
-    public function listOppurtunities(){
-        $opportunities=Oppurtunity::all();
-        return view('oppurtunities.listOppurtunities',['opportunities'=>$opportunities]);
-    }
-    public function deleteOppurtunity($id){
-        Oppurtunity::find($id)->delete();
-        Alert::success('Success','Opening Deleted Successfully');
-        return back();
-    }
-
-//Contact Controller
-
-    public function showContactForm(){
-        $contacts = Contact::all();
-        return view('contacts.backendContacts',['contacts'=>$contacts]);
-    }
-
-    public function addContact(Request $request){
-        $this->validate($request,[
-           'location'=>'required',
-           'address'=>'required',
-           'phone'=>'required|max:10',
+           'name'=>'required',
+           'designation'=>'required',
+           'phone'=>'required',
            'email'=>'required',
+           'representation'=>'required',
+           'image'=>'required',
         ]);
-        if ($request['alt_phone']==''){
-            $alt_phone = "Not Available";
+        if(Committee::create([
+            'name' => $request['name'],
+            'designation' => $request['designation'],
+            'phone' => $request['phone'],
+            'email' => $request['email'],
+            'representation' => $request['representation'],
+            'image' => $request['image'],
+        ])){
+            Alert::success("Success",'Team member added successfully');
         }
         else{
-            $alt_phone = $request['alt_phone'];
+            Alert::error("Error",'Failed to add team member');
+
         }
-        if ($request['fax']==''){
-            $fax = "Not Available";
-        }
-        else{
-            $fax = $request['fax'];
-        }
-        Contact::create([
-           'location'=>$request['location'],
-           'address'=>$request['address'],
-           'phone'=>$request['phone'],
-            'alt_phone'=>$alt_phone,
-            'fax'=>$fax,
-           'email'=>$request['email'],
-        ]);
-        Alert::success("Success","Contact Added Successfully");
         return back();
     }
-    public function deleteContact($id){
-        Contact::find($id)->delete();
-        Alert::Success("Success","Contact deleted successfully");
+
+    public function deleteTeam($id){
+        if(Committee::find($id)->delete()){
+            Alert::Success("Success",'Deleted successfully');
+        }
         return back();
     }
-    public function showUpdateContactForm($id){
-        $contact=Contact::find($id);
-//        dd($contact);
-        return view('contacts.updateContacts',['contact'=>$contact]);
+
+    public function showUpdateForm($id){
+        $data = Committee::find($id);
+        return view('team.teamUpdateForm',['data'=>$data]);
     }
-    public function updateContact(Request $request,$id){
-        if ($request['alt_phone']==''){
-            $alt_phone = "Not Available";
-        }
-        else{
-            $alt_phone = $request['alt_phone'];
-        }
-        if ($request['fax']==''){
-            $fax = "Not Available";
-        }
-        else{
-            $fax = $request['fax'];
-        }
+
+    public function updateTeam(Request $request,$id){
+        $this->validate($request,[
+           'name'=>'required',
+           'designation'=>'required',
+           'phone'=>'required',
+           'email'=>'required',
+           'representation'=>'required',
+           'image'=>'required',
+        ]);
         $update = [
-            'location'=>$request['location'],
-            'address'=>$request['address'],
-            'phone'=>$request['phone'],
-            'alt_phone'=>$alt_phone,
-            'fax'=>$fax,
-            'email'=>$request['email'],
+          'name'=>$request['name'],
+          'designation'=>$request['designation'],
+          'phone'=>$request['phone'],
+          'email'=>$request['email'],
+          'representation'=>$request['representation'],
+          'image'=>$request['image'],
         ];
-        if(Contact::find($id)->update($update)){
-            Alert::success("Success","Contacts information changed");
+        if (Committee::find($id)->update($update)){
+            Alert::success('Success','Updating Successful');
         }
-        else{
-            Alert::error('Failed','Updating contact information failed');
-        }
-        return redirect('/addContacts');
+        return redirect('/team');
     }
+
 
 
 

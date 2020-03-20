@@ -55,7 +55,7 @@
                           </i>
                       </a>
                   </td>
-                  <td style="text-align:center">
+                  <td>
                   <div>
                     <a href="<?php echo e(route('show.updateForm',['id'=>$user->id])); ?>">
                     <i class="fas fa-user-edit mr-3" data-toggle="tooltip" data-placement="top" title="Edit user info">

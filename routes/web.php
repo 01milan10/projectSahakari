@@ -61,13 +61,13 @@ Route::get('/delete_downloadables/{id}','downloadsController@deleteDownloadables
 Route::get('/downloadables/{id}','downloadsController@makeDownload')->name('download.downloadables');
 
 //Oppurtunities Controller
-Route::get('/oppurtunities','backendController@showoppurtunitiesForm')->name('show.oppurtunitiesForm');
+Route::get('/oppurtunities','opportunitiesController@showoppurtunitiesForm')->name('show.oppurtunitiesForm');
 
-Route::get('/add_oppurtunities','backendController@addOppurtunities')->name('add.oppurtunities');
+Route::get('/add_oppurtunities','opportunitiesController@addOppurtunities')->name('add.oppurtunities');
 
-Route::get('/list_oppurtunities','backendController@listOppurtunities')->name('list.oppurtunities');
+Route::get('/list_oppurtunities','opportunitiesController@listOppurtunities')->name('list.oppurtunities');
 
-Route::get('/delete_oppurtunities/{id}','backendController@deleteOppurtunity')->name('delete.oppurtunity');
+Route::get('/delete_oppurtunities/{id}','opportunitiesController@deleteOppurtunity')->name('delete.oppurtunity');
 
 //Balance Controller
 Route::get('/report','balanceController@showReportForm')->name('show.reportForm');
@@ -79,12 +79,19 @@ Route::get('/retrieveBalance','balanceController@retrieveBalance')->name('retrie
 Route::get('/download','balanceController@downloadCollectorReport')->name('download.collector.report');
 
 //Contacts Controller
-Route::get('/addContacts','backendController@showContactForm')->name('show.contactForm');
+Route::get('/addContacts','contactController@showContactForm')->name('show.contactForm');
 
-Route::post('/addContacts','backendController@addContact')->name('add.contacts');
+Route::post('/addContacts','contactController@addContact')->name('add.contacts');
 
-Route::get('/deleteContacts/{id}','backendController@deleteContact')->name('delete.contacts');
+Route::get('/deleteContacts/{id}','contactController@deleteContact')->name('delete.contacts');
 
-Route::get('/updateContacts/{id}','backendController@showUpdateContactForm')->name('show.updateContactsForm');
+Route::get('/updateContacts/{id}','contactController@showUpdateContactForm')->name('show.updateContactsForm');
 
-Route::post('/updateContacts/{id}','backendController@updateContact')->name('update.contacts');
+Route::post('/updateContacts/{id}','contactController@updateContact')->name('update.contacts');
+
+//Committee Controller
+Route::get('/team','backendController@showTeamForm')->name('show.teamForm');
+Route::post('/team','backendController@addTeam')->name('add.team');
+Route::get('/team/delete/{id}','backendController@deleteTeam')->name('delete.team');
+Route::post('/team/update/{id}','backendController@updateTeam')->name('update.team');
+Route::get('/team/update/{id}','backendController@showUpdateForm')->name('show.updateForm');

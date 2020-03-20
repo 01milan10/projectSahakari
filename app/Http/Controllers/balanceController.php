@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Balance;
 use App\Exports\BalanceExport;
+use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -51,11 +52,23 @@ class balanceController extends Controller
 
     public function downloadCollectorReport(Request $request){
         $name=$request['data'];
-        if($name != null){
-            return Excel::download(new BalanceExport($name),$name.".pdf");
+        $format=$request['format'];
+        $data = Balance::where([
+            ['collected_by','like',"%".$name."%"],
+            ['collected_date','=',today()],
+        ])->get(['collected_by','deposited_amount','collected_date','client_name']);
+
+        if($name !=null && count($data)>0){
+            if($format=='.pdf'){
+                $pdf = PDF::loadView('report.downloadReport',['data'=>$data]);
+                return $pdf->download($name.$format);
+            }
+            else{
+                return Excel::download(new BalanceExport($name),$name.$format);
+            }
         }
         else{
-            Alert::error("Error","Please enter the collector's name");
+            Alert::error("Error","Unavailable");
             return back();
         }
     }
