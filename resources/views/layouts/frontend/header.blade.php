@@ -27,7 +27,7 @@
 
     <link rel="stylesheet" href="{{asset('css/ekko-lightbox.css')}}">
 
-{{--    <link rel="stylesheet" href="{{asset('mdbootstrap/css/mdb.css')}}">--}}
+    <link rel="stylesheet" href="{{asset('mdbootstrap/css/mdb.css')}}">
 
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
 
@@ -43,7 +43,6 @@
   </div>
   <div class="site-wrap"  id="home-section">
   <div class="site-navbar py-4 js-sticky-header site-navbar-target" role="banner">
-
       <div>
         <div class="row align-items-center">
         <div class="col-3 col-md-3 col-xl-4  d-block">
@@ -83,7 +82,6 @@
           </div>
         </div>
       </div>
-
     </div>
     <div class="site-blocks-cover" style="overflow: hidden;">
       <div class="container">

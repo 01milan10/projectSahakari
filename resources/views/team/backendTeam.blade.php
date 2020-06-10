@@ -88,7 +88,7 @@
                                 <tr>
                                     <th>Name</th>
                                     <th>Designation</th>
-                                    <th>Phone Numner</th>
+                                    <th>Phone Number</th>
                                     <th>Email</th>
                                     <th>Representation</th>
                                     <th>Profile Picture</th>
@@ -108,7 +108,7 @@
                                             <a href="{{route('show.updateForm',$datum->id)}}" data-toggle="tooltip" data-placement="top" title="Update">
                                                 <i class="fa fa-redo-alt mr-3"></i>
                                             </a>
-                                            <a href="{{route('delete.team',$datum->id)}}" data-toggle="tooltip" data-placement="top" title="Delete">
+                                            <a href="{{route('delete.team',$datum->id)}}" data-toggle="tooltip" data-placement="top" title="Delete" style="color:#dc3545">
                                                 <i class="fa fa-user-times"></i>
                                             </a>
                                         </td>

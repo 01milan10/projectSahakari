@@ -139,10 +139,16 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="<?php echo e(route('show.visionForm')); ?>" class="nav-link">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>
+                            Our Vision & Objectives
+                        </p>
+                    </a>
+                </li>
             </ul>
         </nav>
-        <!-- /.sidebar-menu -->
     </div>
-    <!-- /.sidebar -->
 </aside>
 <?php /**PATH F:\DataworkshopNepal\projectSahakari\resources\views/layouts/backend/sidebar.blade.php ENDPATH**/ ?>

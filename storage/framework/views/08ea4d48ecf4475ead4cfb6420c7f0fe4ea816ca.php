@@ -148,4 +148,5 @@
         </div>
       </div>
     </div>
+
 <?php /**PATH F:\DataworkshopNepal\projectSahakari\resources\views/aboutUs/aboutUs.blade.php ENDPATH**/ ?>

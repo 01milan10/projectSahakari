@@ -26,6 +26,7 @@
     "dependencies": {
         "ekko-lightbox": "^5.3.0",
         "filterizr": "^2.2.3",
-        "mdbootstrap": "^4.14.0"
+        "mdbootstrap": "^4.14.0",
+        "vue-router": "^3.3.2"
     }
 }

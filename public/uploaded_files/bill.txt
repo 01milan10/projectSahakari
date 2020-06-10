@@ -1,0 +1,11 @@
+Second Floor
+Falgun
+
+Rent:12000
+Water:3*500=1500
+Electricity:114*13=1482
+Service Charge:50
+Waste:150
+Water Submeter:150
+--------------------
+Total:15332

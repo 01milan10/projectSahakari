@@ -92,7 +92,7 @@
 
                                                 </td>
                                                 <td>
-                                                    <div class="form-group row" id="last_child">
+                                                    <div class="form-group row">
                                                         <div class="col-sm-8">
                                                             <input type="date" class="form-control" id="date" required name="collected_date[]">
                                                         </div>
