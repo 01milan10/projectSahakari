@@ -1,61 +1,44 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import App from "../components/App";
-import Login from "../components/frontend/Authentication/Login";
-import Register from "../components/frontend/Authentication/Register";
-import AboutUs from "../components/frontend/AboutUs";
-import ContactUs from "../components/frontend/ContactUs";
-import ProgramServices from "../components/frontend/ProgramServices";
-import Testimonials from "../components/frontend/Testimonials";
-import Gallery from "../components/frontend/Gallery";
-import Home from "../components/frontend/Home";
+import Landing from "../views/Landing.vue";
+import Features from "../views/Features.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
     {
         path: "/",
-        name: "home",
-        component: Home
+        name: "Landing",
+        component: Landing
     },
     {
-        path: "/login",
-        name: "login",
-        component: Login
-    },
-    {
-        path: "/register",
-        name: "regsister",
-        component: Register
-    },
-    {
-        path: "/about-us",
-        name: "about-us",
-        component: AboutUs
-    },
-    {
-        path: "/contact-us",
-        name: "contact-us",
-        component: ContactUs
-    },
-    {
-        path: "/program-services",
-        name: "program-services",
-        component: ProgramServices
-    },
-    {
-        path: "/testimonials",
-        name: "testimonials",
-        component: Testimonials
-    },
-    {
-        path: "/gallery",
-        name: "gallery",
-        component: Gallery
+        path: "/features",
+        name: "Features",
+        component: Features,
+        meta: {
+            progress: {
+                func: [
+                    { call: "color", modifier: "temp", argument: "#ffb000" },
+                    { call: "fail", modifier: "temp", argument: "#6e0000" },
+                    { call: "location", modifier: "temp", argument: "top" },
+                    {
+                        call: "transition",
+                        modifier: "temp",
+                        argument: {
+                            speed: ".25s",
+                            opacity: "0.9s",
+                            termination: 400
+                        }
+                    }
+                ]
+            }
+        }
     }
 ];
 
 const router = new VueRouter({
+    mode: "history",
+    base: process.env.BASE_URL,
     routes
 });
 
