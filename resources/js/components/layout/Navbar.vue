@@ -32,7 +32,7 @@
             :elevation="hover?1:0"
           >Features</v-btn>
         </v-hover>
-        <v-menu offset-y>
+        <v-menu offset-y open-on-hover>
           <template v-slot:activator="{ on, attrs }">
             <v-hover v-slot:default="{hover}">
               <v-btn
@@ -42,6 +42,7 @@
                 v-bind="attrs"
                 v-on="on"
                 :elevation="hover?1:0"
+                to="/about-us"
               >
                 <span class="font-weight-light">About Us</span>
                 <v-icon right>mdi-chevron-down</v-icon>
@@ -50,7 +51,7 @@
           </template>
           <v-list dense rounded>
             <v-list-item
-              v-for="(item, index) in links"
+              v-for="(item, index) in drop_links"
               :key="index"
               :to="item.route"
               color="primary"
@@ -89,7 +90,7 @@
         </v-hover>
         <v-hover v-slot:default="{hover}">
           <v-btn
-            class="t-btn font-weight-light"
+            class="font-weight-light"
             text
             :color="`${hover?'blue':'grey'}`"
             to="/login"
@@ -103,7 +104,14 @@
     </v-app-bar>
     <v-navigation-drawer app width="150px" color="black" class="hidden-md-and-up" v-model="drawer">
       <v-list shaped>
-        <v-list-item v-for="(link,i) in links" :key="i" router :to="link.route" dark color="blue">
+        <v-list-item
+          v-for="(link,i) in nav_links"
+          :key="i"
+          router
+          :to="link.route"
+          dark
+          color="blue"
+        >
           <v-list-item-content>
             <v-list-item-title class="grey--text font-weight-light">{{link.title}}</v-list-item-title>
           </v-list-item-content>
@@ -119,21 +127,47 @@ export default {
     return {
       snackbar: false,
       drawer: false,
-      links: [
+      drop_links: [
         {
           title: "Our Team",
           route: "/our-team"
         }
       ],
-      dropdown_font: ["Arial", "Times New Roman", "Calibri", "Roboto"]
+      dropdown_font: ["Arial", "Times New Roman", "Calibri", "Roboto"],
+      nav_links: [
+        {
+          title: "Home",
+          route: "/"
+        },
+        {
+          title: "Features",
+          route: "/features"
+        },
+        {
+          title: "About Us",
+          route: "/about-us"
+        },
+        {
+          title: "Testimonials",
+          route: "/testimonials"
+        },
+        {
+          title: "Gallery",
+          route: "/gallery"
+        },
+        {
+          title: "Contact Us",
+          route: "/contact-us"
+        }
+      ]
     };
   }
 };
 </script>
 
 <style scoped>
-.t-btn:hover {
-  transform: scale(0.9);
+/* .t-btn:hover {
+  transform: scale(1.02);
   transition: 0.35s ease-in-out;
-}
+} */
 </style>

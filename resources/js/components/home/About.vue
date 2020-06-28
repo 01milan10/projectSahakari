@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-container fluid class="grey lighten-4 my-16">
+    <v-container fluid class="grey lighten-4">
       <v-row class="flex-column align-center mt-7">
         <h1 class="font-weight-light display-1">About Us</h1>
         <v-divider class="black" width="25%"></v-divider>
@@ -34,6 +34,7 @@
                     text
                     :elevation="hover?3:0"
                     :class="`${hover?'blue--text':'blue white--text'}`"
+                    to="/about-us"
                   >Learn More</v-btn>
                 </v-hover>
               </v-container>

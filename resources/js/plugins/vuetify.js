@@ -12,7 +12,8 @@ export default new Vuetify({
                 black: "#282e3a",
                 blue: "#44bef1",
                 email: "#4b5d78",
-                primary: "#24a3d8"
+                primary: "#24a3d8",
+                grey_divider: "#e8e8e8"
             }
         }
     }

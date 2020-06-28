@@ -10,6 +10,7 @@
         :cycle="true"
         :continuous="true"
         style="width: 55%"
+        delimiter-icon="mdi-circle-outline"
       >
         <v-carousel-item v-for="(carousel_item, i) in carousel_items" :key="i">
           <v-row class="justify-center mx-auto mt-10">

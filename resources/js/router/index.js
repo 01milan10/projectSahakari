@@ -2,6 +2,8 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Landing from "../views/Landing.vue";
 import Features from "../views/Features.vue";
+import About from "../views/About.vue";
+import Team from "../components/about/Team";
 
 Vue.use(VueRouter);
 
@@ -9,7 +11,17 @@ const routes = [
     {
         path: "/",
         name: "Landing",
-        component: Landing
+        component: Team
+    },
+    {
+        path: "/about-us",
+        name: "About Us",
+        component: About
+    },
+    {
+        path: "/our-team",
+        name: "Our Team",
+        component: Team
     },
     {
         path: "/features",

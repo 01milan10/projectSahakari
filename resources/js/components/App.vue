@@ -6,7 +6,7 @@
     </v-main>
     <Footer />
     <v-btn
-      x-small
+      small
       v-scroll="onScroll"
       v-show="fab"
       fab

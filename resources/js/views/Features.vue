@@ -4,13 +4,13 @@
       <h2 class="text-center display-1">Our Services</h2>
     </v-parallax>
     <v-container>
-      <v-breadcrumbs :items="items" class="py-0">
+      <v-breadcrumbs :items="items" class="pa-0">
         <template v-slot:divider>
-          <v-icon>mdi-chevron-right</v-icon>
+          <v-icon color="primary">mdi-chevron-right</v-icon>
         </template>
       </v-breadcrumbs>
     </v-container>
-    <v-container style="width:75%">
+    <v-container>
       <v-row>
         <v-col cols="12" md="8" lg="9">
           <v-row>
