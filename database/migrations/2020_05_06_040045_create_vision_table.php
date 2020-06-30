@@ -17,7 +17,6 @@ class CreateVisionTable extends Migration
             $table->bigIncrements('id');
             $table->string('vision');
             $table->string('mission');
-            $table->string('mission');
             $table->timestamps();
         });
     }

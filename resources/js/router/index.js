@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import Landing from "../views/Landing.vue";
 import Features from "../views/Features.vue";
 import About from "../views/About.vue";
+import Testimonials from "../views/Testimonials.vue";
 import Team from "../components/about/Team";
 
 Vue.use(VueRouter);
@@ -11,7 +12,7 @@ const routes = [
     {
         path: "/",
         name: "Landing",
-        component: Team
+        component: Landing
     },
     {
         path: "/about-us",
@@ -22,6 +23,11 @@ const routes = [
         path: "/our-team",
         name: "Our Team",
         component: Team
+    },
+    {
+        path: "/testimonials",
+        name: "Our Team",
+        component: Testimonials
     },
     {
         path: "/features",

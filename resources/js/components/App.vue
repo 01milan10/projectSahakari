@@ -4,6 +4,7 @@
     <v-main>
       <router-view></router-view>
     </v-main>
+    <Clients />
     <Footer />
     <v-btn
       small
@@ -25,13 +26,15 @@
 <script>
 import Navbar from "../components/layout/Navbar";
 import Footer from "../components/layout/Footer";
+import Clients from "./Clients";
 
 export default {
   name: "App",
 
   components: {
     Navbar,
-    Footer
+    Footer,
+    Clients
   },
 
   data: () => ({

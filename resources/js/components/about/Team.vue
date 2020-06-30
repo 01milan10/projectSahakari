@@ -64,6 +64,7 @@
                   light
                   :continuous="true"
                   :cycle="true"
+                  delimiter-icon="mdi-circle-outline"
                 >
                   <v-carousel-item v-for="(testimonial,i) in testimonials" :key="i">
                     <v-row class="flex-column align-center">

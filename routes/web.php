@@ -11,16 +11,16 @@
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// })->name('landingPage');
-
-
 Route::get('/', function () {
     return view('test');
-});
+})->name('landingPage');
 
 Auth::routes();
+
+//test controller
+Route::post('/test-login', 'testController@login')->name('test-login');
+Route::get('/test-login', 'testController@showLoginForm');
+
 
 Route::get('/home', 'HomeController@index')->name('home');
 

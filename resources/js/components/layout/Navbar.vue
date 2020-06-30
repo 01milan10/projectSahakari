@@ -88,12 +88,15 @@
             :elevation="hover?1:0"
           >Contact Us</v-btn>
         </v-hover>
+        <Login />
+      </v-toolbar-items>
+      <v-toolbar-items class="hidden-md-and-up">
         <v-hover v-slot:default="{hover}">
           <v-btn
             class="font-weight-light"
             text
             :color="`${hover?'blue':'grey'}`"
-            to="/login"
+            href="/login"
             :elevation="hover?1:0"
           >Login</v-btn>
         </v-hover>
@@ -122,6 +125,7 @@
 </template>
 
 <script>
+import Login from "../auth/Login";
 export default {
   data() {
     return {
@@ -161,6 +165,9 @@ export default {
         }
       ]
     };
+  },
+  components: {
+    Login
   }
 };
 </script>
