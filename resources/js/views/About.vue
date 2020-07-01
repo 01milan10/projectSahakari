@@ -14,7 +14,7 @@
       <v-row>
         <v-col cols="12" md="8" lg="9">
           <v-img src="/img/about-1.jpg" contain />
-          <v-layout class="my-10">
+          <v-layout class="my-10 pa-5">
             <v-row class="flex-column">
               <span>
                 <p
@@ -48,46 +48,6 @@
                   <p class="body-2 text-center my-0">Happy Clients</p>
                 </v-col>
               </v-row>
-            </v-row>
-          </v-layout>
-          <v-layout>
-            <v-row justify="center">
-              <v-col cols="12" md="6" class="px-4">
-                <p class="font-weight-bold text-h5">How we work</p>
-                <v-img src="/img/about-1.jpg" contain></v-img>
-              </v-col>
-              <v-col cols="12" md="6" class="px-4">
-                <p class="font-weight-bold text-h5">Our Mission</p>
-                <span>
-                  <p class="font-weight-light">Our renowned coaching programs will allow you to:</p>
-                  <p>
-                    <v-icon small color="blue">mdi-check</v-icon>
-                    <span class="font-weight-light">Relationships with clients, with employees</span>
-                  </p>
-                  <p>
-                    <v-icon small color="blue">mdi-check</v-icon>
-                    <span class="font-weight-light">Integrity in all we do to achieve full potential</span>
-                  </p>
-                  <p>
-                    <v-icon small color="blue">mdi-check</v-icon>
-                    <span class="font-weight-light">Cut expenses without sacrificing quality</span>
-                  </p>
-                  <p>
-                    <v-icon small color="blue">mdi-check</v-icon>
-                    <span class="font-weight-light">Integrity in all we do to achieve full potential</span>
-                  </p>
-                  <p>
-                    <v-icon small color="blue">mdi-check</v-icon>
-                    <span class="font-weight-light">Hone sharp leadership skills to manage your team</span>
-                  </p>
-                  <p>
-                    <v-icon small color="blue">mdi-check</v-icon>
-                    <span
-                      class="font-weight-light"
-                    >Manage your time so you'll get more done in less time</span>
-                  </p>
-                </span>
-              </v-col>
             </v-row>
           </v-layout>
         </v-col>
@@ -167,6 +127,44 @@
               </v-hover>
             </v-col>
           </v-row>
+        </v-col>
+      </v-row>
+    </v-container>
+    <v-container>
+      <v-row>
+        <v-col cols="12" md="6">
+          <p class="font-weight-bold text-h5">How we work</p>
+          <v-img src="/img/about-1.jpg" contain></v-img>
+        </v-col>
+        <v-col cols="12" md="6">
+          <p class="font-weight-bold text-h5">Our Mission</p>
+          <span>
+            <p class="font-weight-light">Our renowned coaching programs will allow you to:</p>
+            <p>
+              <v-icon small color="blue">mdi-check</v-icon>
+              <span class="font-weight-light">Relationships with clients, with employees</span>
+            </p>
+            <p>
+              <v-icon small color="blue">mdi-check</v-icon>
+              <span class="font-weight-light">Integrity in all we do to achieve full potential</span>
+            </p>
+            <p>
+              <v-icon small color="blue">mdi-check</v-icon>
+              <span class="font-weight-light">Cut expenses without sacrificing quality</span>
+            </p>
+            <p>
+              <v-icon small color="blue">mdi-check</v-icon>
+              <span class="font-weight-light">Integrity in all we do to achieve full potential</span>
+            </p>
+            <p>
+              <v-icon small color="blue">mdi-check</v-icon>
+              <span class="font-weight-light">Hone sharp leadership skills to manage your team</span>
+            </p>
+            <p>
+              <v-icon small color="blue">mdi-check</v-icon>
+              <span class="font-weight-light">Manage your time so you'll get more done in less time</span>
+            </p>
+          </span>
         </v-col>
       </v-row>
     </v-container>

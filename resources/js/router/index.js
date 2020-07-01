@@ -4,6 +4,7 @@ import Landing from "../views/Landing.vue";
 import Features from "../views/Features.vue";
 import About from "../views/About.vue";
 import Testimonials from "../views/Testimonials.vue";
+import Gallery from "../views/Gallery.vue";
 import Team from "../components/about/Team";
 
 Vue.use(VueRouter);
@@ -26,8 +27,13 @@ const routes = [
     },
     {
         path: "/testimonials",
-        name: "Our Team",
+        name: "Testimonials",
         component: Testimonials
+    },
+    {
+        path: "/gallery",
+        name: "Gallery",
+        component: Gallery
     },
     {
         path: "/features",

@@ -79,27 +79,10 @@
             :elevation="hover?1:0"
           >Gallery</v-btn>
         </v-hover>
-        <v-hover v-slot:default="{hover}">
-          <v-btn
-            class="t-btn font-weight-light"
-            text
-            :color="`${hover?'blue':'grey'}`"
-            to="/contact-us"
-            :elevation="hover?1:0"
-          >Contact Us</v-btn>
-        </v-hover>
         <Login />
       </v-toolbar-items>
       <v-toolbar-items class="hidden-md-and-up">
-        <v-hover v-slot:default="{hover}">
-          <v-btn
-            class="font-weight-light"
-            text
-            :color="`${hover?'blue':'grey'}`"
-            href="/login"
-            :elevation="hover?1:0"
-          >Login</v-btn>
-        </v-hover>
+        <Login />
       </v-toolbar-items>
       <span class="hidden-md-and-up">
         <v-app-bar-nav-icon class="grey--text" @click.stop="drawer=!drawer"></v-app-bar-nav-icon>
@@ -158,10 +141,6 @@ export default {
         {
           title: "Gallery",
           route: "/gallery"
-        },
-        {
-          title: "Contact Us",
-          route: "/contact-us"
         }
       ]
     };

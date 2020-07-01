@@ -4,27 +4,32 @@
       <h2 class="display-1 text-center">Testimonials</h2>
     </v-parallax>
     <v-container>
+      <v-breadcrumbs :items="bread_items" class="pa-0">
+        <template v-slot:divider>
+          <v-icon color="primary">mdi-chevron-right</v-icon>
+        </template>
+      </v-breadcrumbs>
+    </v-container>
+    <v-container>
       <v-timeline class="pa-sm-0">
-        <v-slide-x-reverse-transition group hide-on-leave>
-          <v-timeline-item v-for="(testimony,i) in testimonials" :key="i" class="py-5">
-            <template v-slot:icon>
-              <v-avatar size="65">
-                <img :src="testimony.avatar" />
-              </v-avatar>
-            </template>
-            <template v-slot:opposite>
-              <v-row class="flex-column">
-                <span class="font-weight-light primary--text text-h6">{{testimony.name}}</span>
-                <span class="font-weight-light grey--text">{{testimony.position}}</span>
-              </v-row>
-            </template>
-            <v-card class="elevation-2 rounded-xl grey lighten-4">
-              <v-card-text
-                class="grey--text"
-              >Lorem ipsum dolor sit amet, no nam oblique veritus. Commune scaevola imperdiet nec ut, sed euismod convenire principes at. Est et nobis iisque percipit, an vim zril disputando voluptatibus, vix an salutandi sententiae.</v-card-text>
-            </v-card>
-          </v-timeline-item>
-        </v-slide-x-reverse-transition>
+        <v-timeline-item v-for="(testimony,i) in testimonials" :key="i" class="py-5">
+          <template v-slot:icon>
+            <v-avatar size="65">
+              <img :src="testimony.avatar" />
+            </v-avatar>
+          </template>
+          <template v-slot:opposite>
+            <v-row class="flex-column">
+              <span class="font-weight-light primary--text text-h6">{{testimony.name}}</span>
+              <span class="font-weight-light grey--text">{{testimony.position}}</span>
+            </v-row>
+          </template>
+          <v-card class="elevation-2 rounded-xl grey lighten-4">
+            <v-card-text
+              class="grey--text"
+            >Lorem ipsum dolor sit amet, no nam oblique veritus. Commune scaevola imperdiet nec ut, sed euismod convenire principes at. Est et nobis iisque percipit, an vim zril disputando voluptatibus, vix an salutandi sententiae.</v-card-text>
+          </v-card>
+        </v-timeline-item>
       </v-timeline>
     </v-container>
   </div>
@@ -78,7 +83,18 @@ export default {
             "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur saepe repudiandae sint quia hic et."
         }
       ],
-      transition: true
+      bread_items: [
+        {
+          text: "Home",
+          disabled: false,
+          href: "/"
+        },
+        {
+          text: "Testimonials",
+          disabled: true,
+          href: "/testimonials"
+        }
+      ]
     };
   }
 };

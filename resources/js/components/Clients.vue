@@ -5,8 +5,9 @@
         :items="carousel_items"
         :autoplay="true"
         :loop="true"
-        :dots="false"
         :nav="false"
+        :dots="false"
+        :responsive="responsive"
         :autoplayTimeout="timeOut"
       >
         <div v-for="(client,i) in clients" :key="i">
@@ -27,8 +28,13 @@ export default {
   },
   data() {
     return {
+      responsive: {
+        0: { items: 2 },
+        600: { items: 4 },
+        960: { items: 6 }
+      },
       carousel_items: 6,
-      timeOute: 10000,
+      timeOut: 10000,
       clients: [
         {
           logo: "/img/home-7.png"
