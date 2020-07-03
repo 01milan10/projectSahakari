@@ -1,32 +1,19 @@
-<?php $__env->startSection('header'); ?>
-    <?php echo $__env->make('layouts.frontend.header', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-<?php $__env->stopSection(); ?>
+<html>
 
-<?php $__env->startSection('programServices'); ?>
-    <?php echo $__env->make('programServices.programServices', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-<?php $__env->stopSection(); ?>
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
 
-<?php $__env->startSection('aboutUs'); ?>
-    <?php echo $__env->make('aboutUs.aboutUs', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-<?php $__env->stopSection(); ?>
+</head>
 
-<?php $__env->startSection('testimonials'); ?>
-    <?php echo $__env->make('testimonials.testimonials', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-<?php $__env->stopSection(); ?>
+<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+    <div id="app">
+        <App />
+    </div>
+    <script src="js/app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+</body>
 
-<?php $__env->startSection('gallery'); ?>
-    <?php echo $__env->make('gallery.gallery', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-<?php $__env->stopSection(); ?>
-
-<?php $__env->startSection('contactUs'); ?>
-    <?php echo $__env->make('contactUs.contactUs', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-<?php $__env->stopSection(); ?>
-
-<?php $__env->startSection('footer'); ?>
-    <?php echo $__env->make('layouts.frontend.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-<?php $__env->stopSection(); ?>
-
-<?php $__env->startSection('script'); ?>
-<?php $__env->stopSection(); ?>
-
-<?php echo $__env->make('layouts.frontend.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH F:\DataworkshopNepal\projectSahakari\resources\views/welcome.blade.php ENDPATH**/ ?>
+</html><?php /**PATH F:\DataworkshopNepal\projectSahakari\resources\views/welcome.blade.php ENDPATH**/ ?>

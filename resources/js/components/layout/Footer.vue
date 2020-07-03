@@ -65,28 +65,28 @@
                 <p class="text-center font-weight-light">
                   <v-hover v-slot:default="{hover}">
                     <router-link
-                      to="/contact-us"
-                      class="grey--text text-decoration-none"
-                      :class="`${hover?'blue--text':''}`"
-                    >Contact Us</router-link>
-                  </v-hover>
-                </p>
-                <p class="text-center font-weight-light">
-                  <v-hover v-slot:default="{hover}">
-                    <router-link
-                      to="/blog"
-                      class="grey--text text-decoration-none"
-                      :class="`${hover?'blue--text':''}`"
-                    >Blog</router-link>
-                  </v-hover>
-                </p>
-                <p class="text-center font-weight-light">
-                  <v-hover v-slot:default="{hover}">
-                    <router-link
                       to="/testimonials"
                       class="grey--text text-decoration-none"
                       :class="`${hover?'blue--text':''}`"
                     >Testimonials</router-link>
+                  </v-hover>
+                </p>
+                <p class="text-center font-weight-light">
+                  <v-hover v-slot:default="{hover}">
+                    <router-link
+                      to="/our-gallery"
+                      class="grey--text text-decoration-none"
+                      :class="`${hover?'blue--text':''}`"
+                    >Gallery</router-link>
+                  </v-hover>
+                </p>
+                <p class="text-center font-weight-light">
+                  <v-hover v-slot:default="{hover}">
+                    <router-link
+                      to="/our-team"
+                      class="grey--text text-decoration-none"
+                      :class="`${hover?'blue--text':''}`"
+                    >Our Team</router-link>
                   </v-hover>
                 </p>
               </v-col>
@@ -129,22 +129,32 @@
             <v-divider class="grey darken-2 mt-3" width="50%"></v-divider>
             <v-row class="d-flex flex-column align-center white--text ml-">
               <div class="mt-4">
-                <span class="font-weight-light">Get latest updates and offers.</span>
+                <span class="font-weight-light">
+                  Get latest updates and offers.
+                  <v-icon class="pb-2" color="blue">mdi-bell-outline</v-icon>
+                </span>
               </div>
-              <v-card
-                class="d-flex flex-row mt-1 align-center"
-                color="grey lighten-3"
-                width="270"
-                height="65"
-              >
-                <form class="ml-4">
-                  <v-text-field label="Email" :rules="emailRules" clearable></v-text-field>
+              <v-card class="d-flex flex-row mt-1 align-center rounded-lg" color="grey lighten-2">
+                <form action="#" method="post">
+                  <v-card-text class="pb-0">
+                    <v-text-field
+                      type="email"
+                      label="Email"
+                      :rules="emailRules"
+                      clearable
+                      class="ma-0 pa-0"
+                    ></v-text-field>
+                  </v-card-text>
+                  <v-card-actions class="pt-0">
+                    <v-spacer></v-spacer>
+                    <v-hover v-slot:default="{hover}">
+                      <v-btn
+                        rounded
+                        :class="`${hover?'primary--text sub':'primary white--text'}`"
+                      >Submit</v-btn>
+                    </v-hover>
+                  </v-card-actions>
                 </form>
-                <v-hover v-slot:default="{hover}">
-                  <v-btn icon text class="ml-3 mr-3">
-                    <v-icon large :color="`${hover?'black':'email'}`">mdi-email-send</v-icon>
-                  </v-btn>
-                </v-hover>
               </v-card>
             </v-row>
           </v-row>
@@ -177,5 +187,9 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.sub {
+  transform: scale(0.98);
+  transition: 0.5 ease-in-out;
+}
 </style>

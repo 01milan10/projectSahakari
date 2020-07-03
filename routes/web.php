@@ -11,15 +11,36 @@
 |
 */
 
+// Route::get('/{vue_capture?}', function () {
+//     return view('welcome');
+// })->where(
+//     'vue_capture',
+//     '[\/\w\.-]*'
+// );
+Route::any('/features', function () {
+    return view('welcome');
+});
+Route::any('/about-us', function () {
+    return view('welcome');
+});
+Route::any('/contact-us', function () {
+    return view('welcome');
+});
+Route::any('/our-gallery', function () {
+    return view('welcome');
+});
+Route::any('/our-team', function () {
+    return view('welcome');
+});
+Route::any('/testimonials', function () {
+    return view('welcome');
+});
+
 Route::get('/', function () {
-    return view('test');
+    return view('welcome');
 })->name('landingPage');
 
 Auth::routes();
-
-//test controller
-Route::post('/test-login', 'testController@login')->name('test-login');
-Route::get('/test-login', 'testController@showLoginForm');
 
 
 Route::get('/home', 'HomeController@index')->name('home');

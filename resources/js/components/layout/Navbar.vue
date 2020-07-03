@@ -75,7 +75,7 @@
             class="t-btn font-weight-light"
             text
             :color="`${hover?'blue':'grey'}`"
-            to="/gallery"
+            to="/our-gallery"
             :elevation="hover?1:0"
           >Gallery</v-btn>
         </v-hover>
@@ -140,7 +140,7 @@ export default {
         },
         {
           title: "Gallery",
-          route: "/gallery"
+          route: "/our-gallery"
         }
       ]
     };

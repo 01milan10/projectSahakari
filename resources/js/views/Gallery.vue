@@ -1,5 +1,8 @@
 <template>
   <div>
+    <v-parallax src="/img/services-parallax.jpg" height="150">
+      <h2 class="text-center display-1">Our Album</h2>
+    </v-parallax>
     <v-container>
       <v-breadcrumbs :items="bread_items" class="pa-0">
         <template v-slot:divider>
@@ -102,8 +105,9 @@ export default {
 
 <style scoped>
 .img:hover {
-  transform: scale(1.05);
-  transition: 0.3s ease-in-out;
+  opacity: 0.85;
+  transform: scale(0.98);
+  transition: all 0.4s ease-in;
 }
 
 @media screen and (min-width: 768px) {

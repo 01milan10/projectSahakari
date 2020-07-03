@@ -179,12 +179,12 @@ export default {
         {
           text: "Home",
           disabled: false,
-          href: "/"
+          route: "/"
         },
         {
           text: "About Us",
           disabled: true,
-          href: "/about-us"
+          route: "/about-us"
         }
       ],
       testimonials: [

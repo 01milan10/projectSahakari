@@ -31,7 +31,7 @@ const routes = [
         component: Testimonials
     },
     {
-        path: "/gallery",
+        path: "/our-gallery",
         name: "Gallery",
         component: Gallery
     },

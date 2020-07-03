@@ -52,41 +52,34 @@
                                             <tr id="row">
                                                 <td>
                                                     <div class="form-group row">
-                                                        <div class="col-sm-12">
-                                                            <input type="text" class="form-control" id="client_name" required placeholder="Client Name" name="name[]">
-                                                        </div>
+                                                        <input type="text" class="form-control" id="client_name" required placeholder="Client Name" name="name[]">
                                                     </div>
 
                                                 </td>
                                                 <td>
                                                     <div class="form-group row">
-                                                        <div class="col-sm-12">
-                                                            <input type="email" class="form-control" id="client_email" required placeholder="Client Email" name="email[]">
-                                                        </div>
+                                                        <input type="email" class="form-control" id="client_email" required placeholder="Client Email" name="email[]">
                                                     </div>
 
                                                 </td>
                                                 <td>
                                                     <div class="form-group row">
-                                                        <div class="col-sm-12">
-                                                            <input type="number" class="form-control" id="deposit" required placeholder="Deposited Amount" name="deposit[]">
-                                                        </div>
+                                                        <input type="number" class="form-control" id="deposit" required placeholder="Deposited Amount" name="deposit[]">
+
                                                     </div>
 
                                                 </td>
                                                 <td>
                                                     <div class="form-group row">
-                                                        <div class="col-sm-12">
-                                                            <input type="number" class="form-control" id="withdraw" required placeholder="Withdrawn Amount" name="withdraw[]">
-                                                        </div>
+                                                        <input type="number" class="form-control" id="withdraw" required placeholder="Withdrawn Amount" name="withdraw[]">
+
                                                     </div>
 
                                                 </td>
                                                 <td>
                                                     <div class="form-group row">
-                                                        <div class="col-sm-12">
-                                                            <input type="text" class="form-control" id="collector" required placeholder="Collector's Name" name="cName[]">
-                                                        </div>
+                                                        <input type="text" class="form-control" id="collector" required placeholder="Collector's Name" name="cName[]">
+
                                                     </div>
 
                                                 </td>
@@ -127,7 +120,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div>
             <div class="col-12">
                 <div class="card">
                     <div class="card-primary card-outline">
@@ -200,16 +193,17 @@
     });
     $(function() {
         let counter = 1;
-        $("#add-new-row").click(function() {
+        $("#add-new-row").click(() => {
             if (counter < 12) {
-                $("#row").first().val('').clone(true).appendTo($("#reportTable"));
+                $("#row").first().clone(true).appendTo($("#reportTable"));
+
                 counter++;
             }
         });
         $("#remove-new-row").click(function() {
             if (counter != 1) {
                 $(this).closest("#row").remove();
-                counter--
+                counter--;
             }
         });
     })

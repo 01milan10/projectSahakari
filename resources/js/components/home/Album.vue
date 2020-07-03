@@ -12,7 +12,7 @@
           </v-col>
         </v-row>
       </v-container>
-      <v-btn rounded text color="blue">see more</v-btn>
+      <v-btn rounded text color="blue" to="/our-gallery">see more</v-btn>
     </v-row>
   </v-container>
 </template>
@@ -48,7 +48,8 @@ export default {
 
 <style scoped>
 .img:hover {
-  transform: scale(1.025);
-  transition: 0.4s ease;
+  opacity: 0.85;
+  transform: scale(0.98);
+  transition: all 0.4s ease-in;
 }
 </style>

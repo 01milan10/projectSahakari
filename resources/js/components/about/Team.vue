@@ -111,17 +111,17 @@ export default {
         {
           text: "Home",
           disabled: false,
-          href: "/"
+          route: "/"
         },
         {
           text: "About Us",
           disabled: false,
-          href: "/about-us"
+          route: "/about-us"
         },
         {
           text: "Our Team",
           disabled: true,
-          href: "/our-team"
+          route: "/our-team"
         }
       ],
       testimonials: [
