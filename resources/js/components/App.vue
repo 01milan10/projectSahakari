@@ -6,20 +6,23 @@
     </v-main>
     <Clients />
     <Footer />
-    <v-btn
-      small
-      v-scroll="onScroll"
-      v-show="fab"
-      fab
-      dark
-      fixed
-      bottom
-      right
-      color="primary"
-      @click="toTop"
-    >
-      <v-icon>mdi-chevron-up</v-icon>
-    </v-btn>
+    <div class="hidden-sm-and-down">
+      <v-hover v-slot:default="{hover}">
+        <v-btn
+          v-scroll="onScroll"
+          v-show="fab"
+          fab
+          dark
+          fixed
+          bottom
+          right
+          :color="`${hover?'primary':'#229dd1'}`"
+          @click="toTop"
+        >
+          <v-icon>mdi-chevron-up</v-icon>
+        </v-btn>
+      </v-hover>
+    </div>
   </v-app>
 </template>
 

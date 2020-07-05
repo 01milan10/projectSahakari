@@ -51,13 +51,13 @@
           class="font-weight-light grey--text mt-3 text-center"
         >Lorem ipsum dolor sit amet consectetur, adipisicing elit. Molestias, facilis!</p>
         <v-row class="my-5 justify-center">
-          <v-col cols="12" sm="6" md="4" lg="2" v-for="(person,i) in team" :key="i">
+          <v-col cols="6" sm="5" md="4" lg="2" v-for="(person,i) in team" :key="i">
             <v-hover v-slot:default="{hover}">
               <v-card
                 class="mx-auto mt-3 card rounded-t-xl rounded-b-xl"
                 :class="`${hover?'blue':'grey lighten-4'}`"
                 :elevation="hover?5:2"
-                max-width="200"
+                max-width="240"
               >
                 <v-img class="img" :src="person.photo">
                   <v-expand-transition>

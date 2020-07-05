@@ -29,10 +29,16 @@ Route::any('/contact-us', function () {
 Route::any('/our-gallery', function () {
     return view('welcome');
 });
+Route::any('/downloads', function () {
+    return view('welcome');
+});
 Route::any('/our-team', function () {
     return view('welcome');
 });
 Route::any('/testimonials', function () {
+    return view('welcome');
+});
+Route::any('/career', function () {
     return view('welcome');
 });
 

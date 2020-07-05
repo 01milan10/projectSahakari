@@ -79,6 +79,24 @@
             :elevation="hover?1:0"
           >Gallery</v-btn>
         </v-hover>
+        <v-hover v-slot:default="{hover}">
+          <v-btn
+            class="t-btn font-weight-light"
+            text
+            :color="`${hover?'blue':'grey'}`"
+            to="/career"
+            :elevation="hover?1:0"
+          >Career</v-btn>
+        </v-hover>
+        <v-hover v-slot:default="{hover}">
+          <v-btn
+            class="t-btn font-weight-light"
+            text
+            :color="`${hover?'blue':'grey'}`"
+            to="/downloads"
+            :elevation="hover?1:0"
+          >Downloads</v-btn>
+        </v-hover>
         <Login />
       </v-toolbar-items>
       <v-toolbar-items class="hidden-md-and-up">
@@ -141,6 +159,14 @@ export default {
         {
           title: "Gallery",
           route: "/our-gallery"
+        },
+        {
+          title: "Career",
+          route: "/career"
+        },
+        {
+          title: "Downloads",
+          route: "/downloads"
         }
       ]
     };
@@ -152,8 +178,4 @@ export default {
 </script>
 
 <style scoped>
-/* .t-btn:hover {
-  transform: scale(1.02);
-  transition: 0.35s ease-in-out;
-} */
 </style>

@@ -5,6 +5,8 @@ import Features from "../views/Features.vue";
 import About from "../views/About.vue";
 import Testimonials from "../views/Testimonials.vue";
 import Gallery from "../views/Gallery.vue";
+import Downloads from "../views/Downloads.vue";
+import Career from "../views/Career.vue";
 import Team from "../components/about/Team";
 
 Vue.use(VueRouter);
@@ -34,6 +36,16 @@ const routes = [
         path: "/our-gallery",
         name: "Gallery",
         component: Gallery
+    },
+    {
+        path: "/downloads",
+        name: "Downloads",
+        component: Downloads
+    },
+    {
+        path: "/career",
+        name: "Career",
+        component: Career
     },
     {
         path: "/features",
