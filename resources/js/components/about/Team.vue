@@ -24,9 +24,6 @@
                   <h4 class="font-weight-light">{{person.position}}</h4>
                 </v-card-subtitle>
                 <v-divider class="grey_divider"></v-divider>
-                <v-card-text class="px-0">
-                  <span>{{person.description}}</span>
-                </v-card-text>
                 <v-card-actions class="pt-0 px-0">
                   <v-btn small icon>
                     <v-icon>mdi-facebook</v-icon>

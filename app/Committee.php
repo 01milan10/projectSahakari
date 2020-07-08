@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Committee extends Model
 {
     protected $fillable = [
-        'name','designation','phone','email','representation','image',
+        'name', 'designation', 'phone', 'email', 'representation', 'image', 'facebook', 'gmail'
     ];
 }

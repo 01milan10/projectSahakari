@@ -17,6 +17,8 @@
 //     'vue_capture',
 //     '[\/\w\.-]*'
 // );
+
+//Frontend Routes
 Route::any('/features', function () {
     return view('welcome');
 });
@@ -46,13 +48,15 @@ Route::get('/', function () {
     return view('welcome');
 })->name('landingPage');
 
+
+//Auth Routes
 Auth::routes();
 
 
 Route::get('/home', 'HomeController@index')->name('home');
 
 //Backend Controller
-//Users Controller
+//Users Routes
 Route::get('/addUser', 'usersController@showRegisterForm')->name('show.registerForm');
 
 Route::post('/addUser', 'usersController@addUser')->name('add.user');
@@ -69,21 +73,21 @@ Route::get('/resetPassword/{id}', 'usersController@showResetForm')->name('show.r
 
 Route::post('/resetPassword/{id}', 'usersController@resetPassword')->name('reset.password');
 
-//Gallery Controller
+//Gallery Routes
 Route::get('/gallery', 'galleryController@showGallery')->name('show.gallery');
 
 Route::post('/gallery', 'galleryController@upload')->name('image.upload');
 
 Route::get('/gallery/{id}', 'galleryController@delete')->name('image.delete');
 
-//Messages Controller
+//Messages Routes
 Route::get('/add_messages', 'messagesController@showMessageForm')->name('show.messageForm');
 
 Route::post('/add_messages', 'messagesController@uploadMessage')->name('upload.message');
 
 Route::get('/messages', 'frontendController@showMessage')->name('show.message');
 
-//Downloads Controller
+//Downloads Routes
 Route::get('/downloadables', 'downloadsController@showDownloadables')->name('show.downloadables');
 
 Route::post('/downloadables', 'downloadsController@uploadDownloadables')->name('upload.downloadables');
@@ -92,7 +96,7 @@ Route::get('/delete_downloadables/{id}', 'downloadsController@deleteDownloadable
 
 Route::get('/downloadables/{id}', 'downloadsController@makeDownload')->name('download.downloadables');
 
-//Oppurtunities Controller
+//Oppurtunities Routes
 Route::get('/oppurtunities', 'opportunitiesController@showoppurtunitiesForm')->name('show.oppurtunitiesForm');
 
 Route::get('/add_oppurtunities', 'opportunitiesController@addOppurtunities')->name('add.oppurtunities');
@@ -101,7 +105,7 @@ Route::get('/list_oppurtunities', 'opportunitiesController@listOppurtunities')->
 
 Route::get('/delete_oppurtunities/{id}', 'opportunitiesController@deleteOppurtunity')->name('delete.oppurtunity');
 
-//Balance Controller
+//Balance Routes
 Route::get('/report', 'balanceController@showReportForm')->name('show.reportForm');
 
 Route::post('/report', 'balanceController@addReport')->name('add.report');
@@ -110,7 +114,7 @@ Route::get('/retrieveBalance', 'balanceController@retrieveBalance')->name('retri
 
 Route::get('/download', 'balanceController@downloadCollectorReport')->name('download.collector.report');
 
-//Contacts Controller
+//Contacts Routes
 Route::get('/addContacts', 'contactController@showContactForm')->name('show.contactForm');
 
 Route::post('/addContacts', 'contactController@addContact')->name('add.contacts');
@@ -121,18 +125,24 @@ Route::get('/updateContacts/{id}', 'contactController@showUpdateContactForm')->n
 
 Route::post('/updateContacts/{id}', 'contactController@updateContact')->name('update.contacts');
 
-//Committee Controller
-Route::get('/team', 'backendController@showTeamForm')->name('show.teamForm');
+//Committee Routes
+Route::get('/team', 'committeeController@showTeamForm')->name('show.teamForm');
 
-Route::post('/team', 'backendController@addTeam')->name('add.team');
+Route::post('/team', 'committeeController@addTeam')->name('add.team');
 
-Route::get('/team/delete/{id}', 'backendController@deleteTeam')->name('delete.team');
+Route::get('/team/delete/{id}', 'committeeController@deleteTeam')->name('delete.team');
 
-Route::post('/team/update/{id}', 'backendController@updateTeam')->name('update.team');
+Route::post('/team/update/{id}', 'committeeController@updateTeam')->name('update.team');
 
-Route::get('/team/update/{id}', 'backendController@showUpdateForm')->name('show.updateForm');
+Route::get('/team/update/{id}', 'committeeController@showUpdateForm')->name('show.updateForm');
 
-//Vision and Objective Controller
+//Vision and Objective Routes
 Route::get('/vision', 'visionController@showVisionForm')->name('show.visionForm');
 
 Route::post('/vision', 'visionController@addVision')->name('add.vision');
+
+
+//Client's Comments Routes
+Route::get('/client-comments', 'commentController@showCommentForm')->name('show.commentForm');
+Route::post('/client-comments', 'commentController@addComment')->name('add.comment');
+Route::get('/client-comments/{id}', 'commentController@deleteComment')->name('delete.comment');

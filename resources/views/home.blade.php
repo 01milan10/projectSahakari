@@ -32,7 +32,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <div class="card card-primary card-outline" id="line_chart_card">
+                    <div class="card card-info" id="line_chart_card">
                         <div class="card-header">
                             <h3 class="card-title">
                                 <i class="far fa-chart-bar"></i>
@@ -57,15 +57,15 @@
                                     <option value="12">year</option>
                                 </select>
                             </label>
-                            <button type="reset" class="btn btn-primary float-right">
-                                <a href="" class="btn-primary">
+                            <button type="reset" class="btn btn-info float-right">
+                                <a href="" class="btn-info">
                                     <i class="fas fa-file-download mr-2"></i>
                                     Download
                                 </a>
                             </button>
                         </div>
                     </div>
-                    <div class="card card-primary card-outline">
+                    <div class="card card-info">
                         <div class="card-header">
                             <h3 class="card-title">
                                 <i class="far fa-chart-bar"></i>
@@ -92,8 +92,8 @@
                                     <option value="2015">2015</option>
                                 </select>
                             </label>
-                            <button type="reset" class="btn btn-primary float-right">
-                                <a href="" class="btn-primary">
+                            <button type="reset" class="btn btn-info float-right">
+                                <a href="" class="btn-info">
                                     <i class="fas fa-file-download mr-2"></i>
                                     Download
                                 </a>

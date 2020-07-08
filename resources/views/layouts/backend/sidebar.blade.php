@@ -1,8 +1,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="{{route('landingPage')}}" class="brand-link">
-        <img src="{{asset('dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-             style="opacity: .8">
+        <img src="{{asset('dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">Project Sahakari</span>
     </a>
 
@@ -38,7 +37,9 @@
                         </p>
                     </a>
                 </li>
-                <li class="nav-header"><h5>MANAGE PAGES</h5></li>
+                <li class="nav-header">
+                    <h5>MANAGE PAGES</h5>
+                </li>
                 <li class="nav-item">
                     <a href="{{route('show.reportForm')}}" class="nav-link">
                         <i class="nav-icon fas fa-clipboard-list"></i>
@@ -144,6 +145,14 @@
                         <i class="nav-icon fas fa-users"></i>
                         <p>
                             Our Vision & Objectives
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('show.commentForm')}}" class="nav-link">
+                        <i class="nav-icon fas fa-comment-dots"></i>
+                        <p>
+                            Testimonials
                         </p>
                     </a>
                 </li>

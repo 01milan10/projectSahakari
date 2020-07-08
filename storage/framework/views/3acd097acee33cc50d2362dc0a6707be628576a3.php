@@ -1,13 +1,13 @@
 <?php $__env->startSection('header'); ?>
-    <?php echo $__env->make('layouts.backend.header', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php echo $__env->make('layouts.backend.header', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('sidebar'); ?>
-    <?php echo $__env->make('layouts.backend.sidebar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php echo $__env->make('layouts.backend.sidebar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content'); ?>
-    <div class="content-wrapper">
+<div class="content-wrapper">
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
@@ -24,9 +24,10 @@
         </div>
     </section>
     <section class="content">
+        <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="card card-outline card-info">
+                    <div class="card card-info">
                         <div class="card-header">
                             <h3 class="card-title">
                                 Add Messages
@@ -80,26 +81,26 @@ unset($__errorArgs, $__bag); ?>" placeholder="Author Position" name="position" r
                 </div>
                 <!-- /.col-->
             </div>
-            <!-- ./row -->
-        </section>
-    </div>
+        </div>
+        <!-- ./row -->
+    </section>
+</div>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('footer'); ?>
-    <?php echo $__env->make('layouts.backend.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php echo $__env->make('layouts.backend.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('script'); ?>
-    <script src="<?php echo e(asset('plugins/summernote/summernote-bs4.min.js')); ?>"></script>
-    <script type="text/javascript">
-        $(function () {
-            $('.textarea').summernote({
-                placeholder: 'Please write your messages here.',
-                tabSize:3,
-                height:350,
-            })
+<script src="<?php echo e(asset('plugins/summernote/summernote-bs4.min.js')); ?>"></script>
+<script type="text/javascript">
+    $(function() {
+        $('.textarea').summernote({
+            placeholder: 'Please write your messages here.',
+            tabSize: 3,
+            height: 350,
         })
-    </script>
+    })
+</script>
 <?php $__env->stopSection(); ?>
-
 <?php echo $__env->make("layouts.backend.app", \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH F:\DataworkshopNepal\projectSahakari\resources\views/messages/backendMessages.blade.php ENDPATH**/ ?>

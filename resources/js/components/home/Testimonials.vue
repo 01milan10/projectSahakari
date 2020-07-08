@@ -15,14 +15,14 @@
         <v-carousel-item v-for="(carousel_item, i) in carousel_items" :key="i">
           <v-row class="justify-center mx-auto mt-10">
             <v-avatar size="100">
-              <v-img :src="carousel_item.avatar"></v-img>
+              <v-img :src="carousel_item.image"></v-img>
             </v-avatar>
             <span class="text-center">
               <p
                 class="grey--text mt-5 font-weight-light font-italic carousel-content text-sm-body-2 text-md-h6 text-lg-h5"
-              >"{{carousel_item.content}}"</p>
-              <p class="black--text font-weight-bold mt-5 mb-0">{{carousel_item.person}}</p>
-              <p class="font-weight-light grey--text">({{carousel_item.position}})</p>
+              >{{carousel_item.comment}}</p>
+              <p class="black--text font-weight-regular mt-5 mb-0">{{carousel_item.name}}</p>
+              <p class="font-weight-light grey--text">({{carousel_item.designation}})</p>
             </span>
           </v-row>
         </v-carousel-item>
@@ -32,53 +32,53 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   data() {
     return {
       carousel_items: [
-        {
-          avatar: "/img/person_1.jpg",
-          person: "Johan Hill",
-          position: "CEO & Founder",
-          content:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque officia praesentium voluptate iure molestiae perferendis facilis, libero optio molestias odio odit minima sit et nulla dolorem? At sunt voluptate assumenda?"
-        },
-        {
-          avatar: "/img/person_2.jpg",
-          person: "Jim Carry",
-          position: "CEO & Founder",
-          content:
-            " Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque officia praesentium voluptate iure molestiae perferendis facilis, libero optio molestias odio odit minima sit et nulla dolorem? At sunt voluptate assumenda?"
-        },
-        {
-          avatar: "/img/person_3.jpg",
-          person: "Michael Carrick",
-          position: "CEO & Founder",
-          content:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque officia praesentium voluptate iure molestiae perferendis facilis, libero optio molestias odio odit minima sit et nulla dolorem? At sunt voluptate assumenda?"
-        },
-        {
-          avatar: "/img/person_4.jpg",
-          person: "Hilary Towle",
-          position: "CEO & Founder",
-          content:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque officia praesentium voluptate iure molestiae perferendis facilis, libero optio molestias odio odit minima sit et nulla dolorem? At sunt voluptate assumenda?"
-        }
+        // {
+        //   avatar: "/img/person_1.jpg",
+        //   person: "Johan Hill",
+        //   position: "CEO & Founder",
+        //   content:
+        //     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque officia praesentium voluptate iure molestiae perferendis facilis, libero optio molestias odio odit minima sit et nulla dolorem? At sunt voluptate assumenda?"
+        // },
+        // {
+        //   avatar: "/img/person_2.jpg",
+        //   person: "Jim Carry",
+        //   position: "CEO & Founder",
+        //   content:
+        //     " Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque officia praesentium voluptate iure molestiae perferendis facilis, libero optio molestias odio odit minima sit et nulla dolorem? At sunt voluptate assumenda?"
+        // },
+        // {
+        //   avatar: "/img/person_3.jpg",
+        //   person: "Michael Carrick",
+        //   position: "CEO & Founder",
+        //   content:
+        //     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque officia praesentium voluptate iure molestiae perferendis facilis, libero optio molestias odio odit minima sit et nulla dolorem? At sunt voluptate assumenda?"
+        // },
+        // {
+        //   avatar: "/img/person_4.jpg",
+        //   person: "Hilary Towle",
+        //   position: "CEO & Founder",
+        //   content:
+        //     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque officia praesentium voluptate iure molestiae perferendis facilis, libero optio molestias odio odit minima sit et nulla dolorem? At sunt voluptate assumenda?"
+        // }
       ]
     };
+  },
+  created() {
+    axios
+      .get("http://sahakari-app.com/api/get-comments/4")
+      .then(res => (this.carousel_items = res.data.data));
   }
 };
 </script>
 
 <style scoped>
 .carousel-content {
-  line-height: 1.7;
+  line-height: 1.7 !important;
 }
-
-/* @media screen and (min-width: 1904px) {
-  .carousel-content {
-    max-width: 60% !important;
-  }
-} */
 </style>
 

@@ -29,15 +29,15 @@
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    <div class="card-primary card-outline">
+                    <div class="card-info">
                         <div class="card-header">
                             <h3 class="card-title">
                                 <i class="far fa-keyboard"></i>
                                 Add report to database.
                             </h3>
                         </div>
-                        <div class="card-body">
-                            <form class="form-horizontal" method="POST" action="{{ route('add.report') }}">
+                        <form class="form-horizontal" method="POST" action="{{ route('add.report') }}">
+                            <div class="card-body">
                                 {{csrf_field()}}
                                 <div class="card-body">
                                     <table id="reportTable" class="table table-borderless">
@@ -105,6 +105,10 @@
                                         </tbody>
                                     </table>
                                 </div>
+
+
+                            </div>
+                            <div class="card-footer">
                                 <button type="submit" class="btn btn-info">
                                     <i class="fas fa-plus mr-2"></i>
                                     Add
@@ -113,9 +117,8 @@
                                     <i class="fas fa-times mr-2"></i>
                                     Cancel
                                 </button>
-                            </form>
-
-                        </div>
+                            </div>
+                        </form>
                     </div>
 
                 </div>
@@ -124,7 +127,7 @@
         <div>
             <div class="col-12">
                 <div class="card">
-                    <div class="card-primary card-outline">
+                    <div class="card-info">
                         <div class="card-header">
                             <h3 class="card-title">
                                 <i class="far fa-list-alt"></i>
