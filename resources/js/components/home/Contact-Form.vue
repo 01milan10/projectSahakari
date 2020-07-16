@@ -9,21 +9,55 @@
         <v-col cols="12" sm="12" md="8">
           <v-card class="grey lighten-4">
             <v-card-text>
-              <v-form class="px-3" color="blue" ref="form">
-                <v-text-field label="Full Name" prepend-icon="mdi-clipboard-account"></v-text-field>
-                <v-text-field label="Email" prepend-icon="mdi-email"></v-text-field>
-                <v-text-field label="Subject" prepend-icon="mdi-text-subject"></v-text-field>
-                <v-textarea label="Message" prepend-icon="mdi-message-reply"></v-textarea>
+              <v-alert
+                type="success"
+                :value="messageAlert"
+                dismissible
+                outlined
+                transition="slide-x-reverse-transition"
+              >Your message has been sent.</v-alert>
+              <v-alert
+                type="error"
+                :value="errorAlert"
+                outlined
+                dismissible
+                transition="slide-x-reverse-transition"
+              >Invalid Inputs</v-alert>
+              <v-form color="blue" ref="form">
+                <v-text-field
+                  label="Full Name"
+                  v-model="name"
+                  prepend-icon="mdi-clipboard-account"
+                  outlined
+                  :rules="nameRules"
+                ></v-text-field>
+                <v-text-field
+                  label="Email"
+                  v-model="email"
+                  prepend-icon="mdi-email"
+                  outlined
+                  :rules="emailRules"
+                ></v-text-field>
+                <v-text-field
+                  label="Subject"
+                  v-model="subject"
+                  prepend-icon="mdi-text-subject"
+                  :rules="subjectRules"
+                  outlined
+                ></v-text-field>
+                <v-textarea
+                  label="Message"
+                  v-model="message"
+                  prepend-icon="mdi-message-reply"
+                  auto-grow
+                  rows="1"
+                  outlined
+                  :rules="messageRules"
+                  clearable
+                ></v-textarea>
                 <v-row>
                   <v-spacer></v-spacer>
-                  <v-btn class="mx-0 mt-3 blue white--text" rounded>
-                    Submit
-                    <template v-slot:loader>
-                      <span class="custom-loader">
-                        <v-icon light>mdi-cached</v-icon>
-                      </span>
-                    </template>
-                  </v-btn>
+                  <v-btn class="mx-0 mt-3 blue white--text" rounded @click="submit">Submit</v-btn>
                 </v-row>
               </v-form>
             </v-card-text>
@@ -35,8 +69,51 @@
 </template>
 
 <script>
+import Axios from "axios";
 export default {
-  name: "Contact"
+  name: "Contact",
+  data() {
+    return {
+      name: "",
+      email: "",
+      subject: "",
+      message: "",
+      messageAlert: false,
+      errorAlert: false,
+      emailRules: [
+        v => !!v || "E-mail is required",
+        v => /.+@.+\..+/.test(v) || "E-mail must be valid"
+      ],
+      nameRules: [v => !!v || "Name is required"],
+      subjectRules: [v => !!v || "Subject is required"],
+      messageRules: [v => !!v || "Message is required"]
+    };
+  },
+  methods: {
+    submit() {
+      if (this.$refs.form.validate()) {
+        const input = {
+          name: this.name,
+          email: this.email,
+          subject: this.subject,
+          message: this.message
+        };
+        Axios.post("http://sahakari-app.com/api/sendMessage", input).then(
+          () => {
+            this.messageAlert = true;
+            this.$refs.form.reset();
+          }
+        );
+      } else {
+        this.$refs.form.reset();
+        this.errorAlert = true;
+      }
+      setTimeout(
+        () => ((this.messageAlert = false), (this.errorAlert = false)),
+        5000
+      );
+    }
+  }
 };
 </script>
 

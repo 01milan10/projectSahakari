@@ -39,11 +39,11 @@
                                 Line Chart
                             </h3>
 
-                            <div class="card-tools">
+                            <!-- <div class="card-tools">
                                 <button type="button" class="btn btn-tool" data-card-widget="maximize">
                                     <i class="fas fa-expand"></i>
                                 </button>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="card-body">
                             <div id="line-chart"></div>
@@ -57,11 +57,9 @@
                                     <option value="12">year</option>
                                 </select>
                             </label>
-                            <button type="reset" class="btn btn-info float-right">
-                                <a href="" class="btn-info">
-                                    <i class="fas fa-file-download mr-2"></i>
-                                    Download
-                                </a>
+                            <button class="btn btn-info float-right">
+                                <i class="fas fa-file-download mr-2"></i>
+                                Download
                             </button>
                         </div>
                     </div>
@@ -72,11 +70,11 @@
                                 Bar Chart
                             </h3>
 
-                            {{-- <div class="card-tools">--}}
-                            {{-- <button type="button" class="btn btn-tool" data-card-widget="maximize">--}}
-                            {{-- <i class="fas fa-expand"></i>--}}
-                            {{-- </button>--}}
-                            {{-- </div>--}}
+                            <!-- <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="maximize">
+                                    <i class="fas fa-expand"></i>
+                                </button>
+                            </div> -->
                         </div>
                         <div class="card-body">
                             <div id="bar-chart" style="height: 400px;"></div>
@@ -92,11 +90,9 @@
                                     <option value="2015">2015</option>
                                 </select>
                             </label>
-                            <button type="reset" class="btn btn-info float-right">
-                                <a href="" class="btn-info">
-                                    <i class="fas fa-file-download mr-2"></i>
-                                    Download
-                                </a>
+                            <button class="btn btn-info float-right">
+                                <i class="fas fa-file-download mr-2"></i>
+                                Download
                             </button>
                         </div>
                         <!-- /.card-body-->
@@ -127,6 +123,7 @@
 <script src="{{asset("js/underscore.js")}}"></script>
 <script src="{{asset("js/flot.orderbar.js")}}"></script>
 <script src="{{asset("js/flot.axisLabels.js")}}"></script>
+<script src="{{asset("js/moment.js")}}"></script>
 
 
 <script>
@@ -243,7 +240,6 @@
                     ]
                     plot_line(line1, line2, 0.033);
                     plot_bar(bar1, bar2, new Date().getFullYear());
-                    plot_donut(donutData);
                 },
                 fail: function() {
                     alert('Failed to retrieve data.')
@@ -458,7 +454,6 @@
                         }
                     }
                 }
-                console.log(weeklyTotal);
                 return weeklyTotal;
             } else if (timeFrame == 1) {
                 for (let a in totalYear) {
@@ -558,7 +553,6 @@
                         }
                     }
                 }
-                console.log(weeklyTotal);
                 return weeklyTotal;
             } else if (timeFrame == 1) {
                 for (let a in totalYear) {
@@ -609,7 +603,7 @@
                 x = parseInt(item.datapoint[0]),
                     y = parseInt(item.datapoint[1]),
                     a = new Date(x);
-                $('#line-chart-tooltip').html("Rs. " + y + ' on ' + a.toLocaleDateString())
+                $('#line-chart-tooltip').html("Rs. " + y + ' on ' + moment(a).format('LL'))
                     .css({
                         top: item.pageY + 5,
                         left: item.pageX + 5,
@@ -630,7 +624,7 @@
             let y;
             if (item) {
                 y = parseInt(item.datapoint[1]);
-                $('#bar-chart-tooltip').html("The amount is Rs: " + y)
+                $('#bar-chart-tooltip').html('Rs. ' + y)
                     .css({
                         top: item.pageY,
                         left: item.pageX,

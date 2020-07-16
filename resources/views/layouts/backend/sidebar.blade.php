@@ -10,18 +10,20 @@
     <div class="sidebar">
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img src="{{asset('dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
+                @if(Auth:: user()->image == null)
+                <img src="{{asset('uploaded_images/team_avatar/profile_pictures/user.jpg')}}" alt="User Image" class="img-circle elevation-2">
+                @else
+                <img src="{{asset('uploaded_images/team_avatar/profile_pictures').'/'.Auth::user()->image}}" class="img-circle elevation-2" alt="User Image">
+                @endif
+
             </div>
             <div class="info">
-                <a href="#" class="d-block has-treeview">{{Auth:: user()->name}}</a>
+                <a class="d-block">{{Auth:: user()->name}}</a>
             </div>
         </div>
         <form action="#" method="get" class="sidebar-form">
             <div class="input-group">
                 <input type="text" name="q" class="form-control" placeholder="Search...">
-                <button type="submit">
-                    <i class="fas fa-search"></i>
-                </button>
             </div>
         </form>
         <!-- Sidebar Menu -->
@@ -35,6 +37,15 @@
                         <p>
                             Dashboard
                         </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('inbox')}}" class="nav-link inbox">
+                        <i class="nav-icon fas fa-inbox"></i>
+                        <p>
+                            Inbox
+                        </p>
+                        <span class="right badge badge-pill badge-warning newMessageCount"></span>
                     </a>
                 </li>
                 <li class="nav-header">

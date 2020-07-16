@@ -36,36 +36,7 @@ import axios from "axios";
 export default {
   data() {
     return {
-      carousel_items: [
-        // {
-        //   avatar: "/img/person_1.jpg",
-        //   person: "Johan Hill",
-        //   position: "CEO & Founder",
-        //   content:
-        //     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque officia praesentium voluptate iure molestiae perferendis facilis, libero optio molestias odio odit minima sit et nulla dolorem? At sunt voluptate assumenda?"
-        // },
-        // {
-        //   avatar: "/img/person_2.jpg",
-        //   person: "Jim Carry",
-        //   position: "CEO & Founder",
-        //   content:
-        //     " Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque officia praesentium voluptate iure molestiae perferendis facilis, libero optio molestias odio odit minima sit et nulla dolorem? At sunt voluptate assumenda?"
-        // },
-        // {
-        //   avatar: "/img/person_3.jpg",
-        //   person: "Michael Carrick",
-        //   position: "CEO & Founder",
-        //   content:
-        //     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque officia praesentium voluptate iure molestiae perferendis facilis, libero optio molestias odio odit minima sit et nulla dolorem? At sunt voluptate assumenda?"
-        // },
-        // {
-        //   avatar: "/img/person_4.jpg",
-        //   person: "Hilary Towle",
-        //   position: "CEO & Founder",
-        //   content:
-        //     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque officia praesentium voluptate iure molestiae perferendis facilis, libero optio molestias odio odit minima sit et nulla dolorem? At sunt voluptate assumenda?"
-        // }
-      ]
+      carousel_items: []
     };
   },
   created() {

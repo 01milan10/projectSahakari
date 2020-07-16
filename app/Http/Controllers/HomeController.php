@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Balance;
+use App\Inbox;
 use Illuminate\Http\Request;
 use Alert;
 

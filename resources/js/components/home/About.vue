@@ -50,16 +50,20 @@
         <p
           class="font-weight-light grey--text mt-3 text-center"
         >Lorem ipsum dolor sit amet consectetur, adipisicing elit. Molestias, facilis!</p>
-        <v-row class="my-5 justify-center">
+        <v-row class="my-5 justify-space-around">
           <v-col cols="6" sm="5" md="4" lg="2" v-for="(person,i) in team" :key="i">
             <v-hover v-slot:default="{hover}">
               <v-card
                 class="mx-auto mt-3 card rounded-t-xl rounded-b-xl"
                 :class="`${hover?'blue':'grey lighten-4'}`"
                 :elevation="hover?5:2"
-                max-width="240"
+                width="400"
               >
-                <v-img class="img" :src="person.photo">
+                <v-img
+                  class="img"
+                  :src="`/uploaded_images/team_avatar/${person.image}`"
+                  width="400"
+                >
                   <v-expand-transition>
                     <div
                       v-if="hover"
@@ -90,7 +94,9 @@
                   class="my-2 font-weight-light"
                   :class="`${hover?'black--text':''}`"
                 >{{person.name}}</v-card-title>
-                <v-card-subtitle :class="`${hover?'white--text':'blue--text'}`">{{person.position}}</v-card-subtitle>
+                <v-card-subtitle
+                  :class="`${hover?'white--text':'blue--text'}`"
+                >{{person.designation}}</v-card-subtitle>
               </v-card>
             </v-hover>
           </v-col>
@@ -102,42 +108,17 @@
 </template>
 
 <script>
+import Axios from "axios";
 export default {
   data() {
     return {
-      team: [
-        {
-          name: "Chloe Marena",
-          position: "President",
-          photo: "/img/person_1.jpg"
-        },
-        {
-          name: "John Rooster",
-          position: "Marketing",
-          photo: "/img/person_2.jpg"
-        },
-        {
-          name: "Will Turner",
-          position: "Marketing",
-          photo: "/img/person_3.jpg"
-        },
-        {
-          name: "Nicolas Stainer",
-          position: "Financing",
-          photo: "/img/person_4.jpg"
-        },
-        {
-          name: "George Brook",
-          position: "Founder",
-          photo: "/img/person_5.jpg"
-        },
-        {
-          name: "Emily Hopson",
-          position: "Marketing",
-          photo: "/img/person_6.jpg"
-        }
-      ]
+      team: []
     };
+  },
+  created() {
+    Axios.get("http://sahakari-app.com/api/get-team/6").then(
+      res => (this.team = res.data.data)
+    );
   }
 };
 </script>

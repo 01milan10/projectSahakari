@@ -8,6 +8,7 @@ import Gallery from "../views/Gallery.vue";
 import Downloads from "../views/Downloads.vue";
 import Career from "../views/Career.vue";
 import Team from "../components/about/Team";
+import Contacts from "../components/about/Contacts";
 
 Vue.use(VueRouter);
 
@@ -46,6 +47,11 @@ const routes = [
         path: "/career",
         name: "Career",
         component: Career
+    },
+    {
+        path: "/our-contacts",
+        name: "Our Contacts",
+        component: Contacts
     },
     {
         path: "/features",

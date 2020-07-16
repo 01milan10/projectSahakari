@@ -39,13 +39,13 @@
                             {{csrf_field()}}
                             <div class="card-body">
                                 <div>
-                                    <label for="title"></label><input type="text" id="title" class="form-control mb-4" placeholder="Title" name="title" required autocomplete="title" autofocus>
+                                    <input type="text" id="title" class="form-control mb-4" placeholder="Title" name="title" required autocomplete="title" autofocus>
                                 </div>
                                 <div>
-                                    <label for="category"></label><input type="text" id="category" class="form-control mb-4" placeholder="Category" name="category" required autocomplete="category">
+                                    <input type="text" id="category" class="form-control mb-4" placeholder="Category" name="category" required autocomplete="category">
                                 </div>
                                 <div>
-                                    <input type="file" id="file" name="image" class="form-control mb-4" placeholder="Select an image to upload." required autocomplete="file">
+                                    <input type="file" id="file" name="image[]" class="form-control mb-4" placeholder="Select an image to upload." required autocomplete="file" multiple>
                                 </div>
                             </div>
                             <div class="card-footer">
@@ -87,26 +87,10 @@
                                     <td>{{$image->image}}</td>
                                     <td style="text-align:center">
                                         <div>
-                                            <a href="#">
-                                                <i class="fas fa-palette mr-4">
-                                                </i>
-                                            </a>
-                                            <a href="{{route('image.delete',['id'=>$image->id])}}">
+                                            <a href="{{route('image.delete',['id'=>$image->id])}}" data-toggle="tooltip" data-title="Delete" data-placement="top">
                                                 <i class="fas fa-trash ml-3" style="color:#dc3545">
                                                 </i>
                                             </a>
-                                        </div>
-                                        <div>
-                                            <a href="#">
-                                                <span>
-                                                    <label for="changePicture" class="text-sm text-muted">Set As</label>
-                                                    <select id="changePicture">
-                                                        <option value="Banner">Banner</option>
-                                                        <option value="Wallpaper">Wallpaper</option>
-                                                    </select>
-                                                </span>
-                                            </a>
-                                            <a href="{{route('image.delete',['id'=>$image->id])}}"><span class="text-sm text-muted ml-2">Delete</span></a>
                                         </div>
                                     </td>
                                     <td>{{$image->created_at}}</td>
@@ -141,11 +125,7 @@
 <script type="text/javascript">
     $(document).ready(function() {
         $("#imageTable").dataTable();
-
-        $(".fancybox").fancybox({
-            openEffect: "none",
-            closeEffect: "none"
-        });
+        $("[data-toggle='tooltip']").tooltip();
     });
 </script>
 @endsection

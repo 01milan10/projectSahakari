@@ -12,26 +12,25 @@
     </v-container>
     <v-carousel hide-delimiters height="auto">
       <v-carousel-item
-        v-for="(gallery,i) in album"
-        :key="i"
         reverse-transition="slide-x-reverse-transition"
         transition="slide-x-transition"
+        v-for="(album,i) in gallery"
+        :key="i"
       >
         <v-container>
           <v-card class="pa-4 rounded-xl grey lighten-4" light>
-            <v-card-title class="primary--text font-weight-light">{{gallery.title}}</v-card-title>
+            <v-card-title class="primary--text font-weight-light">{{album.category}}</v-card-title>
             <v-card-text>
               <v-row>
-                <v-col cols="6" sm="4" md="3" v-for="(photo,i) in gallery.collection" :key="i">
+                <v-col cols="6" sm="4" md="3" v-for="(photo,i) in album.collection" :key="i">
                   <a
-                    :href="photo.content"
-                    :data-fancybox="gallery.title"
-                    :data-caption="gallery.title"
-                    buttons="download"
+                    :href="`/uploaded_images/gallery/${photo.image}`"
+                    :data-fancybox="photo.category"
+                    :data-caption="photo.title"
                   >
                     <v-img
                       class="img"
-                      :src="photo.content"
+                      :src="`/uploaded_images/gallery/${photo.image}`"
                       style="border-radius:10px; height:250px"
                     />
                   </a>
@@ -46,106 +45,11 @@
 </template>
 
 <script>
+import Axios from "axios";
 export default {
   data() {
     return {
-      album: [
-        {
-          title: "Collection 1",
-          collection: [
-            {
-              content: "/img/person_1.jpg"
-            },
-            {
-              content: "/img/person_2.jpg"
-            },
-            {
-              content: "/img/person_3.jpg"
-            },
-            {
-              content: "/img/person_4.jpg"
-            },
-            {
-              content: "/img/person_5.jpg"
-            },
-            {
-              content: "/img/person_6.jpg"
-            },
-            {
-              content: "/img/person_1.jpg"
-            },
-            {
-              content: "/img/person_2.jpg"
-            },
-            {
-              content: "/img/person_3.jpg"
-            },
-            {
-              content: "/img/person_4.jpg"
-            },
-            {
-              content: "/img/person_5.jpg"
-            },
-            {
-              content: "/img/person_6.jpg"
-            },
-            {
-              content: "/img/person_1.jpg"
-            },
-            {
-              content: "/img/person_2.jpg"
-            },
-            {
-              content: "/img/person_3.jpg"
-            },
-            {
-              content: "/img/person_4.jpg"
-            }
-          ]
-        },
-        {
-          title: "Collection 2",
-          collection: [
-            { content: "/img/gallery/1.jpg" },
-            { content: "/img/gallery/2.jpg" },
-            { content: "/img/gallery/3.jpg" },
-            { content: "/img/gallery/4.jpg" },
-            { content: "/img/gallery/5.jpg" },
-            { content: "/img/gallery/6.jpg" },
-            { content: "/img/gallery/7.jpg" },
-            { content: "/img/gallery/8.jpg" },
-            { content: "/img/gallery/9.jpg" },
-            { content: "/img/gallery/10.jpg" },
-            { content: "/img/gallery/11.jpg" },
-            { content: "/img/gallery/12.jpg" },
-            { content: "/img/gallery/13.jpg" },
-            { content: "/img/gallery/14.jpg" },
-            { content: "/img/gallery/15.jpg" },
-            { content: "/img/gallery/16.jpg" }
-          ]
-        },
-        {
-          title: "Collection 3",
-          collection: [
-            { content: "/img/gallery/1.jpg" },
-            { content: "/img/gallery/2.jpg" },
-            { content: "/img/gallery/3.jpg" },
-            { content: "/img/gallery/4.jpg" },
-            { content: "/img/gallery/5.jpg" },
-            { content: "/img/gallery/6.jpg" },
-            { content: "/img/gallery/7.jpg" },
-            { content: "/img/gallery/8.jpg" },
-            { content: "/img/gallery/9.jpg" },
-            { content: "/img/gallery/10.jpg" },
-            { content: "/img/gallery/11.jpg" },
-            { content: "/img/gallery/12.jpg" },
-            { content: "/img/gallery/13.jpg" },
-            { content: "/img/gallery/14.jpg" },
-            { content: "/img/gallery/15.jpg" },
-            { content: "/img/gallery/16.jpg" }
-          ]
-        }
-      ],
+      gallery: [],
       bread_items: [
         {
           text: "Home",
@@ -159,6 +63,11 @@ export default {
         }
       ]
     };
+  },
+  created() {
+    Axios.get("http://sahakari-app.com/api/get-images/0").then(
+      res => (this.gallery = res.data.data)
+    );
   }
 };
 </script>

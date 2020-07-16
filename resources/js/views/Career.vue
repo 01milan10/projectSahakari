@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-parallax src="/img/services-parallax.jpg" height="150">
-      <h2 class="text-center display-1">Our Services</h2>
+      <h2 class="text-center display-1">Work with Us</h2>
     </v-parallax>
     <v-container>
       <v-breadcrumbs :items="bread_items" class="pa-0">
@@ -16,15 +16,15 @@
         <v-card-text>
           <v-card flat v-for="(career,i) in careers" :key="i">
             <v-card-title class="font-weight-regular">{{career.position}}</v-card-title>
-            <v-card-subtitle class="ml-2 primary--text font-italic">{{career.type}}</v-card-subtitle>
+            <v-card-subtitle class="ml-2 primary--text font-italic">{{career.opening}}</v-card-subtitle>
             <v-card-text class="ml-2">
               <p class="mb-0">
                 Seats available:
-                <span class="primary--text">{{career.seats}}</span>
+                <span class="primary--text">{{career.seat}}</span>
               </p>
               <p>
                 Requirements:
-                <span class="requirements" v-html="career.requirements"></span>
+                <span class="requirements" v-html="career.requirement"></span>
               </p>
             </v-card-text>
           </v-card>
@@ -44,6 +44,7 @@
 </template>
 
 <script>
+import Axios from "axios";
 export default {
   methods: {
     redirect() {
@@ -64,21 +65,13 @@ export default {
           disabled: true
         }
       ],
-      careers: [
-        {
-          type: "Job Vaccancy",
-          position: "Sales Representative",
-          seats: 10,
-          requirements: `<p>Heading</p><p>Title</p><p>this is a new paragraph that i want to write and i want to be able to type properly.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus neque eaque magni in enim autem, a at accusamus. At hic voluptatem laudantium inventore quam veritatis suscipit exercitationem. Ex, distinctio alias.</p><p><br></p>`
-        },
-        {
-          type: "Job Vaccancy",
-          position: "Sales Manager",
-          seats: 2,
-          requirements: `<p>Heading</p><p>Title</p><p>this is a new paragraph that i want to write and i want to be able to type properly.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus neque eaque magni in enim autem, a at accusamus. At hic voluptatem laudantium inventore quam veritatis suscipit exercitationem. Ex, distinctio alias.</p><p><br></p>`
-        }
-      ]
+      careers: []
     };
+  },
+  created() {
+    Axios.get("http://sahakari-app.com/api/get-oppurtunity").then(
+      response => (this.careers = response.data.data)
+    );
   }
 };
 </script>

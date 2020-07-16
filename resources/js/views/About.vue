@@ -74,6 +74,16 @@
                 </v-hover>
                 <v-divider class="grey_divider my-3"></v-divider>
               </span>
+              <span>
+                <v-hover v-slot:default="{hover}">
+                  <router-link
+                    to="/our-contacts"
+                    class="text-decoration-none"
+                    :class="`${hover?'primary--text':'  grey--text'}`"
+                  >Our Contacts</router-link>
+                </v-hover>
+                <v-divider class="grey_divider my-3"></v-divider>
+              </span>
             </v-col>
             <v-col cols="12" sm="6" md="12">
               <v-card class="primary">
@@ -99,15 +109,15 @@
                 >
                   <v-carousel-item v-for="(testimonial,i) in testimonials" :key="i">
                     <v-row class="flex-column align-center">
-                      <v-avatar class="mt-5" size="100">
-                        <img :src="testimonial.avatar" alt />
+                      <v-avatar class="mt-5" size="80">
+                        <img :src="testimonial.image" alt />
                       </v-avatar>
                       <span>
-                        <p class="mt-5 px-10 text-center caption grey--text">{{testimonial.quote}}</p>
-                        <p class="my-0 px-10 text-center font-weight-bold">{{testimonial.person}}</p>
+                        <p class="mt-5 px-10 text-center caption grey--text">{{testimonial.comment}}</p>
+                        <p class="my-0 px-10 text-center font-weight-bold">{{testimonial.name}}</p>
                         <p
                           class="my-0 px-10 text-center font-weight-light grey--text"
-                        >({{testimonial.position}})</p>
+                        >({{testimonial.designation}})</p>
                       </span>
                     </v-row>
                   </v-carousel-item>
@@ -172,45 +182,28 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   data() {
     return {
+      testimonials: [],
       items: [
         {
           text: "Home",
           disabled: false,
-          route: "/"
+          href: "/"
         },
         {
           text: "About Us",
-          disabled: true,
-          route: "/about-us"
-        }
-      ],
-      testimonials: [
-        {
-          person: "Louise Smith",
-          position: "CEO & Founder",
-          avatar: "/img/person_1.jpg",
-          quote:
-            "Wow, I am so happy with your service. You managed to exceed my expectations! You guys are very efficient."
-        },
-        {
-          person: "Jack Walsh",
-          position: "CEO & Founder",
-          avatar: "/img/person_2.jpg",
-          quote:
-            "Wow, I am so happy with your service. You managed to exceed my expectations! You guys are very efficient."
-        },
-        {
-          person: "Adam Watson",
-          position: "CEO & Founder",
-          avatar: "/img/person_3.jpg",
-          quote:
-            "Wow, I am so happy with your service. You managed to exceed my expectations! You guys are very efficient."
+          disabled: true
         }
       ]
     };
+  },
+  created() {
+    axios
+      .get("http://sahakari-app.com/api/get-comments/3")
+      .then(res => (this.testimonials = res.data.data));
   }
 };
 </script>

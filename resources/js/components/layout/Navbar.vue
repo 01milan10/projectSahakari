@@ -136,6 +136,10 @@ export default {
         {
           title: "Our Team",
           route: "/our-team"
+        },
+        {
+          title: "Our Contacts",
+          route: "/our-contacts"
         }
       ],
       dropdown_font: ["Arial", "Times New Roman", "Calibri", "Roboto"],

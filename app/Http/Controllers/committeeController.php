@@ -3,11 +3,25 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Intervention\Image\ImageManagerStatic as Image;
+use App\Http\Resources\Committee as committeeResource;
 use App\Committee;
 use RealRashid\SweetAlert\Facades\Alert;
 
+
 class committeeController extends Controller
 {
+
+    public function getTeam($paginate)
+    {
+        if ($paginate == 0) {
+            $team = Committee::all();
+        } else {
+            $team = Committee::paginate($paginate);
+        }
+        return committeeResource::collection($team);
+    }
+
     public function showTeamForm()
     {
         $data = Committee::all();
@@ -31,12 +45,14 @@ class committeeController extends Controller
         $input['representation'] = $request->representation;
         $input['facebook'] = $request->facebook ? $request->facebook : '';
         $input['gmail'] = $request->gmail  ? $request->gmail : '';
-        $input['image'] = $request->file('image')->getClientOriginalName();
+
+        $image_name = $request->name . '.' . $request->file('image')->getClientOriginalExtension();
+        $input['image'] = $image_name;
 
         if (Committee::create($input)) {
-
-            // dd($input);
-            $request->image->move(public_path('uploaded_images/team_avatar'), $input['image']);
+            $new_image = Image::make($request->file('image')->getRealPath());
+            $resized_image = $new_image->resize(500, 500);
+            $resized_image->save(public_path('uploaded_images/team_avatar/') . $image_name);
             Alert::success("Success", 'Team member added successfully');
         } else {
             Alert::error("Error", 'Failed to add team member');
@@ -68,15 +84,25 @@ class committeeController extends Controller
             'representation' => 'required',
         ]);
         $currentUser = Committee::find($id);
+        if ($request->hasFile('image')) {
+            $image = Image::make($request->file('image')->getRealPath());
+            $resized_image = $image->resize(500, 500);
+            $image_name = $request->name . '.' . $request->file('image')->getClientOriginalExtension();
+        } else {
+            $image_name = $currentUser->image;
+        }
         $update = [
             'name' => $request['name'],
             'designation' => $request['designation'],
             'phone' => $request['phone'],
             'email' => $request['email'],
             'representation' => $request['representation'],
-            'image' => $request['image'] ? $request->image->getClientOriginalName() : $currentUser->image
+            'image' => $image_name
         ];
         if ($currentUser->update($update)) {
+            if ($request->hasFile('image')) {
+                $resized_image->save(public_path('uploaded_images/team_avatar/') . $image_name);
+            }
             Alert::success('Success', 'Updating Successful');
         } else {
             Alert::error('Error', 'Updating Unsuccessful');

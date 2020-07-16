@@ -57,15 +57,15 @@
                 >
                   <v-carousel-item v-for="(testimonial,i) in testimonials" :key="i">
                     <v-row class="flex-column align-center">
-                      <v-avatar class="mt-5" size="100">
-                        <img :src="testimonial.avatar" alt />
+                      <v-avatar class="mt-5" size="80">
+                        <img :src="testimonial.image" alt />
                       </v-avatar>
                       <span>
-                        <p class="mt-5 px-10 text-center caption grey--text">{{testimonial.quote}}</p>
-                        <p class="my-0 px-10 text-center font-weight-bold">{{testimonial.person}}</p>
+                        <p class="mt-5 px-10 text-center caption grey--text">{{testimonial.comment}}</p>
+                        <p class="my-0 px-10 text-center font-weight-bold">{{testimonial.name}}</p>
                         <p
                           class="my-0 px-10 text-center font-weight-light grey--text"
-                        >({{testimonial.position}})</p>
+                        >({{testimonial.designation}})</p>
                       </span>
                     </v-row>
                   </v-carousel-item>
@@ -92,6 +92,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   data: () => ({
     items: [
@@ -132,30 +133,13 @@ export default {
         img: "/img/service-6.jpg"
       }
     ],
-    testimonials: [
-      {
-        person: "Louise Smith",
-        position: "CEO & Founder",
-        avatar: "/img/person_1.jpg",
-        quote:
-          "Wow, I am so happy with your service. You managed to exceed my expectations! You guys are very efficient."
-      },
-      {
-        person: "Jack Walsh",
-        position: "CEO & Founder",
-        avatar: "/img/person_2.jpg",
-        quote:
-          "Wow, I am so happy with your service. You managed to exceed my expectations! You guys are very efficient."
-      },
-      {
-        person: "Adam Watson",
-        position: "CEO & Founder",
-        avatar: "/img/person_3.jpg",
-        quote:
-          "Wow, I am so happy with your service. You managed to exceed my expectations! You guys are very efficient."
-      }
-    ]
-  })
+    testimonials: []
+  }),
+  created() {
+    axios
+      .get("http://sahakari-app.com/api/get-comments/3")
+      .then(res => (this.testimonials = res.data.data));
+  }
 };
 </script>
 

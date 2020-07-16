@@ -1,73 +1,78 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="en">
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Login</title>
+    <link rel="stylesheet" href="{{asset('plugins/fontawesome-free/css/all.min.css')}}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-                <div class="card-body">
-                    <form method="POST" action="{{route('login')}}">
-                        @csrf
+</head>
 
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+<body style="background:lightgrey">
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                                @error('email')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
+    <div class="container">
+        <div class="row mx-auto justify-content-center align-items-center" style="height: 100vh;">
+            <div class="col-10 col-md-6">
+                <form action="{{ route('login') }}" method="POST">
+                    @csrf
+                    <div class="card border-info shadow">
+                        <div class="card-title display-4 text-center">Login</div>
+                        <div class="card-body">
+                            <div class="form-group row justify-content-center">
+                                <label for="email" class="col-sm-3 col-form-label text-sm-right">Email:</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="email" placeholder="email@example.com" name="email" required autofocus>
+                                </div>
                             </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
-                                @error('password')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
+                            <div class="form-group row justify-content-center">
+                                <label for="inputPassword" class="col-sm-3 col-form-label text-sm-right">Password:</label>
+                                <div class="col-sm-6 input-group">
+                                    <input type="password" class="form-control" id="inputPassword" name="password" required autofocus>
+                                    <div class="input-group-append">
+                                        <button type="button" class="btn btn-outline-success showPassword">
+                                            <i class="fas fa-eye-slash"></i>
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
+
                         </div>
-
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
+                        <div class="card-footer">
+                            <div class="form-group ma-5">
+                                <div class="clearfix">
+                                    <a href="/register" class="btn btn-outline-success float-left">Register</a>
+                                    <button type="submit" class="btn btn-success float-right">Login
+                                    </button>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
-
-                                @if (Route::has('password.request'))
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    {{ __('Forgot Your Password?') }}
-                                </a>
-                                @endif
-                            </div>
-                        </div>
-                    </form>
-                </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-</div>
-@endsection
+
+</body>
+
+</html>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+<script>
+    $('.showPassword').click(function(e) {
+        e.preventDefault();
+        const inputPassword = $('#inputPassword');
+        const type = inputPassword.attr('type');
+        if (type === 'text') {
+            inputPassword.attr('type', 'password');
+            $('.showPassword .fas.fa-eye').removeClass("fa-eye").addClass("fa-eye-slash");
+
+        } else {
+            inputPassword.attr('type', 'text');
+            $('.showPassword .fas.fa-eye-slash').removeClass("fa-eye-slash").addClass("fa-eye");
+        }
+    });
+</script>

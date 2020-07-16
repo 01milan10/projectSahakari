@@ -6,6 +6,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Intervention\Image\ImageManagerStatic as Image;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class usersController extends Controller
@@ -80,14 +81,55 @@ class usersController extends Controller
     }
     public function resetPassword(Request $request, $id)
     {
+        $this->validate($request, [
+            'password' => 'required',
+            'password_confirmation' => 'required',
+        ]);
         $update = [
             'password' => Hash::make($request['password']),
         ];
-        if (User::find($id)->update($update)) {
-            Alert::success('Success', 'Password is changed.');
+        if ($request->password == $request->password_confirmation) {
+            if (User::find($id)->update($update)) {
+                Alert::success('Success', 'Password is changed.');
+            } else {
+                Alert::error('Edit Credentials', 'Updating Credentials Failed');
+            }
+            return back();
         } else {
-            Alert::error('Edit Credentials', 'Updating Credentials Failed');
+            Alert::error('Failed', 'Password did not match');
+            return back();
         }
-        return redirect('/listUser');
+        return back();
+    }
+    public function changeAvatar(Request $request, $id)
+    {
+        $this->validate($request, [
+            'avatar' => 'required'
+        ]);
+
+        if ($request->hasFile('avatar')) {
+            $avatar = $request->file('avatar');
+            $user = User::find($id);
+            $userName = $user->name;
+            $fileName = $userName . '.' . $avatar->getClientOriginalExtension();
+            $new_avatar = Image::make($avatar->getRealPath());
+            $resized_avatar = $new_avatar->resize(200, 200);
+            $update = [
+                'image' => $fileName,
+            ];
+            if ($user->update($update)) {
+                $resized_avatar->save(public_path('/uploaded_images/team_avatar/profile_pictures/') . $fileName);
+                Alert::Success("Success", "Profile picture changed");
+                return back();
+            } else {
+                Alert::Error("Failed", "Profile picture not changed");
+                return back();
+            }
+        } else {
+            Alert::Error('Failed', 'Image not found');
+            return back();
+        }
+
+        return back();
     }
 }

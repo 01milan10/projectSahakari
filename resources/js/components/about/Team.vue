@@ -16,23 +16,26 @@
           <v-row>
             <v-col cols="12" md="4" v-for="(person,i) in team" :key="i">
               <v-card flat>
-                <v-img :src="person.photo" style="border-radius:10px; height:240"></v-img>
+                <v-img
+                  :src="`/uploaded_images/team_avatar/${person.image}`"
+                  style="border-radius:10px; height:240"
+                ></v-img>
                 <v-card-title class="px-0">
                   <h4>{{person.name}}</h4>
                 </v-card-title>
                 <v-card-subtitle class="px-0">
-                  <h4 class="font-weight-light">{{person.position}}</h4>
+                  <h4 class="font-weight-light">{{person.designation}}</h4>
                 </v-card-subtitle>
                 <v-divider class="grey_divider"></v-divider>
                 <v-card-actions class="pt-0 px-0">
-                  <v-btn small icon>
+                  <v-btn small icon :href="person.facebook">
                     <v-icon>mdi-facebook</v-icon>
                   </v-btn>
                   <v-btn small icon>
                     <v-icon>mdi-twitter</v-icon>
                   </v-btn>
-                  <v-btn small icon>
-                    <v-icon>mdi-google-plus</v-icon>
+                  <v-btn small icon :href="person.gmail">
+                    <v-icon>mdi-gmail</v-icon>
                   </v-btn>
                 </v-card-actions>
               </v-card>
@@ -66,14 +69,14 @@
                   <v-carousel-item v-for="(testimonial,i) in testimonials" :key="i">
                     <v-row class="flex-column align-center">
                       <v-avatar class="mt-5" size="100">
-                        <img :src="testimonial.avatar" alt />
+                        <img :src="testimonial.image" alt />
                       </v-avatar>
                       <span>
-                        <p class="mt-5 px-10 text-center caption grey--text">{{testimonial.quote}}</p>
-                        <p class="my-0 px-10 text-center font-weight-bold">{{testimonial.person}}</p>
+                        <p class="mt-5 px-10 text-center caption grey--text">{{testimonial.comment}}</p>
+                        <p class="my-0 px-10 text-center font-weight-bold">{{testimonial.name}}</p>
                         <p
                           class="my-0 px-10 text-center font-weight-light grey--text"
-                        >({{testimonial.position}})</p>
+                        >({{testimonial.designation}})</p>
                       </span>
                     </v-row>
                   </v-carousel-item>
@@ -100,6 +103,7 @@
 </template>
 
 <script>
+import Axios from "axios";
 export default {
   name: "About",
   data() {
@@ -108,12 +112,12 @@ export default {
         {
           text: "Home",
           disabled: false,
-          route: "/"
+          href: "/"
         },
         {
           text: "About Us",
           disabled: false,
-          route: "/about-us"
+          href: "/about-us"
         },
         {
           text: "Our Team",
@@ -121,80 +125,17 @@ export default {
           route: "/our-team"
         }
       ],
-      testimonials: [
-        {
-          person: "Louise Smith",
-          position: "CEO & Founder",
-          avatar: "/img/person_1.jpg",
-          quote:
-            "Wow, I am so happy with your service. You managed to exceed my expectations! You guys are very efficient."
-        },
-        {
-          person: "Jack Walsh",
-          position: "CEO & Founder",
-          avatar: "/img/person_2.jpg",
-          quote:
-            "Wow, I am so happy with your service. You managed to exceed my expectations! You guys are very efficient."
-        },
-        {
-          person: "Adam Watson",
-          position: "CEO & Founder",
-          avatar: "/img/person_3.jpg",
-          quote:
-            "Wow, I am so happy with your service. You managed to exceed my expectations! You guys are very efficient."
-        }
-      ],
-      team: [
-        {
-          id: 1,
-          name: "Chloe Marena",
-          position: "President",
-          photo: "/img/person_1.jpg",
-          description:
-            "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugit, consectetur!"
-        },
-        {
-          id: 2,
-          name: "John Rooster",
-          position: "Marketing",
-          photo: "/img/person_2.jpg",
-          description:
-            "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugit, consectetur!"
-        },
-        {
-          id: 3,
-          name: "Will Turner",
-          position: "Marketing",
-          photo: "/img/person_3.jpg",
-          description:
-            "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugit, consectetur!"
-        },
-        {
-          id: 4,
-          name: "Nicolas Stainer",
-          position: "Financing",
-          photo: "/img/person_4.jpg",
-          description:
-            "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugit, consectetur!"
-        },
-        {
-          id: 5,
-          name: "George Brook",
-          position: "Founder",
-          photo: "/img/person_5.jpg",
-          description:
-            "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugit, consectetur!"
-        },
-        {
-          id: 6,
-          name: "Emily Hopson",
-          position: "Marketing",
-          photo: "/img/person_6.jpg",
-          description:
-            "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugit, consectetur!"
-        }
-      ]
+      testimonials: [],
+      team: []
     };
+  },
+  created() {
+    Axios.get("http://sahakari-app.com/api/get-comments/3").then(
+      res => (this.testimonials = res.data.data)
+    );
+    Axios.get("http://sahakari-app.com/api/get-team/0").then(
+      res => (this.team = res.data.data)
+    );
   }
 };
 </script>

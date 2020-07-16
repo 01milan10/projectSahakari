@@ -137,21 +137,6 @@ unset($__errorArgs, $__bag); ?>" placeholder="Select a file to upload." required
         jQuery("#downloadablesTable").DataTable();
         jQuery('[data-toggle="tooltip"]').tooltip();
     });
-    $('#search').on('keyup', function() {
-
-        $value = $(this).val();
-        $.ajax({
-            type: 'get',
-            url: '<?php echo e(URL::to('
-            search ')); ?>',
-            data: {
-                'search': $value
-            },
-            success: function(data) {
-                $('tbody').html(data);
-            }
-        });
-    })
 </script>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('layouts.backend.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH F:\DataworkshopNepal\projectSahakari\resources\views/downloads/backendDownloads.blade.php ENDPATH**/ ?>

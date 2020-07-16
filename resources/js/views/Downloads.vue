@@ -26,7 +26,7 @@
         </v-card-title>
         <v-data-table
           :headers="headers"
-          :items="items"
+          :items="download_items"
           :search="search"
           mobile-breakpoint="768"
           loading-text="Loading... Please Wait!"
@@ -34,11 +34,17 @@
           <template v-slot:item.color="{ item }">
             <v-tooltip top>
               <template v-slot:activator="{on,attrs}">
-                <v-btn :color="item.color" icon v-bind="attrs" v-on="on">
+                <v-btn
+                  :color="item.color"
+                  icon
+                  v-bind="attrs"
+                  v-on="on"
+                  :href="`/downloadables/${item.id}`"
+                >
                   <v-icon>mdi-download</v-icon>
                 </v-btn>
               </template>
-              <span>Download {{item.name}}</span>
+              <span>Download {{item.file}}</span>
             </v-tooltip>
           </template>
           <template v-slot:item.name="{item}">
@@ -51,6 +57,7 @@
 </template>
 
 <script>
+import Axios from "axios";
 export default {
   data() {
     return {
@@ -72,7 +79,7 @@ export default {
           text: "Downloadable Name",
           align: "start",
           sortable: true,
-          value: "name"
+          value: "title"
         },
         {
           text: "",
@@ -80,45 +87,13 @@ export default {
           sortable: false
         }
       ],
-      items: [
-        {
-          name: "Something 1",
-          color: "primary"
-        },
-        {
-          name: "Something 2",
-          color: "primary"
-        },
-        {
-          name: "Something 3",
-          color: "primary"
-        },
-        {
-          name: "Something 4",
-          color: "primary"
-        },
-        {
-          name: "Something 5",
-          color: "primary"
-        },
-        {
-          name: "Something 6",
-          color: "primary"
-        },
-        {
-          name: "Something 7",
-          color: "primary"
-        },
-        {
-          name: "Something 8",
-          color: "primary"
-        },
-        {
-          name: "Something 9",
-          color: "primary"
-        }
-      ]
+      download_items: []
     };
+  },
+  created() {
+    Axios.get("http://sahakari-app.com/api/get-downloads").then(
+      res => (this.download_items = res.data.data)
+    );
   }
 };
 </script>

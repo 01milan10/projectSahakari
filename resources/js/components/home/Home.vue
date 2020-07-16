@@ -28,7 +28,7 @@
               stroke-linecap="round"
               line-width="1"
               radius="5"
-              fill
+              fill="false"
               smooth
             ></v-sparkline>
             <v-expand-transition>
@@ -51,43 +51,20 @@
 </template>
 
 <script>
+import Axios from "axios";
 export default {
   name: "Home",
-  data: () => ({
-    value: [
-      42,
-      44,
-      65,
-      51,
-      59,
-      61,
-      69,
-      76,
-      70,
-      78,
-      95,
-      88,
-      83,
-      71,
-      90,
-      95,
-      90,
-      93,
-      89,
-      95,
-      97,
-      99,
-      89,
-      87,
-      84,
-      81,
-      79,
-      85,
-      93,
-      100
-    ],
-    draw: 4500
-  })
+  data() {
+    return {
+      value: [],
+      draw: 4500
+    };
+  },
+  created() {
+    Axios.get("http://sahakari-app.com/api/get-deposits").then(
+      response => (this.value = response.data.data)
+    );
+  }
 };
 </script>
 

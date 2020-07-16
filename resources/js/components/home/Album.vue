@@ -5,43 +5,36 @@
       <v-divider class="black" width="25%"></v-divider>
       <v-container class="mt-5">
         <v-row justify="center">
-          <v-col cols="12" sm="4" md="3" lg="2" v-for="(photo,i) in gallery" :key="i">
+          <v-col cols="12" sm="4" md="3" lg="2" v-for="(item,i) in gallery" :key="i">
             <v-card flat class="my-1 rounded-t-lg">
-              <v-img class="img" :src="photo.item" height="200"></v-img>
+              <a
+                :href="`/uploaded_images/gallery/${item.image}`"
+                :data-fancybox="item.id"
+                :data-caption="item.title"
+              >
+                <v-img class="img" :src="`/uploaded_images/gallery/${item.image}`" height="200"></v-img>
+              </a>
             </v-card>
           </v-col>
         </v-row>
       </v-container>
-      <v-btn rounded text color="blue" to="/our-gallery">see more</v-btn>
+      <v-btn rounded text color="blue" to="/our-gallery">see more..</v-btn>
     </v-row>
   </v-container>
 </template>
 
 <script>
+import Axios from "axios";
 export default {
   data() {
     return {
-      gallery: [
-        {
-          item: "/img/person_1.jpg"
-        },
-        {
-          item: "/img/person_2.jpg"
-        },
-        {
-          item: "/img/person_3.jpg"
-        },
-        {
-          item: "/img/person_4.jpg"
-        },
-        {
-          item: "/img/person_5.jpg"
-        },
-        {
-          item: "/img/person_6.jpg"
-        }
-      ]
+      gallery: []
     };
+  },
+  created() {
+    Axios.get("http://sahakari-app.com/api/get-images/6").then(
+      res => (this.gallery = res.data)
+    );
   }
 };
 </script>

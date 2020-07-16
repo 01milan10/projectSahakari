@@ -17,6 +17,10 @@
         <form class="px-3" ref="form" action="/login" method="POST">
           <v-card-title>
             <h2 class="font-weight-light black--text">Login</h2>
+            <v-spacer></v-spacer>
+            <v-btn icon color="error" @click="login_dialog=false">
+              <v-icon color="red">mdi-close</v-icon>
+            </v-btn>
           </v-card-title>
           <v-card-text class="py-0">
             <input type="hidden" name="_token" :value="token" />
@@ -26,6 +30,8 @@
               v-model="email"
               name="email"
               required
+              :rules="emailRules"
+              outlined
             ></v-text-field>
             <v-text-field
               label="Password"
@@ -34,23 +40,15 @@
               prepend-icon="mdi-lock"
               v-model="password"
               name="password"
+              outlined
+              :rules="passwordRules"
             ></v-text-field>
           </v-card-text>
           <v-card-actions class="px-4">
             <v-row>
-              <v-col cols="12" class="py-0">
+              <v-col cols="12">
                 <v-row>
-                  <v-btn color="success darken-2" rounded outlined type="submit" :loading="loading">
-                    Login
-                    <v-icon right>mdi-login-variant</v-icon>
-                    <template v-slot:loader>
-                      <span class="custom-loader">
-                        <v-icon light>mdi-cached</v-icon>
-                      </span>
-                    </template>
-                  </v-btn>
-                  <v-spacer></v-spacer>
-                  <v-btn outlined rounded color="error" @click="login_dialog=false">Cancel</v-btn>
+                  <v-btn color="blue" dark block type="submit">Login</v-btn>
                 </v-row>
               </v-col>
             </v-row>
@@ -69,13 +67,13 @@ export default {
       login_dialog: false,
       loading: false,
       email: "",
-      password: ""
+      password: "",
+      emailRules: [
+        v => !!v || "Email is required",
+        v => /.+@.+\..+/.test(v) || "E-mail must be valid"
+      ],
+      passwordRules:[v=>!!v || "Password is required" ]
     };
-  },
-  methods: {
-    show() {
-      console.log("Display something");
-    }
   },
   computed: {
     token() {

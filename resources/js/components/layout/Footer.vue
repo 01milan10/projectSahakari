@@ -143,6 +143,7 @@
                       :rules="emailRules"
                       clearable
                       class="ma-0 pa-0"
+                      outlined
                     ></v-text-field>
                   </v-card-text>
                   <v-card-actions class="pt-0">

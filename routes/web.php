@@ -43,6 +43,9 @@ Route::any('/testimonials', function () {
 Route::any('/career', function () {
     return view('welcome');
 });
+Route::any('/our-contacts', function () {
+    return view('welcome');
+});
 
 Route::get('/', function () {
     return view('welcome');
@@ -56,6 +59,13 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 //Backend Controller
+//Inbox Route
+Route::get('/inbox', 'backendController@inboxMessages')->name('inbox');
+Route::get('/inbox/{id}', 'backendController@deleteMessage')->name('delete.message');
+Route::post('/sendMessage', 'backendController@sendMessage')->name('send.message');
+Route::get('/mail/old/{id}', 'backendController@makeOld')->name('make.old');
+Route::get('/new-mail-count', 'backendController@newMessageCounter');
+
 //Users Routes
 Route::get('/addUser', 'usersController@showRegisterForm')->name('show.registerForm');
 
@@ -72,6 +82,8 @@ Route::post('/updateUser/{id}', 'usersController@updateUser')->name('update.user
 Route::get('/resetPassword/{id}', 'usersController@showResetForm')->name('show.resetForm');
 
 Route::post('/resetPassword/{id}', 'usersController@resetPassword')->name('reset.password');
+
+Route::post('/changeAvatar/{id}', 'usersController@changeAvatar')->name('change.avatar');
 
 //Gallery Routes
 Route::get('/gallery', 'galleryController@showGallery')->name('show.gallery');
