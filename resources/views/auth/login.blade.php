@@ -16,25 +16,33 @@
     <div class="container">
         <div class="row mx-auto justify-content-center align-items-center" style="height: 100vh;">
             <div class="col-10 col-md-6">
-                <form action="{{ route('login') }}" method="POST">
+                <form action="{{ route('login') }}" method="POST" class="needs-validation" id="form" novalidate>
                     @csrf
                     <div class="card border-info shadow">
                         <div class="card-title display-4 text-center">Login</div>
+                        @error('email')
+                        <div class="alert alert-danger text-center">{{ $message }}</div>
+                        @enderror
                         <div class="card-body">
                             <div class="form-group row justify-content-center">
                                 <label for="email" class="col-sm-3 col-form-label text-sm-right">Email:</label>
-                                <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="email" placeholder="email@example.com" name="email" required autofocus>
+                                <div class="col-sm-6 emailGroup">
+                                    <input type="email" class="form-control" id="email" placeholder="email@example.com" name="email" required autofocus pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+                                    <div class="invalid-feedback ">Enter valid email</div>
                                 </div>
+
                             </div>
                             <div class="form-group row justify-content-center">
                                 <label for="inputPassword" class="col-sm-3 col-form-label text-sm-right">Password:</label>
                                 <div class="col-sm-6 input-group">
-                                    <input type="password" class="form-control" id="inputPassword" name="password" required autofocus>
+                                    <input type="password" class="form-control" id="inputPassword" name="password" required autofocus minlength="6">
                                     <div class="input-group-append">
                                         <button type="button" class="btn btn-outline-success showPassword">
                                             <i class="fas fa-eye-slash"></i>
                                         </button>
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        Enter your password. (Min: 6 characters)
                                     </div>
                                 </div>
                             </div>
@@ -44,7 +52,7 @@
                             <div class="form-group ma-5">
                                 <div class="clearfix">
                                     <a href="/register" class="btn btn-outline-success float-left">Register</a>
-                                    <button type="submit" class="btn btn-success float-right">Login
+                                    <button type="submit" class="btn btn-success float-right submit">Login
                                     </button>
                                 </div>
                             </div>
@@ -75,4 +83,22 @@
             $('.showPassword .fas.fa-eye-slash').removeClass("fa-eye-slash").addClass("fa-eye");
         }
     });
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
 </script>

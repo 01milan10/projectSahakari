@@ -8577,7 +8577,7 @@ var render = function() {
                                 "stroke-linecap": "round",
                                 "line-width": "1",
                                 radius: "5",
-                                fill: "false",
+                                fill: "",
                                 smooth: ""
                               }
                             }),
