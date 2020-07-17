@@ -9,12 +9,14 @@ use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Resources\Balance as balanceResource;
+use Carbon\Carbon;
 
 class balanceController extends Controller
 {
     public function getDeposits()
     {
-        $deposits = Balance::orderBy('created_at', 'DESC')->get('deposited_amount');
+        // $deposits = Balance::all();
+        $deposits = Balance::whereYear('collected_date', date('Y'))->whereMonth('collected_date', date('m'))->orderBy('collected_date', 'ASC')->get();
         return balanceResource::collection($deposits);
     }
 

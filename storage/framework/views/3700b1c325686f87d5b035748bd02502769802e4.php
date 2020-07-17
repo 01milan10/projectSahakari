@@ -198,8 +198,13 @@
         let counter = 1;
         $("#add-new-row").click(() => {
             if (counter < 12) {
-                $("#row").first().clone(true).appendTo($("#reportTable"));
-
+                $("#row").first().clone(true).appendTo($("#reportTabBody")).addClass(`newRow${counter}`);
+                const newClientName = $(`.newRow${counter} #client_name`).val('');
+                const newClientEmail = $(`.newRow${counter} #client_email`).val('');
+                const deposit = $(`.newRow${counter} #deposit`).val('');
+                const withdraw = $(`.newRow${counter} #withdraw`).val('');
+                const collector = $(`.newRow${counter} #collector`).val('');
+                const date = $(`.newRow${counter} #date`).val('');
                 counter++;
             }
         });

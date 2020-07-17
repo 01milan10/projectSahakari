@@ -1,8 +1,8 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="{{route('landingPage')}}" class="brand-link">
-        <img src="{{asset('dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">Project Sahakari</span>
+        <img src="{{asset('img/footer-icon.png')}}" alt="AdminLTE Logo" class="brand-image" style="opacity: .8">
+        <span class="brand-text font-weight-light">.</span>
     </a>
 
     <!-- Sidebar -->
@@ -21,16 +21,20 @@
                 <a class="d-block">{{Auth:: user()->name}}</a>
             </div>
         </div>
-        <form action="#" method="get" class="sidebar-form">
-            <div class="input-group">
-                <input type="text" name="q" class="form-control" placeholder="Search...">
-            </div>
-        </form>
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class
                      with font-awesome or any other icon font library -->
+                <div class="nav-item">
+                    <div class="nav-link">
+                        <form action="#" method="get">
+                            <div class="input-group">
+                                <input type="text" name="search" class="form-control" placeholder="Search...">
+                            </div>
+                        </form>
+                    </div>
+                </div>
                 <li class="nav-item">
                     <a href="{{route('home')}}" class="nav-link">
                         <i class="nav-icon fas fa-chart-line"></i>
@@ -44,8 +48,8 @@
                         <i class="nav-icon fas fa-inbox"></i>
                         <p>
                             Inbox
+                            <span class="right badge badge-pill badge-warning newMessageCount"></span>
                         </p>
-                        <span class="right badge badge-pill badge-warning newMessageCount"></span>
                     </a>
                 </li>
                 <li class="nav-header">

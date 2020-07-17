@@ -1,14 +1,12 @@
-@extends('layouts.backend.app')
+<?php $__env->startSection('header'); ?>
+<?php echo $__env->make('layouts.backend.header', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php $__env->stopSection(); ?>
 
-@section('header')
-@include('layouts.backend.header')
-@endsection
+<?php $__env->startSection('sidebar'); ?>
+<?php echo $__env->make('layouts.backend.sidebar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php $__env->stopSection(); ?>
 
-@section('sidebar')
-@include('layouts.backend.sidebar')
-@endsection
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 <div class="content-wrapper">
     <section class="content-header">
         <div class="container-fluid">
@@ -44,21 +42,21 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($opportunities as $opportunity)
+                                <?php $__currentLoopData = $opportunities; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $opportunity): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <tr>
-                                    <td>{{$opportunity->opening}}</td>
-                                    <td>{{$opportunity->position}}</td>
-                                    <td>{{$opportunity->seat}}</td>
+                                    <td><?php echo e($opportunity->opening); ?></td>
+                                    <td><?php echo e($opportunity->position); ?></td>
+                                    <td><?php echo e($opportunity->seat); ?></td>
                                     <td style="text-align:center">
                                         <div>
-                                            <a href="{{route('delete.oppurtunity',['id'=>$opportunity->id])}}">
+                                            <a href="<?php echo e(route('delete.oppurtunity',['id'=>$opportunity->id])); ?>">
                                                 <i class="fas fa-user-times ml-3" data-toggle="tooltip" data-placement="top" title="Delete opening" style="color:#dc3545">
                                                 </i>
                                             </a>
                                         </div>
                                     </td>
                                 </tr>
-                                @endforeach
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </tbody>
                             <tfoot>
                                 <tr>
@@ -79,17 +77,18 @@
         <!-- /.row -->
     </section>
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('footer')
-@include('layouts.backend.footer')
-@endsection
+<?php $__env->startSection('footer'); ?>
+<?php echo $__env->make('layouts.backend.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php $__env->stopSection(); ?>
 
-@section('script')
+<?php $__env->startSection('script'); ?>
 <script>
     $(document).ready(() => {
         $("#opportunityTable").DataTable();
         $('[data-toggle="tooltip"]').tooltip();
     });
 </script>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.backend.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\projectSahakari\resources\views/oppurtunities/listOppurtunities.blade.php ENDPATH**/ ?>

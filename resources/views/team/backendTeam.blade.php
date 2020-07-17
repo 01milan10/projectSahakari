@@ -140,13 +140,5 @@
 @section('script')
 <script type="text/javascript">
     $('[data-toggle="tooltip"]').tooltip();
-    $(document).ready(function() {
-        $("#imageTable").dataTable();
-
-        $(".fancybox").fancybox({
-            openEffect: "none",
-            closeEffect: "none"
-        });
-    });
 </script>
 @endsection

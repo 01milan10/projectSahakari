@@ -14,6 +14,6 @@ class Balance extends JsonResource
      */
     public function toArray($request)
     {
-        return (int)$this->deposited_amount;
+        return (int)$this->deposited_amount / 1000;
     }
 }

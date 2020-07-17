@@ -108,20 +108,13 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('script'); ?>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.min.js"></script>
-<!-- FLOT RESIZE PLUGIN - allows the chart to redraw when the window is resized -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.resize.min.js"></script>
-<!-- FLOT PIE PLUGIN - also used to draw donut charts -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.pie.min.js"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.time.js"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.3/jquery.flot.canvas.min.js"></script>
-
-<script src="<?php echo e(asset("js/underscore.js")); ?>"></script>
-<script src="<?php echo e(asset("js/flot.orderbar.js")); ?>"></script>
-<script src="<?php echo e(asset("js/flot.axisLabels.js")); ?>"></script>
-<script src="<?php echo e(asset("js/moment.js")); ?>"></script>
+<script src="<?php echo e(asset('js/jquery.flot.js')); ?>"></script>
+<script src="<?php echo e(asset('js/jquery.flot.js')); ?>"></script>
+<script src="<?php echo e(asset('js/jquery.flot.time.min.js')); ?>"></script>
+<script src="<?php echo e(asset('js/underscore.js')); ?>"></script>
+<script src="<?php echo e(asset('js/flot.orderbar.js')); ?>"></script>
+<script src="<?php echo e(asset('js/flot.axisLabels.js')); ?>"></script>
+<script src="<?php echo e(asset('js/moment.js')); ?>"></script>
 
 
 <script>

@@ -36,7 +36,7 @@
                         <div class="card-header">
                             <h3 class="card-title">
                                 <i class="fas fa-plus mr-2"></i>
-                                Add Team Member</h3>
+                                Our Mission</h3>
                         </div>
                         <form action="{{ route('add.team') }}" class="form-image-upload" method="POST" enctype="multipart/form-data">
                             {{csrf_field()}}

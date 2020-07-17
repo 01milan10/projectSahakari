@@ -131,7 +131,7 @@
 @include('layouts.backend.footer')
 @endsection
 @section('script')
-<script src="{{asset('plugins/summernote/summernote-bs4.min.js')}}"></script>
+<script src="{{asset('js/summernote/summernote-bs4.min.js')}}"></script>
 <script type="text/javascript">
     $('#commentTable').DataTable();
     $('[data-toggle=tooltip]').tooltip();

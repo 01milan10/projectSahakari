@@ -139,14 +139,6 @@
 <?php $__env->startSection('script'); ?>
 <script type="text/javascript">
     $('[data-toggle="tooltip"]').tooltip();
-    $(document).ready(function() {
-        $("#imageTable").dataTable();
-
-        $(".fancybox").fancybox({
-            openEffect: "none",
-            closeEffect: "none"
-        });
-    });
 </script>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make("layouts.backend.app", \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\projectSahakari\resources\views/team/backendTeam.blade.php ENDPATH**/ ?>
