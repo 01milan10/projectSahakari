@@ -7340,7 +7340,7 @@ var render = function() {
         },
         [
           _vm._v(" "),
-          _c("v-card", { staticClass: "grey lighten-2 border-lg" }, [
+          _c("v-card", { staticClass: "grey lighten-2" }, [
             _c(
               "form",
               {

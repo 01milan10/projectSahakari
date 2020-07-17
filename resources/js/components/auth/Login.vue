@@ -13,7 +13,7 @@
           >Login</v-btn>
         </v-hover>
       </template>
-      <v-card class="grey lighten-2 border-lg">
+      <v-card class="grey lighten-2">
         <form class="px-3" ref="form" action="/login" method="POST">
           <v-card-title>
             <h2 class="font-weight-light black--text">Login</h2>
@@ -72,7 +72,7 @@ export default {
         v => !!v || "Email is required",
         v => /.+@.+\..+/.test(v) || "E-mail must be valid"
       ],
-      passwordRules:[v=>!!v || "Password is required" ]
+      passwordRules: [v => !!v || "Password is required"]
     };
   },
   computed: {
