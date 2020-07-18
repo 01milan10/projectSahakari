@@ -197,7 +197,7 @@
     $(function() {
         let counter = 1;
         $("#add-new-row").click(() => {
-            if (counter < 12) {
+            if (counter < 10) {
                 $("#row").first().clone(true).appendTo($("#reportTabBody")).addClass(`newRow${counter}`);
                 const newClientName = $(`.newRow${counter} #client_name`).val('');
                 const newClientEmail = $(`.newRow${counter} #client_email`).val('');

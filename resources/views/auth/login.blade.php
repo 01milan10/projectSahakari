@@ -20,10 +20,10 @@
                     @csrf
                     <div class="card border-info shadow">
                         <div class="card-title display-4 text-center">Login</div>
-                        @error('email')
-                        <div class="alert alert-danger text-center">{{ $message }}</div>
-                        @enderror
                         <div class="card-body">
+                            @error('email')
+                            <div class="alert alert-danger text-center">{{ $message }}</div>
+                            @enderror
                             <div class="form-group row justify-content-center">
                                 <label for="email" class="col-sm-3 col-form-label text-sm-right">Email:</label>
                                 <div class="col-sm-6 emailGroup">

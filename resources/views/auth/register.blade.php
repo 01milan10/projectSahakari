@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Register</title>
-    <link rel="stylesheet" href="{{asset('plugins/fontawesome-free/css/all.min.css')}}">
+    <link rel="stylesheet" href="{{asset('css/fontawesome-free/css/all.css')}}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -21,6 +21,9 @@
                     <div class="card border-info shadow">
                         <div class="card-title display-4 text-center">Register</div>
                         <div class="card-body">
+                            @error('email')
+                            <div class="alert alert-danger text-center">{{ $message }}</div>
+                            @enderror
                             <div class="form-group row justify-content-center">
                                 <label for="name" class="col-sm-3 col-form-label text-sm-right">Name:</label>
                                 <div class="col-sm-6">

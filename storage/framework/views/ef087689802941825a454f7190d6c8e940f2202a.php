@@ -20,17 +20,17 @@
                     <?php echo csrf_field(); ?>
                     <div class="card border-info shadow">
                         <div class="card-title display-4 text-center">Login</div>
-                        <?php $__errorArgs = ['email'];
+                        <div class="card-body">
+                            <?php $__errorArgs = ['email'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>
-                        <div class="alert alert-danger text-center"><?php echo e($message); ?></div>
-                        <?php unset($message);
+                            <div class="alert alert-danger text-center"><?php echo e($message); ?></div>
+                            <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
-                        <div class="card-body">
                             <div class="form-group row justify-content-center">
                                 <label for="email" class="col-sm-3 col-form-label text-sm-right">Email:</label>
                                 <div class="col-sm-6 emailGroup">
