@@ -10,11 +10,12 @@
             :elevation="hover?1:0"
             v-bind="attrs"
             v-on="on"
+            v-if="!isAuth"
           >Login</v-btn>
         </v-hover>
       </template>
-      <v-card class="grey lighten-2">
-        <form class="px-3" ref="form" action="/login" method="POST">
+      <v-card class="grey lighten-2 border-lg">
+        <v-form class="px-3" ref="form" action="/login" method="POST">
           <v-card-title>
             <h2 class="font-weight-light black--text">Login</h2>
             <v-spacer></v-spacer>
@@ -48,12 +49,12 @@
             <v-row>
               <v-col cols="12">
                 <v-row>
-                  <v-btn color="blue" dark block type="submit">Login</v-btn>
+                  <v-btn color="blue" dark block type="submit" @click="validate">Login</v-btn>
                 </v-row>
               </v-col>
             </v-row>
           </v-card-actions>
-        </form>
+        </v-form>
       </v-card>
     </v-dialog>
   </v-toolbar-items>
@@ -80,7 +81,15 @@ export default {
       let token = document.head.querySelector('meta[name="csrf-token"]');
       return token.content;
     }
-  }
+  },
+  methods: {
+    validate(e) {
+      if (!this.$refs.form.validate()) {
+        e.preventDefault();
+      }
+    }
+  },
+  props: ["isAuth"]
 };
 </script>
 

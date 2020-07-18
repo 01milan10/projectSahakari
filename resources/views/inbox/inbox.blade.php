@@ -11,62 +11,20 @@
 @section('content')
 <div class="content-wrapper">
     <section class="content">
-        <!-- <div class="card card-info">
-            <div class="card-header">
-                <div class="card-title">
-                    Your Inbox
-                </div>
-            </div>
-            <div class="card-body">
-                <div class="table-responsive mailbox-messages">
-                    <table id="messagesTable" class="table table-hover table-striped">
-                        <thead class="text-center">
-                            <th>Subject</th>
-                            <th>Message</th>
-                            <th>Sender</th>
-                            <th>Sender Email</th>
-                            <th>Sent At</th>
-                            <th>Action</th>
-                        </thead>
-                        <tbody>
-                            @foreach($messages as $message)
-                            <tr class="text-center">
-                                <td>{{$message->message_subject}}</td>
-                                <td>{{$message->message}}</td>
-                                <td>{{$message->sender_name}}</td>
-                                <td>{{$message->sender_email}}</td>
-                                <td>{{$message->created_at}}</td>
-                                <td><a href="{{route('delete.message',$message->id)}}" data-toggle="tooltip" data-title="delete" data-placement="left"><i class="fa fa-trash" style="color:red"></i></a></td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                        <thead class="text-center">
-                            <th>Subject</th>
-                            <th>Message</th>
-                            <th>Sender</th>
-                            <th>Sender Email</th>
-                            <th>Sent At</th>
-                            <th>Action</th>
-
-                        </thead>
-                    </table>
-                </div>
-            </div>
-        </div> -->
-        <div class="card card-info card-outline">
+        <div class="card card-info card-outline messagesCard">
             <div class="card-header">
                 <h3 class="card-title">Inbox</h3>
 
-                <!-- <div class="card-tools">
-                    <div class="input-group input-group-sm">
+                <div class="card-tools">
+                    <!-- <div class="input-group input-group-sm">
                         <input type="text" class="form-control" placeholder="Search Mail">
                         <div class="input-group-append">
                             <div class="btn btn-primary">
                                 <i class="fas fa-search"></i>
                             </div>
                         </div>
-                    </div>
-                </div> -->
+                    </div> -->
+                </div>
                 <!-- /.card-tools -->
             </div>
             <!-- /.card-header -->
@@ -79,7 +37,9 @@
                         <button type="button" class="btn btn-default btn-sm deleteMessage" data-toggle="tooltip" data-placement="top" data-title="delete"><i class="far fa-trash-alt"></i></button>
                     </div>
                     <!-- /.btn-group -->
-                    <button type="button" class="btn btn-default btn-sm syncMessages" data-toggle="tooltip" data-placement="top" data-title="sync"><i class="fas fa-sync-alt"></i></button>
+                    <button type="button" class="btn btn-default btn-sm syncMessages" data-toggle="tooltip" data-placement="top" data-title="sync">
+                        <i class="fas fa-sync-alt"></i>
+                    </button>
                     <div class="float-right">
                         {{$messages->render()}}
                     </div>
@@ -192,11 +152,6 @@
     $('[data-toggle="tooltip"]').tooltip();
     // $('#messagesTable').DataTable();
 
-    //Removing the counter badge when inbox loads
-    $(document).ready(function() {
-        $('.newMessageCount').html('');
-    });
-
     $(function() {
         //remove the new badge
         $('.readMail').click(function() {
@@ -223,8 +178,8 @@
         })
         //Check new messages
         $('.syncMessages').click(function() {
-            location.reload(true);
-        });
+            location.reload(true)
+        })
         //Delete selected messages
         $('.deleteMessage').click(function(e) {
             e.preventDefault();

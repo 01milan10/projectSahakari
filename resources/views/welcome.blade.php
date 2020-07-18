@@ -12,7 +12,13 @@
 
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
     <div id="app">
-        <App />
+        @auth
+        <App v-bind:is-auth="1" />
+        @endauth
+
+        @guest
+        <App v-bind:is-auth="0" />
+        @endguest
     </div>
     <script src="js/app.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>

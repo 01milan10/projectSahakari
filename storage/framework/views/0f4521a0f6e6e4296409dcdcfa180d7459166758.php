@@ -89,7 +89,7 @@ unset($__errorArgs, $__bag); ?>" placeholder="Seats Available" name="seat" requi
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('script'); ?>
-<script src="<?php echo e(asset('plugins/summernote/summernote-bs4.min.js')); ?>"></script>
+<script src="<?php echo e(asset('js/summernote/summernote-bs4.min.js')); ?>"></script>
 <script type="text/javascript">
     $(function() {
         $('.textarea').summernote({

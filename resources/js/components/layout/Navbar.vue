@@ -97,7 +97,17 @@
             :elevation="hover?1:0"
           >Downloads</v-btn>
         </v-hover>
-        <Login />
+        <v-hover v-slot:default="{hover}">
+          <v-btn
+            class="t-btn font-weight-light"
+            text
+            :color="`${hover?'blue':'grey'}`"
+            href="/home"
+            :elevation="hover?1:0"
+            v-if="isAuth"
+          >Dashboard</v-btn>
+        </v-hover>
+        <Login :isAuth="isAuth" />
       </v-toolbar-items>
       <v-toolbar-items class="hidden-md-and-up">
         <Login />
@@ -177,7 +187,8 @@ export default {
   },
   components: {
     Login
-  }
+  },
+  props: ["isAuth"]
 };
 </script>
 

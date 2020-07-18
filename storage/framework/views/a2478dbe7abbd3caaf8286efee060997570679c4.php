@@ -36,12 +36,11 @@
                                 <i class="fas fa-plus mr-2"></i>
                                 Our Mission</h3>
                         </div>
-                        <form action="<?php echo e(route('add.team')); ?>" class="form-image-upload" method="POST" enctype="multipart/form-data">
-                            <?php echo e(csrf_field()); ?>
-
+                        <form action="<?php echo e(route('add.vision')); ?>" class="form-image-upload" method="POST" enctype="multipart/form-data">
+                            <?php echo csrf_field(); ?>
                             <div class="card-body" id="card-body">
                                 <div>
-                                    <input type="text" class="form-control mb-4 " placeholder="Our Vision" name="name" required autofocus>
+                                    <input type="text" class="form-control mb-4 " placeholder="Our Vision" name="coreVision" required autofocus>
                                 </div>
                                 <div>
                                     <input type="text" class="form-control mb-4" placeholder="Core Mission" name="coreMission" required>
@@ -49,23 +48,13 @@
                                 <div id="mission">
                                     <div class="form-group row" id="missionHead">
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control mb-1" placeholder="Mission Heading" name="missionHeading" required>
-                                        </div>
-                                        <div class="col-sm-1">
-                                            <div id="add-new-head" class="btn btn-outline-primary">
-                                                <i class="fa fa-plus"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-1">
-                                            <div id="remove-new-head" class="btn btn-outline-danger">
-                                                <i class="fa fa-minus"></i>
-                                            </div>
+                                            <input type="text" class="form-control mb-1" id="mission" placeholder="Mission Heading" name="missionHead" required>
                                         </div>
                                     </div>
 
                                     <div class="form-group row" id="subMission">
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control mb-1" placeholder="Sub-mission" name="subMission[]" required>
+                                            <input type="text" class="form-control mb-1" id="sub-mission" placeholder="Sub-mission" name="subMission[]" required>
                                         </div>
                                         <div class="col-sm-1">
                                             <div id="add-new-obj" class="btn btn-outline-primary">
@@ -107,30 +96,20 @@
     $(function() {
         let counter = 1;
         $("#add-new-obj").click(function() {
-            if (counter < 12) {
-                $("#subMission").first().val('').clone(true).appendTo($("#mission"));
+            if (counter < 5) {
+                console.log(counter)
+                $("#subMission").clone(true).appendTo($("#mission")).addClass(`newSubmission${counter}`);
+                $(`.newSubmission${counter} #sub-mission`).val('')
                 counter++;
             }
         });
         $("#remove-new-obj").click(function() {
             if (counter != 1) {
+                counter--;
                 $(this).closest("#subMission").remove();
-                counter--;
             }
-        });
-    })
-    $(function() {
-        let counter = 1;
-        $("#add-new-head").click(function() {
-            if (counter < 5) {
-                $("#mission").val('').clone(true).appendTo($("#card-body"));
-                counter++;
-            }
-        });
-        $("#remove-new-head").click(function() {
-            if (counter != 1) {
-                $(this).closest("#mission").remove();
-                counter--;
+            if (counter == 1) {
+                $('#subMission').removeClass('newSubmission1 newSubmission2 newSubmission3 newSubmission4');
             }
         });
     })

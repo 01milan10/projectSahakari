@@ -12,7 +12,13 @@
 
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
     <div id="app">
-        <App />
+        <?php if(auth()->guard()->check()): ?>
+        <App v-bind:is-auth="1" />
+        <?php endif; ?>
+
+        <?php if(auth()->guard()->guest()): ?>
+        <App v-bind:is-auth="0" />
+        <?php endif; ?>
     </div>
     <script src="js/app.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>

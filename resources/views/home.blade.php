@@ -39,11 +39,11 @@
                                 Line Chart
                             </h3>
 
-                            <!-- <div class="card-tools">
+                            <div class="card-tools">
                                 <button type="button" class="btn btn-tool" data-card-widget="maximize">
                                     <i class="fas fa-expand"></i>
                                 </button>
-                            </div> -->
+                            </div>
                         </div>
                         <div class="card-body">
                             <div id="line-chart"></div>
@@ -70,14 +70,14 @@
                                 Bar Chart
                             </h3>
 
-                            <!-- <div class="card-tools">
+                            <div class="card-tools">
                                 <button type="button" class="btn btn-tool" data-card-widget="maximize">
                                     <i class="fas fa-expand"></i>
                                 </button>
-                            </div> -->
+                            </div>
                         </div>
                         <div class="card-body">
-                            <div id="bar-chart" style="height: 400px;"></div>
+                            <div id="bar-chart"></div>
                         </div>
                         <div class="card-footer">
                             <label>Show Graph By Year:
@@ -215,22 +215,6 @@
 
 
                     }
-                    donutData = [{
-                            label: 'Series2',
-                            data: 30,
-                            color: '#3c8dbc'
-                        },
-                        {
-                            label: 'Series3',
-                            data: 20,
-                            color: '#0073b7'
-                        },
-                        {
-                            label: 'Series4',
-                            data: 50,
-                            color: '#00c0ef'
-                        }
-                    ]
                     plot_line(line1, line2, 0.033);
                     plot_bar(bar1, bar2, new Date().getFullYear());
                 },
@@ -284,6 +268,9 @@
         }
 
         function plot_bar(bar1, bar2) {
+            $("#bar-chart").attr({
+                "style": "height:400px; width:100%",
+            })
             $.plot('#bar-chart', [bar1, bar2], {
                 grid: {
                     hoverable: true,

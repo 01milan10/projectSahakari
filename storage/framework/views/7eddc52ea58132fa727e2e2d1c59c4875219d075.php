@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="<?php echo e(asset('css/adminlte/adminlte.min.css')); ?>">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="<?php echo e(asset('css/icheck-bootstrap.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('js/summernote/summernote-bs4.css')); ?>">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <!-- <link rel="stylesheet" href="<?php echo e(asset('css/jquery.fancybox.min.css')); ?>"> -->

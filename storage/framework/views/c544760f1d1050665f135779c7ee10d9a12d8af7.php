@@ -130,7 +130,7 @@
 <?php echo $__env->make('layouts.backend.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('script'); ?>
-<script src="<?php echo e(asset('plugins/summernote/summernote-bs4.min.js')); ?>"></script>
+<script src="<?php echo e(asset('js/summernote/summernote-bs4.min.js')); ?>"></script>
 <script type="text/javascript">
     $('#commentTable').DataTable();
     $('[data-toggle=tooltip]').tooltip();

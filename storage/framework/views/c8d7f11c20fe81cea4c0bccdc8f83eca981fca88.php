@@ -12,10 +12,6 @@
         </li>
         <li class="nav-item d-none d-sm-inline-block">
           <a href="<?php echo e(route('landingPage')); ?>" class="nav-link">Frontend</a>
-        </li>
-        <li class="nav-item d-none d-sm-inline-block">
-          <a href="#" class="nav-link">Contact</a>
-        </li>
       </ul>
 
       <!-- Right navbar links -->

@@ -2029,6 +2029,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "App",
+  props: ["isAuth"],
   components: {
     Navbar: _components_layout_Navbar__WEBPACK_IMPORTED_MODULE_0__["default"],
     Footer: _components_layout_Footer__WEBPACK_IMPORTED_MODULE_1__["default"],
@@ -2036,7 +2037,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      fab: false
+      fab: false,
+      authenticated: ""
     };
   },
   methods: {
@@ -2047,6 +2049,13 @@ __webpack_require__.r(__webpack_exports__);
     },
     toTop: function toTop() {
       this.$vuetify.goTo(0);
+    }
+  },
+  mounted: function mounted() {
+    if (this.isAuth == 1) {
+      return this.authenticated = true;
+    } else {
+      return this.authenticated = false;
     }
   }
 });
@@ -2493,6 +2502,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Login",
   data: function data() {
@@ -2516,7 +2526,15 @@ __webpack_require__.r(__webpack_exports__);
       var token = document.head.querySelector('meta[name="csrf-token"]');
       return token.content;
     }
-  }
+  },
+  methods: {
+    validate: function validate(e) {
+      if (!this.$refs.form.validate()) {
+        e.preventDefault();
+      }
+    }
+  },
+  props: ["isAuth"]
 });
 
 /***/ }),
@@ -3467,6 +3485,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -3507,7 +3535,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   components: {
     Login: _auth_Login__WEBPACK_IMPORTED_MODULE_0__["default"]
-  }
+  },
+  props: ["isAuth"]
 });
 
 /***/ }),
@@ -6362,7 +6391,7 @@ var render = function() {
   return _c(
     "v-app",
     [
-      _c("Navbar"),
+      _c("Navbar", { attrs: { isAuth: _vm.authenticated } }),
       _vm._v(" "),
       _c("v-main", [_c("router-view")], 1),
       _vm._v(" "),
@@ -7298,26 +7327,29 @@ var render = function() {
                           fn: function(ref) {
                             var hover = ref.hover
                             return [
-                              _c(
-                                "v-btn",
-                                _vm._g(
-                                  _vm._b(
-                                    {
-                                      staticClass: "font-weight-light",
-                                      attrs: {
-                                        text: "",
-                                        color: "" + (hover ? "blue" : "grey"),
-                                        elevation: hover ? 1 : 0
-                                      }
-                                    },
+                              !_vm.isAuth
+                                ? _c(
                                     "v-btn",
-                                    attrs,
-                                    false
-                                  ),
-                                  on
-                                ),
-                                [_vm._v("Login")]
-                              )
+                                    _vm._g(
+                                      _vm._b(
+                                        {
+                                          staticClass: "font-weight-light",
+                                          attrs: {
+                                            text: "",
+                                            color:
+                                              "" + (hover ? "blue" : "grey"),
+                                            elevation: hover ? 1 : 0
+                                          }
+                                        },
+                                        "v-btn",
+                                        attrs,
+                                        false
+                                      ),
+                                      on
+                                    ),
+                                    [_vm._v("Login")]
+                                  )
+                                : _vm._e()
                             ]
                           }
                         }
@@ -7340,136 +7372,144 @@ var render = function() {
         },
         [
           _vm._v(" "),
-          _c("v-card", { staticClass: "grey lighten-2" }, [
-            _c(
-              "form",
-              {
-                ref: "form",
-                staticClass: "px-3",
-                attrs: { action: "/login", method: "POST" }
-              },
-              [
-                _c(
-                  "v-card-title",
-                  [
-                    _c("h2", { staticClass: "font-weight-light black--text" }, [
-                      _vm._v("Login")
-                    ]),
-                    _vm._v(" "),
-                    _c("v-spacer"),
-                    _vm._v(" "),
-                    _c(
-                      "v-btn",
-                      {
-                        attrs: { icon: "", color: "error" },
-                        on: {
-                          click: function($event) {
-                            _vm.login_dialog = false
+          _c(
+            "v-card",
+            { staticClass: "grey lighten-2 border-lg" },
+            [
+              _c(
+                "v-form",
+                {
+                  ref: "form",
+                  staticClass: "px-3",
+                  attrs: { action: "/login", method: "POST" }
+                },
+                [
+                  _c(
+                    "v-card-title",
+                    [
+                      _c(
+                        "h2",
+                        { staticClass: "font-weight-light black--text" },
+                        [_vm._v("Login")]
+                      ),
+                      _vm._v(" "),
+                      _c("v-spacer"),
+                      _vm._v(" "),
+                      _c(
+                        "v-btn",
+                        {
+                          attrs: { icon: "", color: "error" },
+                          on: {
+                            click: function($event) {
+                              _vm.login_dialog = false
+                            }
                           }
+                        },
+                        [
+                          _c("v-icon", { attrs: { color: "red" } }, [
+                            _vm._v("mdi-close")
+                          ])
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-card-text",
+                    { staticClass: "py-0" },
+                    [
+                      _c("input", {
+                        attrs: { type: "hidden", name: "_token" },
+                        domProps: { value: _vm.token }
+                      }),
+                      _vm._v(" "),
+                      _c("v-text-field", {
+                        attrs: {
+                          label: "Email",
+                          "prepend-icon": "mdi-account",
+                          name: "email",
+                          required: "",
+                          rules: _vm.emailRules,
+                          outlined: ""
+                        },
+                        model: {
+                          value: _vm.email,
+                          callback: function($$v) {
+                            _vm.email = $$v
+                          },
+                          expression: "email"
                         }
-                      },
-                      [
-                        _c("v-icon", { attrs: { color: "red" } }, [
-                          _vm._v("mdi-close")
-                        ])
-                      ],
-                      1
-                    )
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "v-card-text",
-                  { staticClass: "py-0" },
-                  [
-                    _c("input", {
-                      attrs: { type: "hidden", name: "_token" },
-                      domProps: { value: _vm.token }
-                    }),
-                    _vm._v(" "),
-                    _c("v-text-field", {
-                      attrs: {
-                        label: "Email",
-                        "prepend-icon": "mdi-account",
-                        name: "email",
-                        required: "",
-                        rules: _vm.emailRules,
-                        outlined: ""
-                      },
-                      model: {
-                        value: _vm.email,
-                        callback: function($$v) {
-                          _vm.email = $$v
+                      }),
+                      _vm._v(" "),
+                      _c("v-text-field", {
+                        attrs: {
+                          label: "Password",
+                          type: "password",
+                          required: "",
+                          "prepend-icon": "mdi-lock",
+                          name: "password",
+                          outlined: "",
+                          rules: _vm.passwordRules
                         },
-                        expression: "email"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("v-text-field", {
-                      attrs: {
-                        label: "Password",
-                        type: "password",
-                        required: "",
-                        "prepend-icon": "mdi-lock",
-                        name: "password",
-                        outlined: "",
-                        rules: _vm.passwordRules
-                      },
-                      model: {
-                        value: _vm.password,
-                        callback: function($$v) {
-                          _vm.password = $$v
-                        },
-                        expression: "password"
-                      }
-                    })
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "v-card-actions",
-                  { staticClass: "px-4" },
-                  [
-                    _c(
-                      "v-row",
-                      [
-                        _c(
-                          "v-col",
-                          { attrs: { cols: "12" } },
-                          [
-                            _c(
-                              "v-row",
-                              [
-                                _c(
-                                  "v-btn",
-                                  {
-                                    attrs: {
-                                      color: "blue",
-                                      dark: "",
-                                      block: "",
-                                      type: "submit"
-                                    }
-                                  },
-                                  [_vm._v("Login")]
-                                )
-                              ],
-                              1
-                            )
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    )
-                  ],
-                  1
-                )
-              ],
-              1
-            )
-          ])
+                        model: {
+                          value: _vm.password,
+                          callback: function($$v) {
+                            _vm.password = $$v
+                          },
+                          expression: "password"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-card-actions",
+                    { staticClass: "px-4" },
+                    [
+                      _c(
+                        "v-row",
+                        [
+                          _c(
+                            "v-col",
+                            { attrs: { cols: "12" } },
+                            [
+                              _c(
+                                "v-row",
+                                [
+                                  _c(
+                                    "v-btn",
+                                    {
+                                      attrs: {
+                                        color: "blue",
+                                        dark: "",
+                                        block: "",
+                                        type: "submit"
+                                      },
+                                      on: { click: _vm.validate }
+                                    },
+                                    [_vm._v("Login")]
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
         ],
         1
       )
@@ -9922,7 +9962,35 @@ var render = function() {
                 ])
               }),
               _vm._v(" "),
-              _c("Login")
+              _c("v-hover", {
+                scopedSlots: _vm._u([
+                  {
+                    key: "default",
+                    fn: function(ref) {
+                      var hover = ref.hover
+                      return [
+                        _vm.isAuth
+                          ? _c(
+                              "v-btn",
+                              {
+                                staticClass: "t-btn font-weight-light",
+                                attrs: {
+                                  text: "",
+                                  color: "" + (hover ? "blue" : "grey"),
+                                  href: "/home",
+                                  elevation: hover ? 1 : 0
+                                }
+                              },
+                              [_vm._v("Dashboard")]
+                            )
+                          : _vm._e()
+                      ]
+                    }
+                  }
+                ])
+              }),
+              _vm._v(" "),
+              _c("Login", { attrs: { isAuth: _vm.isAuth } })
             ],
             1
           ),
@@ -70659,20 +70727,16 @@ module.exports = g;
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _components_App__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/App */ "./resources/js/components/App.vue");
-/* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./router */ "./resources/js/router/index.js");
-/* harmony import */ var _plugins_vuetify__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./plugins/vuetify */ "./resources/js/plugins/vuetify.js");
+/* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./router */ "./resources/js/router/index.js");
+/* harmony import */ var _plugins_vuetify__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./plugins/vuetify */ "./resources/js/plugins/vuetify.js");
 
 
 
-
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("App", __webpack_require__(/*! ./components/App */ "./resources/js/components/App.vue")["default"]);
 new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   el: "#app",
-  router: _router__WEBPACK_IMPORTED_MODULE_2__["default"],
-  vuetify: _plugins_vuetify__WEBPACK_IMPORTED_MODULE_3__["default"],
-  render: function render(h) {
-    return h(_components_App__WEBPACK_IMPORTED_MODULE_1__["default"]);
-  }
+  router: _router__WEBPACK_IMPORTED_MODULE_1__["default"],
+  vuetify: _plugins_vuetify__WEBPACK_IMPORTED_MODULE_2__["default"]
 });
 
 /***/ }),
