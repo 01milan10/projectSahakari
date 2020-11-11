@@ -38,14 +38,29 @@
                         <form action="{{ route('image.upload') }}" class="form-image-upload" method="POST" enctype="multipart/form-data">
                             {{csrf_field()}}
                             <div class="card-body">
-                                <div>
-                                    <input type="text" id="title" class="form-control mb-4" placeholder="Title" name="title" required autocomplete="title" autofocus>
+                                <div class="mb-4">
+                                    <input type="text" id="title" class="form-control @error('title') is-invalid @enderror" placeholder="Title" name="title" value="{{old('title')}}" required autocomplete="title" autofocus>
+                                    @error('title')
+                                    <span class="invalid-feedback">
+                                        <strong>{{$message}}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
-                                <div>
-                                    <input type="text" id="category" class="form-control mb-4" placeholder="Category" name="category" required autocomplete="category">
+                                <div class="mb-4">
+                                    <input type="text" id="category" class="form-control @error('category') is-invalid @enderror" placeholder="Category" name="category" value="{{old('category')}}" required autocomplete="category">
+                                    @error('category')
+                                    <span class="invalid-feedback">
+                                        <strong>{{$message}}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
-                                <div>
-                                    <input type="file" id="file" name="image[]" class="form-control mb-4" placeholder="Select an image to upload." required autocomplete="file" multiple>
+                                <div class="mb-4">
+                                    <input type="file" id="file" name="image[]" class="form-control @error('image') is-invalid @enderror" placeholder="Select an image to upload." required autocomplete="file" multiple>
+                                    @error('image')
+                                    <span class="invalid-feedback">
+                                        <strong>{{$message}}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="card-footer">

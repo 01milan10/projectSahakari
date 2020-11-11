@@ -15,7 +15,6 @@
                 <?php else: ?>
                 <img src="<?php echo e(asset('uploaded_images/team_avatar/profile_pictures').'/'.Auth::user()->image); ?>" class="img-circle elevation-2" alt="User Image">
                 <?php endif; ?>
-
             </div>
             <div class="info">
                 <a class="d-block"><?php echo e(Auth:: user()->name); ?></a>
@@ -61,24 +60,20 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
+                        <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('create',App\User::class)): ?>
                         <li class="nav-item">
-                            <a href="<?php echo e(route('show.registerForm')); ?>" class="nav-link">
+                            <a href="<?php echo e(route('create.user')); ?>" class="nav-link">
                                 <i class="nav-icon fas fa-user-plus"></i>
                                 <p>
                                     Add User
                                 </p>
                             </a>
                         </li>
+                        <?php endif; ?>
                         <li class="nav-item">
                             <a href="<?php echo e(route('list.user')); ?>" class="nav-link">
                                 <i class="fas fa-list-alt mr-2"></i>
                                 <p>List Users</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?php echo e(route('list.user')); ?>" class="nav-link">
-                                <i class="fas fa-redo-alt mr-2"></i>
-                                <p>Reset Password</p>
                             </a>
                         </li>
                     </ul>
@@ -107,6 +102,14 @@
                     </ul>
                 </li>
                 <li class="nav-item">
+                    <a href="/features/create" class="nav-link">
+                        <i class="nav-icon fas fa-anchor"></i>
+                        <p>
+                            Features
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="<?php echo e(route('show.gallery')); ?>" class="nav-link">
                         <i class="nav-icon far fa-image"></i>
                         <p>
@@ -118,7 +121,7 @@
                     <a href="<?php echo e(route('show.messageForm')); ?>" class="nav-link">
                         <i class="nav-icon far fa-envelope"></i>
                         <p>
-                            Add Messages
+                            Messages
                         </p>
                     </a>
                 </li>
@@ -132,7 +135,7 @@
                     <a href="<?php echo e(route('show.contactForm')); ?>" class="nav-link">
                         <i class="nav-icon fas fa-id-badge"></i>
                         <p>
-                            Manage Contacts
+                            Contacts
                         </p>
                     </a>
                 </li>
@@ -157,6 +160,14 @@
                         <i class="nav-icon fas fa-comment-dots"></i>
                         <p>
                             Testimonials
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?php echo e(route('create.client')); ?>" class="nav-link">
+                        <i class="nav-icon fas fa-handshake"></i>
+                        <p>
+                            Clients
                         </p>
                     </a>
                 </li>

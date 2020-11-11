@@ -53,41 +53,68 @@
                                             <tr id="row">
                                                 <td>
                                                     <div class="form-group row">
-                                                        <input type="text" class="form-control" id="client_name" required placeholder="Client Name" name="name[]">
+                                                        <input type="text" class="form-control @error('name.*') is-invalid @enderror" id="client_name" value="{{old('name.*')}}" required placeholder="Client Name" name="name[]" minlength="3">
+                                                        @error('name.*')
+                                                        <div class="invalid-feedback">
+                                                            {{ $message}}
+                                                        </div>
+                                                        @enderror
                                                     </div>
 
                                                 </td>
                                                 <td>
                                                     <div class="form-group row">
-                                                        <input type="email" class="form-control" id="client_email" required placeholder="Client Email" name="email[]">
+                                                        <input type="email" class="form-control @error('email.*') is-invalid @enderror" id="client_email" value="{{old('email.*')}}" required placeholder="Client Email" name="email[]">
+                                                        @error('email.*')
+                                                        <div class="invalid-feedback">
+                                                            {{$message}}
+                                                        </div>
+                                                        @enderror
                                                     </div>
 
                                                 </td>
                                                 <td>
                                                     <div class="form-group row">
-                                                        <input type="number" class="form-control" id="deposit" required placeholder="Deposited Amount" name="deposit[]">
-
+                                                        <input type="number" class="form-control @error('deposit.*') is-invalid @enderror" id="deposit" value="{{old('deposit.*')}}" required placeholder="Deposited Amount" name="deposit[]">
+                                                        @error('deposit.*')
+                                                        <div class="invalid-feedback">
+                                                            {{$message}}
+                                                        </div>
+                                                        @enderror
                                                     </div>
 
                                                 </td>
                                                 <td>
                                                     <div class="form-group row">
-                                                        <input type="number" class="form-control" id="withdraw" required placeholder="Withdrawn Amount" name="withdraw[]">
-
+                                                        <input type="number" class="form-control @error('withdraw.*') is-invalid @enderror" id="withdraw" value="{{old('withdraw.*')}}" required placeholder="Withdrawn Amount" name="withdraw[]">
+                                                        @error('withdraw.*')
+                                                        <div class="invalid-feedback">
+                                                            {{$message}}
+                                                        </div>
+                                                        @enderror
                                                     </div>
 
                                                 </td>
                                                 <td>
                                                     <div class="form-group row">
-                                                        <input type="text" class="form-control" id="collector" required placeholder="Collector's Name" name="cName[]">
-
+                                                        <input type="text" class="form-control @error('cName.*') is-invalid @enderror" id="collector" value="{{old('cName.*')}}" required placeholder="Collector's Name" name="cName[]">
+                                                        @error('cName.*')
+                                                        <div class="invalid-feedback">
+                                                            {{$message}}
+                                                        </div>
+                                                        @enderror
                                                     </div>
 
                                                 </td>
                                                 <td>
                                                     <div class="form-group row">
                                                         <div class="col-sm-8">
-                                                            <input type="date" class="form-control" id="date" required name="collected_date[]">
+                                                            <input type="date" class="form-control @error('collected_date') is-invalid @enderror" id="date" value="{{old('date.*')}}" required name="collected_date[]">
+                                                            @error('collected_date')
+                                                            <div class="invalid-feedback">
+                                                                {{$message}}
+                                                            </div>
+                                                            @enderror
                                                         </div>
                                                         <div class="col-sm-2">
                                                             <div id="add-new-row" class="btn btn-outline-primary">
@@ -109,13 +136,13 @@
 
                             </div>
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-info">
-                                    <i class="fas fa-plus mr-2"></i>
-                                    Add
-                                </button>
-                                <button type="reset" class="btn btn-danger float-right">
+                                <button type="reset" class="btn btn-outline-danger">
                                     <i class="fas fa-times mr-2"></i>
                                     Cancel
+                                </button>
+                                <button type="submit" class="btn btn-info float-right">
+                                    <i class="fas fa-plus mr-2"></i>
+                                    Add
                                 </button>
                             </div>
                         </form>

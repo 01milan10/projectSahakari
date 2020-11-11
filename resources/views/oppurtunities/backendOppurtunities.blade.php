@@ -39,6 +39,7 @@
                             {{csrf_field()}}
                             <div class="card-body pad">
                                 <div>
+                                    <label for="title">Job type</label>
                                     <select id="title" name="opening" class="form-control mb-2">
                                         <option value="Job Vacancy">Job Vacancy</option>
                                         <option value="Internship">Internship</option>
@@ -46,17 +47,34 @@
 
                                 </div>
                                 <div>
-                                    <input type="text" class="form-control mb-2 @error('category') is-invalid @enderror" placeholder="Position" name="position" required autocomplete="category">
+                                    <label for="position">Position</label>
+                                    <input type="text" id="position" class="form-control mb-2 @error('category') is-invalid @enderror" value="{{old('position')}}" placeholder="Position" name="position" required autocomplete="category">
+                                    @error('category')
+                                    <div class="invalid-feedback">
+                                        <span>{{$message}}</span>
+                                    </div>
+                                    @enderror
                                 </div>
                                 <div>
-                                    <input type="number" class="form-control mb-2 @error('category') is-invalid @enderror" placeholder="Seats Available" name="seat" required autocomplete="category">
+                                    <label for="seat">Available seats</label>
+                                    <input id="seat" type="number" class="form-control mb-2 @error('seat') is-invalid @enderror" value="{{old('seat')}}" placeholder="Seats Available" name="seat" required>
+                                    @error('seat')
+                                    <div class="invalid-feedback">
+                                        <span>{{$message}}</span>
+                                    </div>
+                                    @enderror
                                 </div>
                                 <div class="mb-3">
-                                    <textarea class="textarea" name="requirement"></textarea>
+                                    <label for="requirement">Requirements</label>
+                                    <textarea id="requirement" class="textarea" name="requirement"></textarea>
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <button class="btn btn-info" type="submit">
+                                <a type="button" href="{{route('list.oppurtunities')}}" class="btn btn-outline-danger">
+                                    <i class="fas fa-times mr-2"></i>
+                                    Cancel
+                                </a>
+                                <button class="btn btn-info float-right" type="submit">
                                     <i class="fas fa-upload mr-2"></i>
                                     Upload</button>
                             </div>
@@ -83,6 +101,14 @@
             placeholder: 'Please write requirements for the position messages here.',
             tabSize: 3,
             height: 350,
+            toolbar: [
+                ['style', ['bold', 'italic', 'underline', 'clear']],
+                ['font', ['strikethrough', 'superscript', 'subscript']],
+                ['fontsize', ['fontsize']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['height', ['height']]
+            ]
         })
     })
 </script>

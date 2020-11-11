@@ -27,7 +27,7 @@ class opportunitiesController extends Controller
         $this->validate($request, [
             'opening' => 'required',
             'position' => 'required',
-            'seat' => 'required',
+            'seat' => 'required|numeric',
             'requirement' => 'required',
         ]);
         $input = [

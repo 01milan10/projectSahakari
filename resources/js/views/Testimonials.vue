@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="page">
     <v-parallax src="/img/services-parallax.jpg" height="150">
       <h2 class="display-1 text-center">Testimonials</h2>
     </v-parallax>
@@ -43,21 +43,21 @@ export default {
         {
           text: "Home",
           disabled: false,
-          href: "/"
+          href: "/",
         },
         {
           text: "Testimonials",
           disabled: true,
-          href: "/testimonials"
-        }
-      ]
+          href: "/testimonials",
+        },
+      ],
     };
   },
   created() {
     axios
       .get("http://sahakari-app.com/api/get-comments/0")
-      .then(res => (this.testimonials = res.data.data));
-  }
+      .then((res) => (this.testimonials = res.data.data));
+  },
 };
 </script>
 

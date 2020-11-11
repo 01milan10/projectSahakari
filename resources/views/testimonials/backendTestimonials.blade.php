@@ -38,20 +38,50 @@
                         <form method="Post" action="{{route('add.comment')}}" enctype="multipart/form-data">
                             {{csrf_field()}}
                             <div class="card-body">
-                                <div>
-                                    <input type="text" class="form-control mb-4 " placeholder="Name" name="name" required autofocus>
+                                <div class="mb-4">
+                                    <label for="name">Name</label>
+                                    <input type="text" class="form-control @error('name') is-invalid @enderror" placeholder="Name" name="name" value="{{old('name')}}" required autofocus>
+                                    @error('name')
+                                    <span class="invalid-feedback">
+                                        <strong>{{$message}}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
-                                <div>
-                                    <input type="text" class="form-control mb-4" placeholder="Designation" name="designation" required>
+                                <div class="mb-4">
+                                    <label for="designation">Designation</label>
+                                    <input type="text" class="form-control @error('designation') is-invalid @enderror" placeholder="Designation" name="designation" value="{{old('designation')}}" required autofocus minlength="4">
+                                    @error('designation')
+                                    <span class="invalid-feedback">
+                                        <strong>{{$message}}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
-                                <div>
-                                    <input type="email" class="form-control mb-4" placeholder="Email" name="email" required>
+                                <div class="mb-4">
+                                    <label for="email">Email</label>
+                                    <input type="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email" name="email" value="{{old('email')}}" required autofocus>
+                                    @error('email')
+                                    <span class="invalid-feedback">
+                                        <strong>{{$message}}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
-                                <div>
-                                    <input type="file" name="image" class="form-control mb-4" required>
+                                <div class=" mb-4">
+                                    <label for="image">Profile Picture</label>
+                                    <input type="file" name="image" class="form-control @error('image') is-invalid @enderror" required autofocus>
+                                    @error('image')
+                                    <span class="invalid-feedback">
+                                        <strong>{{$message}}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
-                                <div>
-                                    <textarea class="form-control mb-4 textarea" name="comment" required></textarea>
+                                <div class=" mb-4">
+                                    <label for="comment">Client's Comment</label>
+                                    <textarea class="form-control textarea @error('comment') is-invalid @enderror" name="comment" required minlength="5" autofocus autocomplete="old_comment"></textarea>
+                                    @error('comment')
+                                    <span class="invalid-feedback">
+                                        <strong>{{$message}}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
 
                             </div>
@@ -139,7 +169,15 @@
         $('.textarea').summernote({
             placeholder: 'Please write comments here.',
             tabSize: 3,
-            height: 340,
+            height: 180,
+            toolbar: [
+                ['style', ['bold', 'italic', 'underline', 'clear']],
+                ['font', ['strikethrough', 'superscript', 'subscript']],
+                ['fontsize', ['fontsize']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['height', ['height']]
+            ]
         })
     })
 </script>

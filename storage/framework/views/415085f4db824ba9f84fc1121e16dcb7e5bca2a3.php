@@ -38,16 +38,30 @@
 
                             <div class="card-body">
                                 <div>
-                                    <label for="title"></label><input type="text" id="title" class="form-control mb-4 <?php $__errorArgs = ['title'];
+                                    <label for="title">Title</label>
+                                    <input type="text" id="title" class="form-control mb-4 <?php $__errorArgs = ['title'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" placeholder="Title" name="title" required autocomplete="title" autofocus>
+unset($__errorArgs, $__bag); ?>" placeholder="Title" name="title" value="<?php echo e(old('title')); ?>" required autocomplete="title" autofocus>
+                                    <?php $__errorArgs = ['title'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                    <div class="invalid-feedback">
+                                        <span><?php echo e($message); ?></span>
+                                    </div>
+                                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                                 </div>
                                 <div>
+                                    <label for="file">Select File</label>
                                     <input type="file" id="file" name="file" class="form-control mb-4 <?php $__errorArgs = ['file'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -56,6 +70,18 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" placeholder="Select a file to upload." required autocomplete="file">
+                                    <?php $__errorArgs = ['file'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                    <div class="invalid-feedback">
+                                        <span><?php echo e($message); ?></span>
+                                    </div>
+                                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                                 </div>
                             </div>
                             <div class="card-footer">

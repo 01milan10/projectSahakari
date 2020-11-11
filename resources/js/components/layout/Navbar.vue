@@ -28,7 +28,7 @@
             text
             :color="`${hover?'blue':'grey'}`"
             router
-            to="/features"
+            to="/our-features"
             :elevation="hover?1:0"
           >Features</v-btn>
         </v-hover>

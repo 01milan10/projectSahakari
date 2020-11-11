@@ -23,6 +23,8 @@
     <script src="js/app.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+    <script src="{{asset('js/gsap-public/minified/gsap.min.js')}}"></script>
+    <script src="{{asset('js/animation/animation.js')}}"></script>
 </body>
 
 </html>

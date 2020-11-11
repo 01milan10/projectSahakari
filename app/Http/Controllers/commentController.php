@@ -19,11 +19,11 @@ class commentController extends Controller
     public function addComment(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required',
-            'designation' => 'required',
-            'email' => 'required',
-            'comment' => 'required',
-            'image' => 'required',
+            'name' => 'required|min:3',
+            'designation' => 'required|min:4',
+            'email' => 'required:email:rfc',
+            'comment' => 'required|min:5',
+            'image' => 'required|image',
         ]);
 
         $input['name'] = $request['name'];

@@ -45,30 +45,39 @@
                 </tr>
               </thead>
               <tbody>
-                @foreach($data as $user)
+                @foreach($users as $user)
                 <tr>
                   <td>{{$user->name}}</td>
                   <td>{{$user->email}}</td>
                   <td>
                     {{$user->password}}
-                    <a class="float-right" href="{{route('show.resetForm',['id'=>$user->id])}}">
+                    @can('resetPassword',$user)
+                    <a class="float-right" href="{{route('show.resetForm',['user'=>$user->id])}}">
                       <i class="fas fa-pen-alt mr-4" data-toggle="tooltip" data-placement="top" title="Change Password">
                       </i>
                     </a>
+                    @endcan
                   </td>
                   <td>
                     <div>
-                      <a href="{{route('show.updateForm',['id'=>$user->id])}}">
+                      @can('update',$user)
+                      <a href="{{route('show.userUpdateForm',['id'=>$user->id])}}">
                         <i class="fas fa-user-edit mr-3" data-toggle="tooltip" data-placement="top" title="Edit user info">
                         </i>
                       </a>
-                      <a href="{{route('delete.user',['id'=>$user->id])}}">
+                      <a href="{{route('delete.user',['user'=>$user->id])}}">
                         <i class="fas fa-user-times ml-3" data-toggle="tooltip" data-placement="top" title="Delete user info" style="color:#dc3545">
                         </i>
                       </a>
+                      @endcan
+                      @cannot('update',$user)
+                      <p class='text-center'>not allowed</p>
+                      @endcannot
                     </div>
                   </td>
-                  <td>---</td>
+                  <td>
+                    <p class="text-center">---</p>
+                  </td>
                 </tr>
                 @endforeach
               </tbody>

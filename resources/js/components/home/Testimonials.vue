@@ -36,14 +36,19 @@ import axios from "axios";
 export default {
   data() {
     return {
-      carousel_items: []
+      carousel_items: [],
     };
   },
-  created() {
-    axios
-      .get("http://sahakari-app.com/api/get-comments/4")
-      .then(res => (this.carousel_items = res.data.data));
-  }
+  methods: {
+    async getData() {
+      await axios
+        .get("http://sahakari-app.com/api/get-comments/4")
+        .then((res) => (this.carousel_items = res.data.data));
+    },
+  },
+  async created() {
+    await this.getData();
+  },
 };
 </script>
 

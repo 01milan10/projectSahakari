@@ -188,9 +188,10 @@
             $('.mailbox-messages input[type=\'checkbox\']:checked').each(function() {
                 $.ajax({
                     type: "get",
-                    url: `/inbox/${this.value}`,
-                    success: $(`#inboxRow${this.value}`).remove()
+                    url: `/inbox/${this.value}/delete`,
+                    success: $(`#inboxRow${this.value}`).remove(),
                 });
+                location.reload(true);
 
             })
 

@@ -43,31 +43,40 @@
                 </tr>
               </thead>
               <tbody>
-                <?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <?php $__currentLoopData = $users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <tr>
                   <td><?php echo e($user->name); ?></td>
                   <td><?php echo e($user->email); ?></td>
                   <td>
                     <?php echo e($user->password); ?>
 
-                    <a class="float-right" href="<?php echo e(route('show.resetForm',['id'=>$user->id])); ?>">
+                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('resetPassword',$user)): ?>
+                    <a class="float-right" href="<?php echo e(route('show.resetForm',['user'=>$user->id])); ?>">
                       <i class="fas fa-pen-alt mr-4" data-toggle="tooltip" data-placement="top" title="Change Password">
                       </i>
                     </a>
+                    <?php endif; ?>
                   </td>
                   <td>
                     <div>
-                      <a href="<?php echo e(route('show.updateForm',['id'=>$user->id])); ?>">
+                      <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('update',$user)): ?>
+                      <a href="<?php echo e(route('show.userUpdateForm',['id'=>$user->id])); ?>">
                         <i class="fas fa-user-edit mr-3" data-toggle="tooltip" data-placement="top" title="Edit user info">
                         </i>
                       </a>
-                      <a href="<?php echo e(route('delete.user',['id'=>$user->id])); ?>">
+                      <a href="<?php echo e(route('delete.user',['user'=>$user->id])); ?>">
                         <i class="fas fa-user-times ml-3" data-toggle="tooltip" data-placement="top" title="Delete user info" style="color:#dc3545">
                         </i>
                       </a>
+                      <?php endif; ?>
+                      <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->denies('update',$user)): ?>
+                      <p class='text-center'>not allowed</p>
+                      <?php endif; ?>
                     </div>
                   </td>
-                  <td>---</td>
+                  <td>
+                    <p class="text-center">---</p>
+                  </td>
                 </tr>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
               </tbody>

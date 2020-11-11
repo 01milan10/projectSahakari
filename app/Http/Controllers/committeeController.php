@@ -7,6 +7,7 @@ use Intervention\Image\ImageManagerStatic as Image;
 use App\Http\Resources\Committee as committeeResource;
 use App\Committee;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Str;
 
 
 class committeeController extends Controller
@@ -30,12 +31,12 @@ class committeeController extends Controller
     public function addTeam(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required',
-            'designation' => 'required',
-            'phone' => 'required',
-            'email' => 'required',
-            'representation' => 'required',
-            'image' => 'required',
+            'name' => 'required|min:3',
+            'designation' => 'required|min:3',
+            'phone' => 'required|numeric|max:10|min:7',
+            'email' => 'required|email:rfc',
+            'representation' => 'required|min:3',
+            'image' => 'required|image',
 
         ]);
         $input['name'] = $request->name;
@@ -43,8 +44,8 @@ class committeeController extends Controller
         $input['phone'] = $request->phone;
         $input['email'] = $request->email;
         $input['representation'] = $request->representation;
-        $input['facebook'] = $request->facebook ? $request->facebook : '';
-        $input['gmail'] = $request->gmail  ? $request->gmail : '';
+        $input['facebook'] = $request->facebook ? $this->makeLink($request->facebook) : '';
+        $input['gmail'] = $request->gmail  ? $this->makeLink($request->gmail) : '';
 
         $image_name = $request->name . '.' . $request->file('image')->getClientOriginalExtension();
         $input['image'] = $image_name;
@@ -97,7 +98,9 @@ class committeeController extends Controller
             'phone' => $request['phone'],
             'email' => $request['email'],
             'representation' => $request['representation'],
-            'image' => $image_name
+            'image' => $image_name,
+            'facebook' => $this->makeLink(request('facebook')),
+            'gmail' => $this->makeLink(request('gmail')),
         ];
         if ($currentUser->update($update)) {
             if ($request->hasFile('image')) {
@@ -108,5 +111,13 @@ class committeeController extends Controller
             Alert::error('Error', 'Updating Unsuccessful');
         }
         return redirect('/team');
+    }
+    private function makeLink($data)
+    {
+        if (!Str::contains($data, 'https://')) {
+            return 'https://' . $data;
+        } else {
+            return $data;
+        }
     }
 }

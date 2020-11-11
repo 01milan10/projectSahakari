@@ -36,39 +36,91 @@
                         <form method="post" action="">
                             <?php echo e(csrf_field()); ?>
 
-                            <div class="card-body pad">
-                                <div>
-                                    <input type="text" class="form-control mb-4 <?php $__errorArgs = ['title'];
+                            <div class="card-body">
+                                <div class="mb-2">
+                                    <label for="title">Title</label>
+                                    <input type="text" class="form-control <?php $__errorArgs = ['title'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" placeholder="Title" name="title" required autocomplete="title" autofocus>
+unset($__errorArgs, $__bag); ?>" placeholder="Title" name="title" value="<?php echo e(old('title')); ?>" required autocomplete="title" autofocus>
+                                    <?php $__errorArgs = ['title'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                    <div class="invalid-feedback">
+                                        <span><?php echo e($message); ?></span>
+                                    </div>
+                                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                                 </div>
-                                <div>
-                                    <input type="text" class="form-control mb-4 <?php $__errorArgs = ['category'];
+                                <div class="mb-2">
+                                    <label for="author">Author</label>
+                                    <input type="text" class="form-control <?php $__errorArgs = ['category'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" placeholder="Author Name" name="author" required autocomplete="category">
+unset($__errorArgs, $__bag); ?>" placeholder="Author Name" name="author" value="<?php echo e(old('author')); ?>" required autocomplete="category">
+                                    <?php $__errorArgs = ['author'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                    <div class="invalid-feedback">
+                                        <span><?php echo e($message); ?></span>
+                                    </div>
+                                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                                 </div>
-                                <div>
-                                    <input type="text" class="form-control mb-4 <?php $__errorArgs = ['category'];
+                                <div class="mb-2">
+                                    <label for="position">Position</label>
+                                    <input type="text" class="form-control <?php $__errorArgs = ['category'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" placeholder="Author Position" name="position" required autocomplete="category">
+unset($__errorArgs, $__bag); ?>" placeholder="Author Position" name="position" value="<?php echo e(old('position')); ?>" required autocomplete="category">
+                                    <?php $__errorArgs = ['position'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                    <div class="invalid-feedback">
+                                        <span><?php echo e($message); ?></span>
+                                    </div>
+                                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                                 </div>
-                                <div class="mb-3">
+                                <div class="mb-2">
+                                    <label for="message">Message</label>
                                     <textarea class="textarea" name="message"></textarea>
+                                    <?php $__errorArgs = ['message'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                    <div class="invalid-feedback">
+                                        <span><?php echo e($message); ?></span>
+                                    </div>
+                                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                                 </div>
                             </div>
                             <div class="card-footer">
@@ -92,13 +144,21 @@ unset($__errorArgs, $__bag); ?>" placeholder="Author Position" name="position" r
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('script'); ?>
-<script src="<?php echo e(asset('js/summernote/summernote-bs4.min.js')); ?>"></script>
+<script src="<?php echo e(asset('js/summernote/summernote-bs4.js')); ?>"></script>
 <script type="text/javascript">
     $(function() {
         $('.textarea').summernote({
             placeholder: 'Please write your messages here.',
             tabSize: 3,
             height: 350,
+            toolbar: [
+                ['style', ['bold', 'italic', 'underline', 'clear']],
+                ['font', ['strikethrough', 'superscript', 'subscript']],
+                ['fontsize', ['fontsize']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['height', ['height']]
+            ]
         })
     })
 </script>

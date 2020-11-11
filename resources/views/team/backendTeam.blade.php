@@ -41,30 +41,77 @@
                         <form action="{{ route('add.team') }}" class="form-image-upload" method="POST" enctype="multipart/form-data">
                             {{csrf_field()}}
                             <div class="card-body">
-                                <div>
-                                    <input type="text" class="form-control mb-4 " placeholder="Name" name="name" required autofocus>
+                                <div class="mb-2">
+                                    <label for="name">Name</label>
+                                    <input type="text" class="form-control @error('name') is-invalid @enderror" placeholder="Name" name="name" value="{{old('name')}}" required autofocus>
+                                    @error('name')
+                                    <div class="invalid-feedback">
+                                        <span>{{$message}}</span>
+                                    </div>
+                                    @enderror
                                 </div>
-                                <div>
-                                    <input type="text" class="form-control mb-4" placeholder="Designation" name="designation" required>
+                                <div class="mb-2">
+                                    <label for="name">Designation</label>
+                                    <input type="text" class="form-control @error('designation') is-invalid @enderror" placeholder="Designation" name="designation" value="{{old('designation')}}" required>
+                                    @error('designation')
+                                    <div class="invalid-feedback">
+                                        <span>{{$message}}</span>
+                                    </div>
+                                    @enderror
                                 </div>
-                                <div>
-                                    <input type="number" class="form-control mb-4" placeholder="Phone Number" name="phone" required>
+                                <div class="mb-2">
+                                    <label for="name">Phone</label>
+                                    <input type="number" class="form-control @error('phone') is-invalid @enderror" placeholder="Phone Number" name="phone" value="{{old('phone')}}" required>
+                                    @error('phone')
+                                    <div class="invalid-feedback">
+                                        <span>{{$message}}</span>
+                                    </div>
+                                    @enderror
                                 </div>
-                                <div>
-                                    <input type="email" class="form-control mb-4" placeholder="Email" name="email" required>
+                                <div class="mb-2">
+                                    <label for="name">Email</label>
+                                    <input type="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email" name="email" value="{{old('email')}}" required>
+                                    @error('email')
+                                    <div class="invalid-feedback">
+                                        <span>{{$message}}</span>
+                                    </div>
+                                    @enderror
                                 </div>
-                                <div>
-                                    <input type="text" class="form-control mb-4" placeholder="Representation" name="representation" required>
+                                <div class="mb-2">
+                                    <label for="name">Representation</label>
+                                    <input type="text" class="form-control @error('representation') is-invalid @enderror" placeholder="Representation" name="representation" value="{{old('representation')}}" required>
+                                    @error('representation')
+                                    <div class="invalid-feedback">
+                                        <span>{{$message}}</span>
+                                    </div>
+                                    @enderror
                                 </div>
-                                <div>
-                                    <input type="text" class="form-control mb-4" placeholder="Facebook Link" name="facebook">
+                                <div class="mb-2">
+                                    <label for="name">Facebook Link</label>
+                                    <input type="text" class="form-control @error('facebook') is-invalid @enderror" placeholder="Facebook Link" name="facebook" value="{{old('facebook')}}">
+                                    @error('facebook')
+                                    <div class="invalid-feedback">
+                                        <span>{{$message}}</span>
+                                    </div>
+                                    @enderror
                                 </div>
-                                <div>
-                                    <input type="text" class="form-control mb-4" placeholder="Gmail Link" name="gmail">
+                                <div class="mb-2">
+                                    <label for="name">Gmail Link</label>
+                                    <input type="text" class="form-control @error('gmail') is-invalid @enderror" placeholder="Gmail Link" name="gmail" value="{{old('gmail')}}">
+                                    @error('gmail')
+                                    <div class="invalid-feedback">
+                                        <span>{{$message}}</span>
+                                    </div>
+                                    @enderror
                                 </div>
-
-                                <div>
-                                    <input type="file" name="image" class="form-control mb-4" required>
+                                <div class="mb-2">
+                                    <label for="name">Profile Picture</label>
+                                    <input type="file" name="image" class="form-control @error('iamge') is-invalid @enderror" required>
+                                    @error('image')
+                                    <div class="invalid-feedback">
+                                        <span>{{$message}}</span>
+                                    </div>
+                                    @enderror
                                 </div>
 
                             </div>
@@ -84,7 +131,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">DataTable with default features</h3>
+                        <h3 class="card-title">Our team members</h3>
                     </div>
                     <div class="card-body">
                         <table id="imageTable" class="table table-bordered table-striped">

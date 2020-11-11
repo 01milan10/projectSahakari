@@ -31,8 +31,8 @@ class galleryController extends Controller
     public function upload(Request $request)
     {
         $this->validate($request, [
-            'title' => 'required',
-            'category' => 'required',
+            'title' => 'required|min:4',
+            'category' => 'required|unique:image_gallery',
             'image' => 'required',
         ]);
         if (count($request->file('image')) > 20) {

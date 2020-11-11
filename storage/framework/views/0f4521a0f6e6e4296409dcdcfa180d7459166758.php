@@ -38,6 +38,7 @@
 
                             <div class="card-body pad">
                                 <div>
+                                    <label for="title">Job type</label>
                                     <select id="title" name="opening" class="form-control mb-2">
                                         <option value="Job Vacancy">Job Vacancy</option>
                                         <option value="Internship">Internship</option>
@@ -45,31 +46,62 @@
 
                                 </div>
                                 <div>
-                                    <input type="text" class="form-control mb-2 <?php $__errorArgs = ['category'];
+                                    <label for="position">Position</label>
+                                    <input type="text" id="position" class="form-control mb-2 <?php $__errorArgs = ['category'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" placeholder="Position" name="position" required autocomplete="category">
+unset($__errorArgs, $__bag); ?>" value="<?php echo e(old('position')); ?>" placeholder="Position" name="position" required autocomplete="category">
+                                    <?php $__errorArgs = ['category'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                    <div class="invalid-feedback">
+                                        <span><?php echo e($message); ?></span>
+                                    </div>
+                                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                                 </div>
                                 <div>
-                                    <input type="number" class="form-control mb-2 <?php $__errorArgs = ['category'];
+                                    <label for="seat">Available seats</label>
+                                    <input id="seat" type="number" class="form-control mb-2 <?php $__errorArgs = ['seat'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" placeholder="Seats Available" name="seat" required autocomplete="category">
+unset($__errorArgs, $__bag); ?>" value="<?php echo e(old('seat')); ?>" placeholder="Seats Available" name="seat" required>
+                                    <?php $__errorArgs = ['seat'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                    <div class="invalid-feedback">
+                                        <span><?php echo e($message); ?></span>
+                                    </div>
+                                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                                 </div>
                                 <div class="mb-3">
-                                    <textarea class="textarea" name="requirement"></textarea>
+                                    <label for="requirement">Requirements</label>
+                                    <textarea id="requirement" class="textarea" name="requirement"></textarea>
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <button class="btn btn-info" type="submit">
+                                <a type="button" href="<?php echo e(route('list.oppurtunities')); ?>" class="btn btn-outline-danger">
+                                    <i class="fas fa-times mr-2"></i>
+                                    Cancel
+                                </a>
+                                <button class="btn btn-info float-right" type="submit">
                                     <i class="fas fa-upload mr-2"></i>
                                     Upload</button>
                             </div>
@@ -96,6 +128,14 @@ unset($__errorArgs, $__bag); ?>" placeholder="Seats Available" name="seat" requi
             placeholder: 'Please write requirements for the position messages here.',
             tabSize: 3,
             height: 350,
+            toolbar: [
+                ['style', ['bold', 'italic', 'underline', 'clear']],
+                ['font', ['strikethrough', 'superscript', 'subscript']],
+                ['fontsize', ['fontsize']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['height', ['height']]
+            ]
         })
     })
 </script>

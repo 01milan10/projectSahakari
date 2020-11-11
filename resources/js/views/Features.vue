@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="page">
     <v-parallax src="/img/services-parallax.jpg" height="150">
       <h2 class="text-center display-1">Our Services</h2>
     </v-parallax>
@@ -16,16 +16,15 @@
           <v-row>
             <v-col cols="12" sm="4" v-for="(service,i) in services" :key="i">
               <v-card flat>
-                <v-img :src="service.img"></v-img>
+                <v-img :src="`/uploaded_images/services_images/${service.image}`"></v-img>
                 <v-card-title class="pl-0">{{service.title}}</v-card-title>
                 <v-card-text
                   class="pl-0 pb-0 font-weight-light"
-                >Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse sint totam, quia odit a quas aliquam neque! Fugiat, distinctio rem!</v-card-text>
+                >{{service.description.substring(0,100)+'...'}}</v-card-text>
                 <v-card-actions>
-                  <v-btn x-small text rounded color="primary" class="px-0">
-                    see more
-                    <v-icon x-small>mdi-chevron-right</v-icon>
-                  </v-btn>
+                  <ShowFeature
+                    :feature="{title:service.title,description:service.description,image:service.image}"
+                  />
                 </v-card-actions>
               </v-card>
             </v-col>
@@ -40,14 +39,14 @@
                   <p
                     class="caption text-left"
                   >Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi facere est distinctio veniam hic dolor?</p>
-                  <v-btn small outlined color="white">Contact Us</v-btn>
+                  <ContactUs />
                 </v-card-text>
               </v-card>
             </v-col>
             <v-col cols="12" sm="6" md="12">
               <v-card flat outlined>
                 <v-carousel
-                  height="370"
+                  height="450"
                   :show-arrows="false"
                   hide-delimiter-background
                   light
@@ -93,53 +92,45 @@
 
 <script>
 import axios from "axios";
+import ShowFeature from "../components/features/ShowFeature";
+import ContactUs from "../components/contact-us/ContactUs";
 export default {
   data: () => ({
     items: [
       {
         text: "Home",
         disabled: false,
-        href: "/"
+        href: "/",
       },
       {
         text: "Services",
         disabled: true,
-        href: "/services"
-      }
+        href: "/services",
+      },
     ],
-    services: [
-      {
-        title: "Financial Planning",
-        img: "/img/service-1.jpg"
-      },
-      {
-        title: "Investment Advising",
-        img: "/img/service-2.jpg"
-      },
-      {
-        title: "Taxation",
-        img: "/img/service-3.jpg"
-      },
-      {
-        title: "Retirement Planning",
-        img: "/img/service-4.jpg"
-      },
-      {
-        title: "Business Planning",
-        img: "/img/service-5.jpg"
-      },
-      {
-        title: "Risk Management",
-        img: "/img/service-6.jpg"
-      }
-    ],
-    testimonials: []
+    services: [],
+    testimonials: [],
   }),
+  components: {
+    ShowFeature,
+    ContactUs,
+  },
+  methods: {
+    async getData() {
+      await axios
+        .get("http://sahakari-app.com/api/get-comments/3")
+        .then((res) => (this.testimonials = res.data.data));
+
+      await axios
+        .get("http://sahakari-app.com/api/get-features")
+        .then((res) => {
+          this.services = res.data;
+        });
+    },
+  },
   created() {
-    axios
-      .get("http://sahakari-app.com/api/get-comments/3")
-      .then(res => (this.testimonials = res.data.data));
-  }
+    this.getData();
+  },
 };
 </script>
 

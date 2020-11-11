@@ -1,0 +1,1 @@
+<?php /**PATH C:\xampp\htdocs\projectSahakari\resources\views/features/index.blade.php ENDPATH**/ ?>

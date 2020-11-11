@@ -18,7 +18,7 @@
             <div class="col-12 col-sm-12 col-md-8">
                 <form action="{{ route('register') }}" method="POST" class="needs-validation" novalidate>
                     @csrf
-                    <div class="card border-info shadow">
+                    <div class="card border-success shadow">
                         <div class="card-title display-4 text-center">Register</div>
                         <div class="card-body">
                             @error('email')

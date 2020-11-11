@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="page">
     <v-parallax src="/img/services-parallax.jpg" height="150">
       <h2 class="text-center display-1">Downloads</h2>
     </v-parallax>
@@ -66,35 +66,35 @@ export default {
         {
           text: "Home",
           disabled: false,
-          href: "/"
+          href: "/",
         },
         {
           text: "Downloads",
           disabled: true,
-          href: "/downloads"
-        }
+          href: "/downloads",
+        },
       ],
       headers: [
         {
           text: "Downloadable Name",
           align: "start",
           sortable: true,
-          value: "title"
+          value: "title",
         },
         {
           text: "",
           value: "color",
-          sortable: false
-        }
+          sortable: false,
+        },
       ],
-      download_items: []
+      download_items: [],
     };
   },
   created() {
     Axios.get("http://sahakari-app.com/api/get-downloads").then(
-      res => (this.download_items = res.data.data)
+      (res) => (this.download_items = res.data.data)
     );
-  }
+  },
 };
 </script>
 

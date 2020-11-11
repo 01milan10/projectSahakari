@@ -14,7 +14,8 @@ export default new Vuetify({
                 email: "#4b5d78",
                 primary: "#24a3d8",
                 grey_divider: "#e8e8e8",
-                banner_blue: "#229dd1"
+                banner_blue: "#229dd1",
+                danger: "#CA0B00"
             }
         }
     }

@@ -37,44 +37,110 @@
                             <?php echo e(csrf_field()); ?>
 
                             <div class="card-body">
-                                <div>
-                                    <label for="location"></label><input type="text" id="location" class="form-control mb-4 <?php $__errorArgs = ['title'];
+                                <div class="mb-2">
+                                    <label for="location">District</label>
+                                    <input type="text" id="location" class="form-control <?php $__errorArgs = ['title'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" placeholder="District" name="location" required autocomplete="location" autofocus>
-                                </div>
+unset($__errorArgs, $__bag); ?>" placeholder="District" name="location" minlength="4" required autofocus>
+                                    <?php $__errorArgs = ['location'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                    <div class="invalid-feedback">
+                                        <span><?php echo e($message); ?></span>
+                                    </div>
+                                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                                </div class="mb-2">
                                 <div>
-                                    <label for="address"></label><input type="text" id="address" class="form-control mb-4 <?php $__errorArgs = ['title'];
+                                    <label for="address">Address</label>
+                                    <input type="text" id="address" class="form-control <?php $__errorArgs = ['title'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" placeholder="Address" name="address" required autocomplete="address" autofocus>
+unset($__errorArgs, $__bag); ?>" placeholder="Address" name="address" minlength="4" required autofocus>
+                                    <?php $__errorArgs = ['address'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                    <div class="invalid-feedback">
+                                        <span><?php echo e($message); ?></span>
+                                    </div>
+                                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                                 </div>
-                                <div>
-                                    <label for="phone"></label><input type="number" id="phone" class="form-control mb-4 <?php $__errorArgs = ['title'];
+                                <div class="mb-2">
+                                    <label for="phone">Phone</label>
+                                    <input type="number" id="phone" class="form-control <?php $__errorArgs = ['title'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" placeholder="Telephone Number" name="phone" required autocomplete="phone" autofocus>
+unset($__errorArgs, $__bag); ?>" placeholder="Telephone Number" name="phone" required autofocus>
+                                    <?php $__errorArgs = ['phone'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                    <div class="invalid-feedback">
+                                        <span><?php echo e($message); ?></span>
+                                    </div>
+                                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                                 </div>
-                                <div>
-                                    <label for="alt_phone"></label><input type="number" id="alt_phone" class="form-control mb-4" placeholder="Alternative Telephone" name="alt_phone">
+                                <div class="mb-2">
+                                    <label for="alt_phone">Alternate Phone</label>
+                                    <input type="number" id="alt_phone" class="form-control" placeholder="Alternative Telephone" name="alt_phone">
+                                    <?php $__errorArgs = ['alt_phone'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                    <div class="invalid-feedback">
+                                        <span><?php echo e($message); ?></span>
+                                    </div>
+                                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                                 </div>
-                                <div>
-                                    <label for="fax"></label><input type="number" id="fax" class="form-control mb-4" placeholder="Fax Number" name="fax">
+                                <div class="mb-2">
+                                    <label for="fax">Fax</label>
+                                    <input type="number" id="fax" class="form-control" placeholder="Fax Number" name="fax">
+                                    <?php $__errorArgs = ['fax'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                    <div class="invalid-feedback">
+                                        <span><?php echo e($message); ?></span>
+                                    </div>
+                                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                                 </div>
-                                <div>
-                                    <label for="email"></label><input type="email" id="email" class="form-control mb-4 <?php $__errorArgs = ['title'];
+                                <div class="mb-2">
+                                    <label for="email">Email</label>
+                                    <input type="email" id="email" class="form-control <?php $__errorArgs = ['title'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -82,6 +148,18 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" placeholder="Email" name="email" required autocomplete="email" autofocus>
+                                    <?php $__errorArgs = ['email'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                    <div class="invalid-feedback">
+                                        <span><?php echo e($message); ?></span>
+                                    </div>
+                                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                                 </div>
                             </div>
                             <div class="card-footer">

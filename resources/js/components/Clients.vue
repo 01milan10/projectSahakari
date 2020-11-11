@@ -1,62 +1,57 @@
 <template>
   <v-layout class="grey lighten-4">
     <v-container>
-      <carousel
-        :items="carousel_items"
-        :autoplay="true"
-        :loop="true"
-        :nav="false"
-        :dots="false"
-        :responsive="responsive"
-        :autoplayTimeout="timeOut"
-      >
-        <div v-for="(client,i) in clients" :key="i">
-          <a href="#">
-            <img :src="client.logo" alt="client" />
-          </a>
-        </div>
-      </carousel>
+      <div v-if="clients.length">
+        <carousel
+          :items="carousel_items"
+          :autoplay="true"
+          :loop="true"
+          :nav="false"
+          :dots="false"
+          :responsive="responsive"
+          :autoplayTimeout="timeOut"
+        >
+          <div v-for="(client,i) in clients" :key="i">
+            <a :href="client.link">
+              <img :src="`/uploaded_images/clients_logo/${client.logo}`" alt="client" />
+            </a>
+          </div>
+        </carousel>
+      </div>
     </v-container>
   </v-layout>
 </template>
 
 <script>
 import carousel from "vue-owl-carousel";
+import axios from "axios";
 export default {
   components: {
-    carousel
+    carousel,
   },
   data() {
     return {
       responsive: {
         0: { items: 2 },
         600: { items: 4 },
-        960: { items: 6 }
+        960: { items: 6 },
       },
       carousel_items: 6,
       timeOut: 10000,
-      clients: [
-        {
-          logo: "/img/home-7.png"
-        },
-        {
-          logo: "/img/home-8.png"
-        },
-        {
-          logo: "/img/home-9.png"
-        },
-        {
-          logo: "/img/home-10.png"
-        },
-        {
-          logo: "/img/home-11.png"
-        },
-        {
-          logo: "/img/home-12.png"
-        }
-      ]
+      clients: [],
+      nextTick: "1",
     };
-  }
+  },
+  methods: {
+    async getData() {
+      await axios
+        .get("http://sahakari-app.com/api/get-clients")
+        .then((res) => (this.clients = res.data.data));
+    },
+  },
+  created() {
+    this.getData();
+  },
 };
 </script>
 

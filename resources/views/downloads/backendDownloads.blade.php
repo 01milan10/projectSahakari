@@ -39,10 +39,22 @@
                             {{csrf_field()}}
                             <div class="card-body">
                                 <div>
-                                    <label for="title"></label><input type="text" id="title" class="form-control mb-4 @error('title') is-invalid @enderror" placeholder="Title" name="title" required autocomplete="title" autofocus>
+                                    <label for="title">Title</label>
+                                    <input type="text" id="title" class="form-control mb-4 @error('title') is-invalid @enderror" placeholder="Title" name="title" value="{{old('title')}}" required autocomplete="title" autofocus>
+                                    @error('title')
+                                    <div class="invalid-feedback">
+                                        <span>{{$message}}</span>
+                                    </div>
+                                    @enderror
                                 </div>
                                 <div>
+                                    <label for="file">Select File</label>
                                     <input type="file" id="file" name="file" class="form-control mb-4 @error('file') is-invalid @enderror" placeholder="Select a file to upload." required autocomplete="file">
+                                    @error('file')
+                                    <div class="invalid-feedback">
+                                        <span>{{$message}}</span>
+                                    </div>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="card-footer">

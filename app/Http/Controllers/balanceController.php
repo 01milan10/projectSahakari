@@ -15,7 +15,6 @@ class balanceController extends Controller
 {
     public function getDeposits()
     {
-        // $deposits = Balance::all();
         $deposits = Balance::whereYear('collected_date', date('Y'))->whereMonth('collected_date', date('m'))->orderBy('collected_date', 'ASC')->get();
         return balanceResource::collection($deposits);
     }
@@ -30,12 +29,18 @@ class balanceController extends Controller
     public function addReport(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required',
-            'email' => 'required',
-            'deposit' => 'required',
-            'withdraw' => 'required',
-            'cName' => 'required',
-            'collected_date' => 'required',
+            'name.*' => 'required|string|min:3',
+            'email.*' => 'required|email:rfc',
+            'deposit.*' => 'required|numeric',
+            'withdraw.*' => 'required|numeric',
+            'cName.*' => 'required|min:3',
+            'collected_date.*' => 'required|date',
+        ], [
+            'required' => '*:attribute required',
+            'email' => '*invalid email',
+            'numeric' => '*numbers only',
+            'min' => '*min 3 characters'
+
         ]);
         if (count($request["name"])) {
             for ($i = 0; $i < count($request["name"]); $i++) {
@@ -62,24 +67,33 @@ class balanceController extends Controller
         }
     }
 
+
     public function downloadCollectorReport(Request $request)
     {
         $name = $request['data'];
         $format = $request['format'];
-        $data = Balance::where([
-            ['collected_by', 'like', "%" . $name . "%"],
-            ['collected_date', '=', today()],
-        ])->get(['collected_by', 'deposited_amount', 'collected_date', 'client_name']);
+        $fileName = date('Y') . '-' . date('m') . '-' . date('d');
+        if ($name != null) {
+            $fileName = date('Y') . '-' . date('m') . '-' . date('d') . '(' . $request['data'] . ')';
+            $data = Balance::where([
+                ['collected_by', 'like', "%" . $name . "%"],
+                ['collected_date', '=', today()],
+            ])->get(['collected_by', 'deposited_amount', 'withdrawn_amount', 'collected_date', 'client_name']);
+        } else {
+            $data = Balance::where([
+                ['collected_date', '=', today()],
+            ])->get(['collected_by', 'deposited_amount', 'withdrawn_amount', 'collected_date', 'client_name']);
+        }
 
-        if ($name != null && count($data) > 0) {
+        if (count($data) > 0) {
             if ($format == '.pdf') {
                 $pdf = PDF::loadView('report.downloadReport', ['data' => $data]);
-                return $pdf->download($name . $format);
+                return $pdf->download($fileName . $format);
             } else {
-                return Excel::download(new BalanceExport($name), $name . $format);
+                return Excel::download(new BalanceExport($name), $fileName . $format);
             }
         } else {
-            Alert::error("Error", "Unavailable");
+            Alert::error("Error", "Report is empty");
             return back();
         }
     }

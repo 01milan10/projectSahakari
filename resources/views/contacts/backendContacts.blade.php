@@ -38,23 +38,59 @@
                         <form action="{{route('add.contacts')}}" class="form-image-upload" method="POST" enctype="multipart/form-data">
                             {{csrf_field()}}
                             <div class="card-body">
+                                <div class="mb-2">
+                                    <label for="location">District</label>
+                                    <input type="text" id="location" class="form-control @error('title') is-invalid @enderror" placeholder="District" name="location" value="{{old('location')}}" minlength="4" required autofocus>
+                                    @error('location')
+                                    <div class="invalid-feedback">
+                                        <span>{{$message}}</span>
+                                    </div>
+                                    @enderror
+                                </div class="mb-2">
                                 <div>
-                                    <label for="location"></label><input type="text" id="location" class="form-control mb-4 @error('title') is-invalid @enderror" placeholder="District" name="location" required autocomplete="location" autofocus>
+                                    <label for="address">Address</label>
+                                    <input type="text" id="address" class="form-control @error('title') is-invalid @enderror" placeholder="Address" name="address" value="{{old('address')}}" minlength="4" required autofocus>
+                                    @error('address')
+                                    <div class="invalid-feedback">
+                                        <span>{{$message}}</span>
+                                    </div>
+                                    @enderror
                                 </div>
-                                <div>
-                                    <label for="address"></label><input type="text" id="address" class="form-control mb-4 @error('title') is-invalid @enderror" placeholder="Address" name="address" required autocomplete="address" autofocus>
+                                <div class="mb-2">
+                                    <label for="phone">Phone</label>
+                                    <input type="number" id="phone" class="form-control @error('title') is-invalid @enderror" placeholder="Telephone Number" name="phone" value="{{old('phone')}}" required autofocus>
+                                    @error('phone')
+                                    <div class="invalid-feedback">
+                                        <span>{{$message}}</span>
+                                    </div>
+                                    @enderror
                                 </div>
-                                <div>
-                                    <label for="phone"></label><input type="number" id="phone" class="form-control mb-4 @error('title') is-invalid @enderror" placeholder="Telephone Number" name="phone" required autocomplete="phone" autofocus>
+                                <div class="mb-2">
+                                    <label for="alt_phone">Alternate Phone</label>
+                                    <input type="number" id="alt_phone" class="form-control" placeholder="Alternative Telephone" name="alt_phone" value="{{old('alt_phone')}}">
+                                    @error('alt_phone')
+                                    <div class="invalid-feedback">
+                                        <span>{{$message}}</span>
+                                    </div>
+                                    @enderror
                                 </div>
-                                <div>
-                                    <label for="alt_phone"></label><input type="number" id="alt_phone" class="form-control mb-4" placeholder="Alternative Telephone" name="alt_phone">
+                                <div class="mb-2">
+                                    <label for="fax">Fax</label>
+                                    <input type="number" id="fax" class="form-control" placeholder="Fax Number" name="fax" value="{{old('fax')}}">
+                                    @error('fax')
+                                    <div class="invalid-feedback">
+                                        <span>{{$message}}</span>
+                                    </div>
+                                    @enderror
                                 </div>
-                                <div>
-                                    <label for="fax"></label><input type="number" id="fax" class="form-control mb-4" placeholder="Fax Number" name="fax">
-                                </div>
-                                <div>
-                                    <label for="email"></label><input type="email" id="email" class="form-control mb-4 @error('title') is-invalid @enderror" placeholder="Email" name="email" required autocomplete="email" autofocus>
+                                <div class="mb-2">
+                                    <label for="email">Email</label>
+                                    <input type="email" id="email" class="form-control @error('title') is-invalid @enderror" placeholder="Email" name="email" required autocomplete="email" value="{{old('email')}}" autofocus>
+                                    @error('email')
+                                    <div class="invalid-feedback">
+                                        <span>{{$message}}</span>
+                                    </div>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="card-footer">

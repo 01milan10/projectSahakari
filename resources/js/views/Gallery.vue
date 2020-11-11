@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="page">
     <v-parallax src="/img/services-parallax.jpg" height="150">
       <h2 class="text-center display-1">Our Album</h2>
     </v-parallax>
@@ -54,21 +54,21 @@ export default {
         {
           text: "Home",
           disabled: false,
-          href: "/"
+          href: "/",
         },
         {
           text: "Gallery",
           disabled: true,
-          href: "/gallery"
-        }
-      ]
+          href: "/gallery",
+        },
+      ],
     };
   },
   created() {
     Axios.get("http://sahakari-app.com/api/get-images/0").then(
-      res => (this.gallery = res.data.data)
+      (res) => (this.gallery = res.data.data)
     );
-  }
+  },
 };
 </script>
 

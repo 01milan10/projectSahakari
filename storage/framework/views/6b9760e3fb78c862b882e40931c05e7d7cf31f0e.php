@@ -18,7 +18,7 @@
             <div class="col-12 col-sm-12 col-md-8">
                 <form action="<?php echo e(route('register')); ?>" method="POST" class="needs-validation" novalidate>
                     <?php echo csrf_field(); ?>
-                    <div class="card border-info shadow">
+                    <div class="card border-success shadow">
                         <div class="card-title display-4 text-center">Register</div>
                         <div class="card-body">
                             <?php $__errorArgs = ['email'];

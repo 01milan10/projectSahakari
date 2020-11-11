@@ -12,13 +12,15 @@ use RealRashid\SweetAlert\Facades\Alert;
 class usersController extends Controller
 {
     //User Controller
-    public function showRegisterForm()
+    public function create()
     {
         return view('User.addUser');
     }
 
-    public function addUser(Request $request)
+    public function store(Request $request)
     {
+        $this->authorize('create', User::class);
+
         if ($this->validate($request, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
@@ -38,15 +40,17 @@ class usersController extends Controller
         return redirect('/addUser');
     }
 
-    public function listUser()
+    public function index()
     {
-        $data = DB::table('users')->get();
-        return view('User.listUser', ['data' => $data]);
+        $users = User::all();
+        return view('User.listUser', ['users' => $users]);
     }
 
-    public function deleteUser($id)
+    public function destroy(User $user)
     {
-        if (User::find($id)->delete()) {
+        $this->authorize('delete', $user);
+
+        if ($user->delete()) {
             Alert::success('Delete User', 'User Removed Successfully');
         } else {
             Alert::error('Delete User', 'User Could Not Be Removed');
@@ -61,13 +65,15 @@ class usersController extends Controller
         return view('User.updateUser', ['user' => $user]);
     }
 
-    public function updateUser(Request $request, $id)
+    public function update(Request $request, User $user)
     {
+        $this->authorize('update', $user);
+
         $update = [
             'name' => $request['name'],
             'email' => $request['email'],
         ];
-        if (User::find($id)->update($update)) {
+        if ($user->update($update)) {
             Alert::success('Edit Credentials', 'Updating Credentials Successful');
         } else {
             Alert::error('Edit Credentials', 'Updating Credentials Failed');
@@ -79,27 +85,20 @@ class usersController extends Controller
         $user = User::find($id);
         return view('User.resetPassword', ['user' => $user]);
     }
-    public function resetPassword(Request $request, $id)
+    public function resetPassword(Request $request, User $user)
     {
+        $this->authorize('resetPassword', $user);
+
         $this->validate($request, [
-            'password' => 'required',
-            'password_confirmation' => 'required',
+            'password' => 'required|confirmed|min:8',
         ]);
         $update = [
             'password' => Hash::make($request['password']),
         ];
-        if ($request->password == $request->password_confirmation) {
-            if (User::find($id)->update($update)) {
-                Alert::success('Success', 'Password is changed.');
-            } else {
-                Alert::error('Edit Credentials', 'Updating Credentials Failed');
-            }
-            return back();
-        } else {
-            Alert::error('Failed', 'Password did not match');
-            return back();
+        if ($user->update($update)) {
+            Alert::success('Success', 'Password is changed.');
+            return redirect('/listUser');
         }
-        return back();
     }
     public function changeAvatar(Request $request, $id)
     {

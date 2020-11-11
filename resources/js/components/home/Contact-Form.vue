@@ -5,7 +5,7 @@
         <h1 class="display-1 font-weight-light text-center white--text">Contact Us</h1>
         <v-divider class="grey lighten-3" width="25%"></v-divider>
       </v-row>
-      <v-row class="justify-center">
+      <v-row class="justify-center contactForm">
         <v-col cols="12" sm="12" md="8">
           <v-card class="grey lighten-4">
             <v-card-text>
@@ -81,12 +81,12 @@ export default {
       messageAlert: false,
       errorAlert: false,
       emailRules: [
-        v => !!v || "E-mail is required",
-        v => /.+@.+\..+/.test(v) || "E-mail must be valid"
+        (v) => !!v || "E-mail is required",
+        (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
       ],
-      nameRules: [v => !!v || "Name is required"],
-      subjectRules: [v => !!v || "Subject is required"],
-      messageRules: [v => !!v || "Message is required"]
+      nameRules: [(v) => !!v || "Name is required"],
+      subjectRules: [(v) => !!v || "Subject is required"],
+      messageRules: [(v) => !!v || "Message is required"],
     };
   },
   methods: {
@@ -96,7 +96,7 @@ export default {
           name: this.name,
           email: this.email,
           subject: this.subject,
-          message: this.message
+          message: this.message,
         };
         Axios.post("http://sahakari-app.com/api/sendMessage", input).then(
           () => {
@@ -112,8 +112,32 @@ export default {
         () => ((this.messageAlert = false), (this.errorAlert = false)),
         5000
       );
-    }
-  }
+    },
+  },
+  mounted() {
+    let t1 = this.$gsap.timeline({
+      scrollTrigger: {
+        trigger: ".contactForm",
+        start: "top center",
+        end: "bottom top",
+        toggleActions: "restart pause resume pause",
+      },
+    });
+
+    t1.fromTo(
+      ".contactForm",
+      {
+        xPercent: 30,
+        opacity: 0,
+      },
+      {
+        xPercent: 0,
+        duration: 2.5,
+        ease: "back",
+        opacity: 1,
+      }
+    );
+  },
 };
 </script>
 

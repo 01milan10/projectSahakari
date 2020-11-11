@@ -2,7 +2,7 @@
   <v-app>
     <Navbar :isAuth="authenticated" />
     <v-main>
-      <router-view></router-view>
+      <router-view />
     </v-main>
     <Clients />
     <Footer />
@@ -37,12 +37,12 @@ export default {
   components: {
     Navbar,
     Footer,
-    Clients
+    Clients,
   },
 
   data: () => ({
     fab: false,
-    authenticated: ""
+    authenticated: "",
   }),
   methods: {
     onScroll(e) {
@@ -52,7 +52,7 @@ export default {
     },
     toTop() {
       this.$vuetify.goTo(0);
-    }
+    },
   },
   mounted() {
     if (this.isAuth == 1) {
@@ -60,7 +60,7 @@ export default {
     } else {
       return (this.authenticated = false);
     }
-  }
+  },
 };
 </script>
 

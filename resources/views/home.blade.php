@@ -39,11 +39,11 @@
                                 Line Chart
                             </h3>
 
-                            <div class="card-tools">
+                            <!-- <div class="card-tools">
                                 <button type="button" class="btn btn-tool" data-card-widget="maximize">
                                     <i class="fas fa-expand"></i>
                                 </button>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="card-body">
                             <div id="line-chart"></div>
@@ -57,10 +57,10 @@
                                     <option value="12">year</option>
                                 </select>
                             </label>
-                            <button class="btn btn-info float-right">
+                            <!-- <button class="btn btn-info float-right">
                                 <i class="fas fa-file-download mr-2"></i>
                                 Download
-                            </button>
+                            </button> -->
                         </div>
                     </div>
                     <div class="card card-info">
@@ -70,11 +70,11 @@
                                 Bar Chart
                             </h3>
 
-                            <div class="card-tools">
+                            <!-- <div class="card-tools">
                                 <button type="button" class="btn btn-tool" data-card-widget="maximize">
                                     <i class="fas fa-expand"></i>
                                 </button>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="card-body">
                             <div id="bar-chart"></div>
@@ -90,10 +90,10 @@
                                     <option value="2015">2015</option>
                                 </select>
                             </label>
-                            <button class="btn btn-info float-right">
+                            <!-- <button class="btn btn-info float-right">
                                 <i class="fas fa-file-download mr-2"></i>
                                 Download
-                            </button>
+                            </button> -->
                         </div>
                         <!-- /.card-body-->
                     </div>
@@ -121,7 +121,6 @@
 
 <script>
     $(function() {
-        let donutData;
         let i;
         let date;
         let deposited_amount;
@@ -242,7 +241,7 @@
                     },
                     points: {
                         show: true,
-                        radius: 0.7,
+                        radius: 5,
                     },
                 },
                 lines: {

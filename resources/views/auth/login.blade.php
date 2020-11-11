@@ -18,7 +18,7 @@
             <div class="col-10 col-md-6">
                 <form action="{{ route('login') }}" method="POST" class="needs-validation" id="form" novalidate>
                     @csrf
-                    <div class="card border-info shadow">
+                    <div class="card border-success shadow">
                         <div class="card-title display-4 text-center">Login</div>
                         <div class="card-body">
                             @error('email')

@@ -1,5 +1,5 @@
 <template>
-  <div class="pt-10">
+  <div class="pt-10 page">
     <Home />
     <Features />
     <ProgressCount />
@@ -26,8 +26,8 @@ export default {
     Testimonials,
     Album,
     Contact,
-    ProgressCount
-  }
+    ProgressCount,
+  },
 };
 </script>
 

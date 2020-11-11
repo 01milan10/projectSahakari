@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="page">
     <v-parallax src="/img/services-parallax.jpg" height="150">
       <h2 class="text-center display-1">About Us</h2>
     </v-parallax>
@@ -92,14 +92,14 @@
                   <p
                     class="caption text-left"
                   >Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi facere est distinctio veniam hic dolor?</p>
-                  <v-btn small outlined color="white">Contact Us</v-btn>
+                  <ContactUs />
                 </v-card-text>
               </v-card>
             </v-col>
             <v-col cols="12" sm="6" md="12">
               <v-card flat outlined>
                 <v-carousel
-                  height="370"
+                  height="450"
                   :show-arrows="false"
                   hide-delimiter-background
                   light
@@ -182,8 +182,12 @@
 </template>
 
 <script>
+import ContactUs from "../components/contact-us/ContactUs";
 import axios from "axios";
 export default {
+  components: {
+    ContactUs,
+  },
   data() {
     return {
       testimonials: [],
@@ -191,20 +195,20 @@ export default {
         {
           text: "Home",
           disabled: false,
-          href: "/"
+          href: "/",
         },
         {
           text: "About Us",
-          disabled: true
-        }
-      ]
+          disabled: true,
+        },
+      ],
     };
   },
   created() {
     axios
       .get("http://sahakari-app.com/api/get-comments/3")
-      .then(res => (this.testimonials = res.data.data));
-  }
+      .then((res) => (this.testimonials = res.data.data));
+  },
 };
 </script>
 

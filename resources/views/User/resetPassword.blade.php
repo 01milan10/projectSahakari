@@ -38,32 +38,35 @@
                         <form class="form-horizontal" method="POST" action="{{route('reset.password',$user->id)}}">
                             {{csrf_field()}}
                             <div class="card-body">
-                                <div class="form-group row">
-                                    <label for="inputEmail3" class="col-sm-2 col-form-label">Email:</label>
-                                    <div class="col-sm-10 mb-2">
+                                <div class="form-group">
+                                    <label for="inputEmail3">Email</label>
+                                    <div class="mb-2">
                                         <input type="email" class="form-control" id="inputEmail3" value="{{$user['email']}}" name="email" required readonly>
                                     </div>
-                                    <label for="inputPassword" class="col-sm-2 col-form-label">New Password:</label>
-                                    <div class="col-sm-10 mb-2">
-                                        <input type="text" class="form-control" id="inputPassword" name="password" required>
+                                    <label for="inputPassword">New Password</label>
+                                    <div class="mb-2">
+                                        <input type="text" class="form-control @error('password') is-invalid @enderror" id="inputPassword" name="password" required>
+                                        @error('password')
+                                        <div class="invalid-feedback">
+                                            <span>{{$message}}</span>
+                                        </div>
+                                        @enderror
                                     </div>
-                                    <label for="password_confirmation" class="col-sm-2 col-form-label">confirm Password:</label>
-                                    <div class="col-sm-10 mb-2">
+                                    <label for="password_confirmation">confirm Password</label>
+                                    <div class="mb-2">
                                         <input type="text" class="form-control" id="password_confirmation" name="password_confirmation" required>
                                     </div>
                                 </div>
-                                <!-- /.card-body -->
-                                <div class="card-footer">
-                                    <button type="submit" class="btn btn-info">
-                                        <i class="fas fa-user-edit mr-2"></i>
-                                        Update</button>
-                                    <form action="{{route('home')}}">
-                                        <button class="btn btn-danger float-right">
-                                            <i class="fas fa-times mr-2"></i>
-                                            Cancel</button>
-                                    </form>
-                                </div>
-                                <!-- /.card-footer -->
+                            </div>
+                            <div class="card-footer">
+                                <a type="button" href="{{route('list.user')}}" class="btn btn-outline-danger">
+                                    <i class="fas fa-times mr-2"></i>
+                                    Cancel
+                                </a>
+                                <button type="submit" class="btn btn-info float-right">
+                                    <i class="fas fa-user-edit mr-2"></i>
+                                    Update</button>
+                            </div>
                         </form>
                     </div>
                 </div>

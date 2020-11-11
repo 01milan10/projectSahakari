@@ -1,10 +1,18 @@
 <template>
-  <v-container fluid class="mt-5 pt-10">
-    <v-row class="flex-column justify-center align-center mt-7">
+  <v-container fluid>
+    <v-row class="flex-column justify-center align-center">
       <h1 class="font-weight-light display-1 text-center">Our Services & Features</h1>
       <v-divider class="black" width="25%"></v-divider>
-      <v-row class="justify-center mx-auto mt-10">
-        <v-col cols="12" sm="11" md="6" lg="3" v-for="(item,i) in items" :key="i">
+      <v-row class="justify-center mx-auto mt-10 ourFeatures">
+        <v-col
+          class="eachFeature"
+          cols="12"
+          sm="11"
+          md="6"
+          lg="3"
+          v-for="(item,i) in items"
+          :key="i"
+        >
           <v-hover v-slot:default="{hover}">
             <v-card
               :elevation="hover?10:0"
@@ -27,7 +35,7 @@
                 <v-btn
                   text
                   rounded
-                  to="/features"
+                  to="/our-features"
                   :elevation="hover?5:0"
                   :class="`${hover?'grey lighten-4 blue--text':''}`"
                 >learn more</v-btn>
@@ -47,19 +55,34 @@ export default {
       items: [
         {
           title: "Marketing Consulting",
-          icon: "mdi-sync"
+          icon: "mdi-sync",
         },
         {
           title: "Market Analysis",
-          icon: "mdi-domain"
+          icon: "mdi-domain",
         },
         {
           title: "Easy Purchase",
-          icon: "mdi-basket"
-        }
-      ]
+          icon: "mdi-basket",
+        },
+      ],
     };
-  }
+  },
+  mounted() {
+    let features = this.$gsap.timeline({
+      scrollTrigger: {
+        trigger: ".ourFeatures",
+        toggleActions: "restart pause resume pause",
+        start: "top bottom",
+        end: "bottom top",
+      },
+    });
+    features.fromTo(
+      ".ourFeatures .eachFeature ",
+      { opacity: 0, yPercent: -50 },
+      { stagger: 0.3, yPercent: 0, duration: 2, opacity: 1, ease: "bounce" }
+    );
+  },
 };
 </script>
 

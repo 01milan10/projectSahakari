@@ -52,41 +52,158 @@
                                             <tr id="row">
                                                 <td>
                                                     <div class="form-group row">
-                                                        <input type="text" class="form-control" id="client_name" required placeholder="Client Name" name="name[]">
+                                                        <input type="text" class="form-control <?php $__errorArgs = ['name.*'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" id="client_name" value="<?php echo e(old('name.*')); ?>" required placeholder="Client Name" name="name[]" minlength="3">
+                                                        <?php $__errorArgs = ['name.*'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                                        <div class="invalid-feedback">
+                                                            <?php echo e($message); ?>
+
+                                                        </div>
+                                                        <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                                                     </div>
 
                                                 </td>
                                                 <td>
                                                     <div class="form-group row">
-                                                        <input type="email" class="form-control" id="client_email" required placeholder="Client Email" name="email[]">
+                                                        <input type="email" class="form-control <?php $__errorArgs = ['email.*'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" id="client_email" value="<?php echo e(old('email.*')); ?>" required placeholder="Client Email" name="email[]">
+                                                        <?php $__errorArgs = ['email.*'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                                        <div class="invalid-feedback">
+                                                            <?php echo e($message); ?>
+
+                                                        </div>
+                                                        <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                                                     </div>
 
                                                 </td>
                                                 <td>
                                                     <div class="form-group row">
-                                                        <input type="number" class="form-control" id="deposit" required placeholder="Deposited Amount" name="deposit[]">
+                                                        <input type="number" class="form-control <?php $__errorArgs = ['deposit.*'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" id="deposit" value="<?php echo e(old('deposit.*')); ?>" required placeholder="Deposited Amount" name="deposit[]">
+                                                        <?php $__errorArgs = ['deposit.*'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                                        <div class="invalid-feedback">
+                                                            <?php echo e($message); ?>
 
+                                                        </div>
+                                                        <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                                                     </div>
 
                                                 </td>
                                                 <td>
                                                     <div class="form-group row">
-                                                        <input type="number" class="form-control" id="withdraw" required placeholder="Withdrawn Amount" name="withdraw[]">
+                                                        <input type="number" class="form-control <?php $__errorArgs = ['withdraw.*'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" id="withdraw" value="<?php echo e(old('withdraw.*')); ?>" required placeholder="Withdrawn Amount" name="withdraw[]">
+                                                        <?php $__errorArgs = ['withdraw.*'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                                        <div class="invalid-feedback">
+                                                            <?php echo e($message); ?>
 
+                                                        </div>
+                                                        <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                                                     </div>
 
                                                 </td>
                                                 <td>
                                                     <div class="form-group row">
-                                                        <input type="text" class="form-control" id="collector" required placeholder="Collector's Name" name="cName[]">
+                                                        <input type="text" class="form-control <?php $__errorArgs = ['cName.*'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" id="collector" value="<?php echo e(old('cName.*')); ?>" required placeholder="Collector's Name" name="cName[]">
+                                                        <?php $__errorArgs = ['cName.*'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                                        <div class="invalid-feedback">
+                                                            <?php echo e($message); ?>
 
+                                                        </div>
+                                                        <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                                                     </div>
 
                                                 </td>
                                                 <td>
                                                     <div class="form-group row">
                                                         <div class="col-sm-8">
-                                                            <input type="date" class="form-control" id="date" required name="collected_date[]">
+                                                            <input type="date" class="form-control <?php $__errorArgs = ['collected_date'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" id="date" value="<?php echo e(old('date.*')); ?>" required name="collected_date[]">
+                                                            <?php $__errorArgs = ['collected_date'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                                            <div class="invalid-feedback">
+                                                                <?php echo e($message); ?>
+
+                                                            </div>
+                                                            <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                                                         </div>
                                                         <div class="col-sm-2">
                                                             <div id="add-new-row" class="btn btn-outline-primary">
@@ -108,13 +225,13 @@
 
                             </div>
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-info">
-                                    <i class="fas fa-plus mr-2"></i>
-                                    Add
-                                </button>
-                                <button type="reset" class="btn btn-danger float-right">
+                                <button type="reset" class="btn btn-outline-danger">
                                     <i class="fas fa-times mr-2"></i>
                                     Cancel
+                                </button>
+                                <button type="submit" class="btn btn-info float-right">
+                                    <i class="fas fa-plus mr-2"></i>
+                                    Add
                                 </button>
                             </div>
                         </form>

@@ -28,8 +28,9 @@ class contactController extends Controller
         $this->validate($request, [
             'location' => 'required',
             'address' => 'required',
-            'phone' => 'required|max:10',
-            'email' => 'required',
+            'phone' => 'required|max:10|min:7|numeric',
+            'alt_phone' => 'max:10|min:7|numeric',
+            'email' => 'required|email:rfc',
         ]);
         if ($request['alt_phone'] == '') {
             $alt_phone = "Not Available";

@@ -37,18 +37,42 @@
                         </div>
                         <form method="post" action="">
                             {{csrf_field()}}
-                            <div class="card-body pad">
-                                <div>
-                                    <input type="text" class="form-control mb-4 @error('title') is-invalid @enderror" placeholder="Title" name="title" required autocomplete="title" autofocus>
+                            <div class="card-body">
+                                <div class="mb-2">
+                                    <label for="title">Title</label>
+                                    <input type="text" class="form-control @error('title') is-invalid @enderror" placeholder="Title" name="title" value="{{old('title')}}" required autocomplete="title" autofocus>
+                                    @error('title')
+                                    <div class="invalid-feedback">
+                                        <span>{{$message}}</span>
+                                    </div>
+                                    @enderror
                                 </div>
-                                <div>
-                                    <input type="text" class="form-control mb-4 @error('category') is-invalid @enderror" placeholder="Author Name" name="author" required autocomplete="category">
+                                <div class="mb-2">
+                                    <label for="author">Author</label>
+                                    <input type="text" class="form-control @error('category') is-invalid @enderror" placeholder="Author Name" name="author" value="{{old('author')}}" required autocomplete="category">
+                                    @error('author')
+                                    <div class="invalid-feedback">
+                                        <span>{{$message}}</span>
+                                    </div>
+                                    @enderror
                                 </div>
-                                <div>
-                                    <input type="text" class="form-control mb-4 @error('category') is-invalid @enderror" placeholder="Author Position" name="position" required autocomplete="category">
+                                <div class="mb-2">
+                                    <label for="position">Position</label>
+                                    <input type="text" class="form-control @error('category') is-invalid @enderror" placeholder="Author Position" name="position" value="{{old('position')}}" required autocomplete="category">
+                                    @error('position')
+                                    <div class="invalid-feedback">
+                                        <span>{{$message}}</span>
+                                    </div>
+                                    @enderror
                                 </div>
-                                <div class="mb-3">
+                                <div class="mb-2">
+                                    <label for="message">Message</label>
                                     <textarea class="textarea" name="message"></textarea>
+                                    @error('message')
+                                    <div class="invalid-feedback">
+                                        <span>{{$message}}</span>
+                                    </div>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="card-footer">
@@ -79,6 +103,14 @@
             placeholder: 'Please write your messages here.',
             tabSize: 3,
             height: 350,
+            toolbar: [
+                ['style', ['bold', 'italic', 'underline', 'clear']],
+                ['font', ['strikethrough', 'superscript', 'subscript']],
+                ['fontsize', ['fontsize']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['height', ['height']]
+            ]
         })
     })
 </script>

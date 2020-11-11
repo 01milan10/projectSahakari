@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="page">
     <v-parallax src="/img/services-parallax.jpg" height="150">
       <h2 class="text-center display-1">Work with Us</h2>
     </v-parallax>
@@ -33,9 +33,9 @@
           <span class="font-weight-light">
             Send your cv at:
             <a
-              @click="redirect"
+              href="https://mail.google.com/mail/u/0/#inbox?compose=jrjtXJTXxmLKTPrrdSflBTmsgVKdBNjPnsQrmTHPmjLWlkpHVsLgtTSBTnrHxxvpxSvwrkDq"
               class="primary--text font-weight-light"
-            >someone@something.com</a>
+            >dataworkshopnepal@gmail.com</a>
           </span>
         </v-card-actions>
       </v-card>
@@ -50,7 +50,7 @@ export default {
     redirect() {
       const url = "https://www.gmail.com";
       window.open(url);
-    }
+    },
   },
   data() {
     return {
@@ -58,21 +58,21 @@ export default {
         {
           text: "Home",
           disabled: false,
-          href: "/"
+          href: "/",
         },
         {
           text: "Career",
-          disabled: true
-        }
+          disabled: true,
+        },
       ],
-      careers: []
+      careers: [],
     };
   },
   created() {
     Axios.get("http://sahakari-app.com/api/get-oppurtunity").then(
-      response => (this.careers = response.data.data)
+      (response) => (this.careers = response.data.data)
     );
-  }
+  },
 };
 </script>
 

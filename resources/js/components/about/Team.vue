@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="page">
     <v-parallax src="/img/services-parallax.jpg" height="150">
       <h2 class="text-center display-1">Our Team</h2>
     </v-parallax>
@@ -31,9 +31,6 @@
                   <v-btn small icon :href="person.facebook">
                     <v-icon>mdi-facebook</v-icon>
                   </v-btn>
-                  <v-btn small icon>
-                    <v-icon>mdi-twitter</v-icon>
-                  </v-btn>
                   <v-btn small icon :href="person.gmail">
                     <v-icon>mdi-gmail</v-icon>
                   </v-btn>
@@ -51,14 +48,14 @@
                   <p
                     class="caption text-left"
                   >Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi facere est distinctio veniam hic dolor?</p>
-                  <v-btn small outlined color="white">Contact Us</v-btn>
+                  <ContactUs />
                 </v-card-text>
               </v-card>
             </v-col>
             <v-col cols="12" sm="6" md="12">
               <v-card flat outlined>
                 <v-carousel
-                  height="370"
+                  height="450"
                   :show-arrows="false"
                   hide-delimiter-background
                   light
@@ -104,7 +101,11 @@
 
 <script>
 import Axios from "axios";
+import ContactUs from "../contact-us/ContactUs";
 export default {
+  components: {
+    ContactUs,
+  },
   name: "About",
   data() {
     return {
@@ -112,31 +113,31 @@ export default {
         {
           text: "Home",
           disabled: false,
-          href: "/"
+          href: "/",
         },
         {
           text: "About Us",
           disabled: false,
-          href: "/about-us"
+          href: "/about-us",
         },
         {
           text: "Our Team",
           disabled: true,
-          route: "/our-team"
-        }
+          route: "/our-team",
+        },
       ],
       testimonials: [],
-      team: []
+      team: [],
     };
   },
-  created() {
-    Axios.get("http://sahakari-app.com/api/get-comments/3").then(
-      res => (this.testimonials = res.data.data)
+  async created() {
+    await Axios.get("http://sahakari-app.com/api/get-comments/3").then(
+      (res) => (this.testimonials = res.data.data)
     );
-    Axios.get("http://sahakari-app.com/api/get-team/0").then(
-      res => (this.team = res.data.data)
+    await Axios.get("http://sahakari-app.com/api/get-team/0").then(
+      (res) => (this.team = res.data.data)
     );
-  }
+  },
 };
 </script>
 

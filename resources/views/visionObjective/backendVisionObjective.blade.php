@@ -41,22 +41,23 @@
                         <form action="{{ route('add.vision') }}" class="form-image-upload" method="POST" enctype="multipart/form-data">
                             @csrf()
                             <div class="card-body" id="card-body">
-                                <div>
-                                    <input type="text" class="form-control mb-4 " placeholder="Our Vision" name="coreVision" required autofocus>
+                                <div class="mb-2">
+                                    <label for="coreVision">Our Core Vision</label>
+                                    <input type="text" class="form-control" placeholder="Our Vision" name="coreVision" value="{{old('coreVision')}}" required autofocus>
                                 </div>
-                                <div>
-                                    <input type="text" class="form-control mb-4" placeholder="Core Mission" name="coreMission" required>
+                                <div class="mb-2">
+                                    <label for="coreMission">Our Core Mission</label>
+                                    <input type="text" class="form-control" placeholder="Core Mission" name="coreMission" value="{{old('coreMission')}}" required>
                                 </div>
                                 <div id="mission">
-                                    <div class="form-group row" id="missionHead">
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control mb-1" id="mission" placeholder="Mission Heading" name="missionHead" required>
-                                        </div>
+                                    <div class="mb-2">
+                                        <label for="missionHead">Mission Heading</label>
+                                        <input type="text" class="form-control" id="mission" placeholder="Mission Heading" name="missionHead" value="{{old('missionHead')}}" required>
                                     </div>
 
                                     <div class="form-group row" id="subMission">
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control mb-1" id="sub-mission" placeholder="Sub-mission" name="subMission[]" required>
+                                            <input type="text" class="form-control" id="sub-mission" placeholder="Sub-mission" name="subMission[]" required>
                                         </div>
                                         <div class="col-sm-1">
                                             <div id="add-new-obj" class="btn btn-outline-primary">
